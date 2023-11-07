@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
       home: const FetchData(),
@@ -56,7 +56,10 @@ class _FetchDataState extends State<FetchData> {
           if (snapshot.hasData) {
             return MyHomePage(content: snapshot.data!);
           } else {
-            return const SizedBox(height: 50, width: 50, child: CircularProgressIndicator());
+            return const Align(
+                alignment: Alignment.center,
+                child: SizedBox(
+                    height: 50, width: 50, child: CircularProgressIndicator()));
           }
         });
   }
@@ -84,8 +87,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       });
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +215,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     size: 24,
                                   )),
                               onTap: () {
-
                                 _launchUrl('mailto:howard8479@gmail.com');
                               },
                             ),

@@ -63,8 +63,14 @@ class _FutureImageBuilderState extends State<FutureImageBuilder> {
             child: Container(
               padding: EdgeInsets.all(32),
               decoration: const BoxDecoration(color: Color(0x66FFFFFF)),
-              child: Image.network(
-                location,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.65,
+                  child: Image.network(
+                    location,
+                  ),
+                ),
               ),
             ),
           );

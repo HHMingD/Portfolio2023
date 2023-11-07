@@ -120,7 +120,7 @@ const RESOURCES = {".dart_tool/chrome-device/Default/arbitration_service_config.
 "build/web/icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "build/web/icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
 "build/web/index.html": "36f89d495342804ee2cf903c53effb91",
-"/": "af428cb70681b77c898cd64ca4cbad5a",
+"/": "80f1372e5d6a1524bd9e6b3336f3402e",
 "build/web/main.dart.js": "8b225e5777f1e80135fe3fc6e8a88b99",
 "build/web/manifest.json": "46da308e64bf9e35c0d48d9fe309c2e7",
 "build/web/version.json": "c00f200db791955d03aed010c55282fb",
@@ -138,12 +138,12 @@ const RESOURCES = {".dart_tool/chrome-device/Default/arbitration_service_config.
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "10dce29885b2b8892a6460dd8772f524",
+"index.html": "5f506a2b676a029de9a4638a5a9c3af8",
 "lib/class.dart": "96d8aab912de4e47c93aadd6bb0b31e0",
 "lib/dataclass.dart": "d41d8cd98f00b204e9800998ecf8427e",
 "lib/dataparse.dart": "e0013cb1ac3539479836d6f33128fb8b",
 "lib/main.dart": "e3f9a3cbde93ce93f9b79898b42184b4",
-"main.dart.js": "9e27226acf703ffd59a95b054397d552",
+"main.dart.js": "e11c2b3235fa174132901cde21e685e2",
 "manifest.json": "7020d1f1338de1bcb3b7f590fd395900",
 "pubspec.lock": "63e38741c419a3830a33f998e7895fdd",
 "pubspec.yaml": "126dbb95e0308734239d4153bb1fc0b9",
@@ -155,7 +155,7 @@ const RESOURCES = {".dart_tool/chrome-device/Default/arbitration_service_config.
 "web/icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "web/icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "web/icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"web/index.html": "af428cb70681b77c898cd64ca4cbad5a",
+"web/index.html": "80f1372e5d6a1524bd9e6b3336f3402e",
 "web/manifest.json": "46da308e64bf9e35c0d48d9fe309c2e7"};
 // The application shell files that are downloaded before a service worker can
 // start.
