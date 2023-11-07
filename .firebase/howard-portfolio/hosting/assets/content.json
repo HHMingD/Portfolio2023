@@ -1,0 +1,142 @@
+[
+  {
+    "ProjectTitle": "ZOI",
+    "SummaryContent": "Our client is a state-owned investment entity in GSA. \n\nAs this is the first ever sold case for BCG around the metaverse topic, we are in a pioneering role to experiment with the BCG’s metaverse strategy.\n\nThe client have no prior knowledge in the field of metaverse, spatial rendering and digital marketing. They also realised that their business would require significant uplift in their digital outreach due to their geo-locational constrains. (Far from major markets with global talents)\n\nMost of our work would rely on improvisation as we uncover the potential of VR technology. We developed a method for rapid prototyping. To allow us to use an organic approach for this case. \n\nOur goal is to seek opportunities in building standalone VR products. \n\nI was the metaverse subject matter expert of this project in charge of the research routines and the prototype strategy and the production lead of the case.",
+    "ImpactContent": "The project was the first ever sold metaverse project for BCG. \n\nWith our strategic input, our client made significant progress on building their own metaverse strategy.\n\nWe’ve had two major pivot during the period of my staffing.\nThe first phase was to explore the VR use case for the family and business setting. The second phase was to explore the feasibility of building VR based virtual community within our client’s core social group (Employees and family).The third use case builds on top of the second phase result. We validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client’s community. \n\nThe project extended from originally a 7 weeks project to a project lasting more than an year. It is still an on going project as of now (OCT 2023.) ",
+    "ChallengeContent": [
+      {
+        "STARTitle": "Challenge 1 - Rapid design exploration with emerging technology",
+        "SituationTitle": "Lacking tools with no rapid prototyping capability",
+        "SituationContent": "Design with VR would need a very different approach from the traditional UI/UX point of view. This is uncharted territory for both BCG and our client. \n\nNo rapid prototyping tools. The time it takes to test a concept is significantly longer comparing to the traditional UI/UX 2D digital project.\nThe project has a short time span initially. we need to put together a convince use case that would help our client’s business in a short 7 weeks sprint.",
+        "TaskTitle": "Coming up with a VR prototype strategy, quick and dirty",
+        "TaskContent": "Define methods to build VR prototypes fast and lean\nDefine the research routines to extract insights. \nBuilding VR mock ups to communicate the initial BCG team hypothesis on the product proposal",
+        "ActionTitle": "Putting together a VR testing routine fast and lean. ",
+        "ActionContent": "We embraced the principal of ”seeing is believing”. We believed that the only way to deliver meaningful insight is to put VR product in front of our testing participants. \n\nUtilised VR mock ups to validate our hypothesis  through user research with a captive user group picked by the client side. \nKey Pivot: Use of the environment of “VRChat” to build quick and dirty VR experiences to test and gather insights, with extremely basic unity build. At time, we focused on simple script, look and feel, and design articulation.\nLook and feel and the necessity of articulating the affordance of the VR design, Designing objects and scene that resonate with the target audience accordingly. \nLeveraging my experience in Spatial rendering, we built 4 different VR scenes to explore the potential VR value with our client. ",
+        "ResultTitle": "Organic approach help us land the VR proposition exactly where they need to be",
+        "ResultContent": "In the phase 2 of the project. We were able to deliver functional VR user testing environment in just 14 days\nWe were able to coop with the need to rapidly change the direction of the project. \nWe were able to rapidly reflect the user feedback onto the VR scenario",
+        "ImageContentList": [
+          {
+            "ImageLocation": "imageLocation1",
+            "ImageDescription": "imageDescription1"
+          },
+          {
+            "ImageLocation": "imageLocation2",
+            "ImageDescription": "imageDescription2"
+          }
+        ]
+      },
+      {
+        "STARTitle": "Challenge 2 - Synthesising the business value of VR",
+        "SituationTitle": "Building the VR business strategy from scratch",
+        "SituationContent": "situationContent",
+        "TaskTitle": "The need to pioneer the process",
+        "TaskContent": "taskContent",
+        "ActionTitle": "Pioneering the VR strategy with real world VR aficionados",
+        "ActionContent": "actionContent",
+        "ResultTitle": "A solid VR use case that unblocks our client’s geolocational limits",
+        "ResultContent": "resultContent",
+        "ImageContentList": [
+          {
+            "ImageLocation": "imageLocation1",
+            "ImageDescription": "imageDescription1"
+          },
+          {
+            "ImageLocation": "imageLocation2",
+            "ImageDescription": "imageDescription2"
+          }
+        ]
+      },
+      {
+        "STARTitle": "Challenge 3 - Interactive VR prototype in 7 days ",
+        "SituationTitle": "Unsuccessful communication causing unsatisfying results. ",
+        "SituationContent": "situationContent",
+        "TaskTitle": "Building a VR scene under time pressure",
+        "TaskContent": "taskContent",
+        "ActionTitle": "Simple level design, capturing the look and feel, excellence of a VR build",
+        "ActionContent": "actionContent",
+        "ResultTitle": "Alignment with the client. Successfully materialised the essence of a VR use case",
+        "ResultContent": "resultContent",
+        "ImageContentList": [
+          {
+            "ImageLocation": "imageLocation1",
+            "ImageDescription": "imageDescription1"
+          },
+          {
+            "ImageLocation": "imageLocation2",
+            "ImageDescription": "imageDescription2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "ProjectTitle": "CDP",
+    "SummaryContent": "Our client is a major international non-profit organisation. Their operation process requires a lot of manual tasks and this could invites a large margin of error\nWe are seeing these human errors causing harm to their reputation and increase the cost to their operation. All the manual tasks make it hard for them to scale, while seeing the demand growing by 3 fold in the past two years\n\nIt has become evident that Words and Excel would not be sufficient to support their future growth. We are tasked to build a B2B product that handles the scoring questionnaire, the customers response system and the E2E scoring journey.\n\nWe need to build a digital journey from the ground up. Demolishing undesirable process and create the new link in their operation. \n\nThis is a behemoth piece of work, we separate the work into many different streams. I work closely with the client team manager, the BCG engineering team, and a BCG business analyst for this work stream. I am responsible for the workstream’s design operation.",
+    "ImpactContent": "We delivered a functional product built in just 3 months that supports our client’s E2E journey \n\nBeside delivering the product, the BCG team’s goal was to help our client make the transition into a tech company.\nOutside of the development work, we are also tasked with:\nUpskilling current employee\nBuild the in-house product team\nBurn the down the early risk of a product development. \n\nOur client is forced by the market to initiate change. The increasing public awareness to the climate crisis has propelled their business to multiply in the past few years.  If they are unable to ride the wave of hyper growth for climate industry, their business would be seriously challenged as the market would favor competitors with better products. \n\nOur work has been success in multiple front. The new product will be able to help our client solve their scaling issue in the short term. The long term strategy of the complete transformation will be achieved by the product team picked, and onboarded by the BCG team. \n\nWe are hopeful that our influence will be crucial to our client’s success in the short term future.",
+    "ChallengeContent": [
+      {
+        "STARTitle": "Challenge 1 - Problem solving Zero to one",
+        "SituationTitle": "Unscalable process prone to human error that costs our client dearly.",
+        "SituationContent": "situationContent",
+        "TaskTitle": "Build the digital product with scalability in mind",
+        "TaskContent": "taskContent",
+        "ActionTitle": "Investigating the journey, connecting the dots, then figure out what we can automate. With a strict lean MVP mindset",
+        "ActionContent": "actionContent",
+        "ResultTitle": "Connected team align on the focus of the development after the first sprint cycle",
+        "ResultContent": "resultContent",
+        "ImageContentList": [
+          {
+            "ImageLocation": "imageLocation1",
+            "ImageDescription": "imageDescription1"
+          },
+          {
+            "ImageLocation": "imageLocation2",
+            "ImageDescription": "imageDescription2"
+          }
+        ]
+      },
+      {
+        "STARTitle": "Challenge 2 - Co-PMing, Leading the agile experience",
+        "SituationTitle": "Conflicting interests in product development roles while setting up agile development environment",
+        "SituationContent": "situationContent",
+        "TaskTitle": "Taking the team onto the journey of agile ways of working ",
+        "TaskContent": "taskContent",
+        "ActionTitle": "Ownership of the agile rituals from day one. Acting as scram master until the client is comfortable to assume the role",
+        "ActionContent": "actionContent",
+        "ResultTitle": "Good teaming performance from a quantifiable source",
+        "ResultContent": "resultContent",
+        "ImageContentList": [
+          {
+            "ImageLocation": "imageLocation1",
+            "ImageDescription": "imageDescription1"
+          },
+          {
+            "ImageLocation": "imageLocation2",
+            "ImageDescription": "imageDescription2"
+          }
+        ]
+      },
+      {
+        "STARTitle": "Challenge 3 - Product building excellence",
+        "SituationTitle": "Designing with a almost non-existent digital branding guideline with tight deadlines",
+        "SituationContent": "situationContent",
+        "TaskTitle": "Deliver a fully working product for the project duration",
+        "TaskContent": "taskContent",
+        "ActionTitle": "Setting up routines to iterate the digital branding",
+        "ActionContent": "actionContent",
+        "ResultTitle": "A functional product built in just 3 months with necessary validations",
+        "ResultContent": "resultContent",
+        "ImageContentList": [
+          {
+            "ImageLocation": "imageLocation1",
+            "ImageDescription": "imageDescription1"
+          },
+          {
+            "ImageLocation": "imageLocation2",
+            "ImageDescription": "imageDescription2"
+          }
+        ]
+      }
+    ]
+  }
+]
