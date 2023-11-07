@@ -56,8 +56,7 @@ class _FetchDataState extends State<FetchData> {
           if (snapshot.hasData) {
             return MyHomePage(content: snapshot.data!);
           } else {
-            print('empty');
-            return Container();
+            return const SizedBox(height: 50, width: 50, child: CircularProgressIndicator());
           }
         });
   }
@@ -81,11 +80,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     {
       setState(() {
         _selectedProjectIndex = setProjectIndex;
-        print("state set");
         _selectedChallengeIndex = setChallengeIndex;
       });
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -199,28 +199,31 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     children: [
                       Container(
                         clipBehavior: Clip.hardEdge,
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             border: Border.all(width: 1),
-                            borderRadius: const BorderRadius.all(Radius.circular(5))),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5))),
                         child: Column(
-
                           children: [
                             InkWell(
                               child: Container(
-                                  padding: EdgeInsets.all(12),
+                                  padding: const EdgeInsets.all(12),
                                   child: const Icon(
                                     Icons.mail_outline,
                                     size: 24,
                                   )),
                               onTap: () {
+
                                 _launchUrl('mailto:howard8479@gmail.com');
                               },
                             ),
-                            SizedBox(height: 8,),
+                            const SizedBox(
+                              height: 8,
+                            ),
                             InkWell(
                               child: Container(
-                                  padding: EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(8),
                                   child: const Icon(
                                     Icons.linked_camera_outlined,
                                     size: 24,
@@ -230,11 +233,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                     'https://www.linkedin.com/in/howard-h-chen/');
                               },
                             ),
-
                           ],
                         ),
                       ),
-                      SizedBox(            height: MediaQuery.of(context).size.height * 0.15,),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.15,
+                      ),
                     ],
                   )),
               const SizedBox(
@@ -248,8 +252,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   }
 }
 
-Future<void> _launchUrl(String Webpagelink) async {
-  if (!await launchUrl(Uri.parse(Webpagelink))) {
-    throw Exception(Webpagelink);
+Future<void> _launchUrl(String webpagelink) async {
+  if (!await launchUrl(Uri.parse(webpagelink))) {
+    throw Exception(webpagelink);
   }
 }

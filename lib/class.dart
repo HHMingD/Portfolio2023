@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'apptheme.dart';
@@ -6,7 +5,7 @@ import 'dataparse.dart';
 import 'network.dart';
 
 class NavigationItem extends StatefulWidget {
-  const NavigationItem({
+  const NavigationItem({super.key,
     required this.buttonName,
     required this.isChallenge,
     required this.onCountSelected,
@@ -19,7 +18,7 @@ class NavigationItem extends StatefulWidget {
   final bool isSelected;
 
   @override
-  State<StatefulWidget> createState() => _NavigationItemState();
+  State<NavigationItem> createState() => _NavigationItemState();
 }
 
 class _NavigationItemState extends State<NavigationItem> {
@@ -52,20 +51,18 @@ class _NavigationItemState extends State<NavigationItem> {
               text: TextSpan(
                 children: <TextSpan>[
                   TextSpan(
-                      text: widget.buttonName,
-                      style: widget.isSelected
-                          ? Apptheme.labelSmallHC
-                          : Apptheme.labelSmall,
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => widget.onCountSelected()),
+                    text: widget.buttonName,
+                    style: widget.isSelected
+                        ? Apptheme.labelSmallHC
+                        : Apptheme.labelSmall,
+                  ),
                   widget.isChallenge == true
                       ? TextSpan(
                           style: widget.isSelected
                               ? Apptheme.labelTinyHC
                               : Apptheme.labelTiny,
                           text: '   //Challenge'.replaceAll(' ', '\u00A0'),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () => widget.onCountSelected())
+                        )
                       : const TextSpan(),
                 ],
               ),
@@ -76,10 +73,11 @@ class _NavigationItemState extends State<NavigationItem> {
 }
 
 class MainPageContent extends StatelessWidget {
-  const MainPageContent(
-      {required this.selectionProjectIndex,
-      required this.selectionChallengeIndex,
-      required this.content});
+  const MainPageContent({
+    required this.selectionProjectIndex,
+    required this.selectionChallengeIndex,
+    required this.content,
+  });
 
   final int selectionProjectIndex;
   final int selectionChallengeIndex;
@@ -118,7 +116,9 @@ class MainPageContent extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
           ),
-          const Text(style: Apptheme.titleSmall, 'Summary'),
+          Text(
+              style: Apptheme.titleSmall,
+              "${content[selectionProjectIndex].projectTitle} Summary"),
           const SizedBox(
             height: 24,
           ),
@@ -134,9 +134,9 @@ class MainPageContent extends StatelessWidget {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
           ),
-          const Text(
+          Text(
             style: Apptheme.titleSmall,
-            'Impact',
+            "${content[selectionProjectIndex].projectTitle} Impact",
           ),
           const SizedBox(
             height: 24,
@@ -162,7 +162,7 @@ class MainPageContent extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            labelSTAR('#Situation'),
+            labelSTAR('#Situation the team was in:'),
             customExpansionTile(
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
@@ -174,7 +174,7 @@ class MainPageContent extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            labelSTAR('#Task'),
+            labelSTAR('#Tasks I was assigned:'),
             customExpansionTile(
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
@@ -186,7 +186,7 @@ class MainPageContent extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            labelSTAR('#Action'),
+            labelSTAR('#Actions I decided to take:'),
             customExpansionTile(
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
@@ -198,7 +198,7 @@ class MainPageContent extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            labelSTAR('#Result'),
+            labelSTAR('#Results the team bring:'),
             customExpansionTile(
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
@@ -232,11 +232,11 @@ class MainPageContent extends StatelessWidget {
                               flex: 6,
                               child: SizedBox(
                                 height: double.infinity,
-                                child: FutureImageBuilder(
-                                    content[selectionProjectIndex]
-                                        .challengeContent[selectionChallengeIndex]
-                                        .imageContentList[imageIndex]
-                                        .imageLocation),
+                                child: FutureImageBuilder(content[
+                                        selectionProjectIndex]
+                                    .challengeContent[selectionChallengeIndex]
+                                    .imageContentList[imageIndex]
+                                    .imageLocation),
                               ),
                             ),
                             const SizedBox(width: 16),
@@ -269,6 +269,7 @@ class MainPageContent extends StatelessWidget {
 }
 
 class AboutMeWelcome extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return const SingleChildScrollView(
@@ -285,7 +286,7 @@ class AboutMeWelcome extends StatelessWidget {
               height: 24,
             ),
             Text(
-              'This is my portfolio, please feel free to reach out if you are interested in my work.',
+              'Welcome to my portfolio, please feel free to reach out if you are interested in my work.',
               style: Apptheme.labelLarge,
             ),
             SizedBox(
@@ -295,7 +296,6 @@ class AboutMeWelcome extends StatelessWidget {
               'The portolfio itself is also a brief demonstration of how I approach product build. The site self made, powered by Flutter and Firebase with the focus on being functional, and low cost with clean interface in the shortest amount of time possible. This lean build methodology achieves functional software in the shortest amount of time possible that serves the need of being a designer`s portfolio',
               style: Apptheme.bodyBase,
             )
-
           ],
         ),
       ),
