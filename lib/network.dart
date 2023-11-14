@@ -1,24 +1,10 @@
-import 'dart:js';
 import 'package:flutter/cupertino.dart';
-
 import 'apptheme.dart';
-import 'dataparse.dart';
+import 'jsonparse.dart';
 import 'dart:convert';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:http/http.dart' as http;
-import 'package:json_annotation/json_annotation.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'class.dart';
-import 'dataparse.dart';
-import 'network.dart';
-import 'dart:convert';
-import 'package:json_annotation/json_annotation.dart';
-import 'package:firebase_core/firebase_core.dart';
-
-import 'firebase_options.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 final contentRef = FirebaseStorage.instance.ref('content.json');
 
@@ -36,10 +22,27 @@ Future<List<ProjectContent>> readProjectJsonOnline() async {
   }
 }
 
+Future<JsonStructure> readJsonStructureOnline() async {
+  final String url = await contentRef.getDownloadURL();
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    var parsedJson = await json.decode(response.body);
+    JsonStructure jsonStructure = JsonStructure.fromJson(parsedJson);
+
+    return JsonStructure(
+      projectList: jsonStructure.projectList,
+      smallProjectList: jsonStructure.smallProjectList,
+    );
+  } else {
+    throw Exception('Failed to load project');
+  }
+}
+
 late OverlayEntry overlayEntry;
 
 class FutureImageBuilder extends StatefulWidget {
-  const FutureImageBuilder(this.imageLink, {Key? key}) : super(key: key);
+  const FutureImageBuilder(this.imageLink, {super.key});
+
   final String imageLink;
 
   @override
@@ -49,7 +52,7 @@ class FutureImageBuilder extends StatefulWidget {
 class _FutureImageBuilderState extends State<FutureImageBuilder> {
   void showHint(String location) {
     overlayEntry = myOverlayEntry(location);
-    Overlay.of(this.context).insert(overlayEntry);
+    Overlay.of(context).insert(overlayEntry);
   }
 
   OverlayEntry myOverlayEntry(String location) {
@@ -61,8 +64,8 @@ class _FutureImageBuilderState extends State<FutureImageBuilder> {
               overlayEntry?.remove();
             },
             child: Container(
-              padding: EdgeInsets.all(32),
-              decoration: const BoxDecoration(color: Color(0x66FFFFFF)),
+              padding: const EdgeInsets.all(32),
+              decoration: const BoxDecoration(color: Color(0x66000000)),
               child: Align(
                 alignment: Alignment.center,
                 child: Container(

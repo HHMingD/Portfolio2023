@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'apptheme.dart';
-import 'dataparse.dart';
+import 'jsonparse.dart';
 import 'network.dart';
 
 class NavigationItem extends StatefulWidget {
-  const NavigationItem({super.key,
+  const NavigationItem({
+    super.key,
     required this.buttonName,
     required this.isChallenge,
     required this.onCountSelected,
@@ -72,8 +74,9 @@ class _NavigationItemState extends State<NavigationItem> {
   }
 }
 
-class MainPageContent extends StatelessWidget {
-  const MainPageContent({
+class MainPageProjectContent extends StatelessWidget {
+  const MainPageProjectContent({
+    super.key,
     required this.selectionProjectIndex,
     required this.selectionChallengeIndex,
     required this.content,
@@ -111,22 +114,79 @@ class MainPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (selectionChallengeIndex == -1) {
-      return ListView(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-          ),
-          Text(
-              style: Apptheme.titleSmall,
-              "${content[selectionProjectIndex].projectTitle} Summary"),
-          const SizedBox(
-            height: 24,
-          ),
-          Text(
-              style: Apptheme.bodyBase,
-              content[selectionProjectIndex].summaryContent)
-        ],
-      );
+      return ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+          child: ListView(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+              Text(
+                  style: Apptheme.titleSmall,
+                  "${content[selectionProjectIndex].projectTitle} Summary"),
+              const SizedBox(
+                height: 24,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: Apptheme.black)),
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        style: Apptheme.labelBase,
+                        "My role: ${content[selectionProjectIndex].projectMyRole}"),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                        style: Apptheme.labelSmall,
+                        "Duration: ${content[selectionProjectIndex].projectDuration}"),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Text(
+                        style: Apptheme.labelSmall,
+                        "Location: ${content[selectionProjectIndex].projectLocation}"),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                              style: Apptheme.labelSmall,
+                              "Team: \n${content[selectionProjectIndex].teamComposition}"),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Text(
+                              style: Apptheme.labelSmall,
+                              "Topic: \n${content[selectionProjectIndex].projectTopic}"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              Text(
+                  style: Apptheme.bodyBase,
+                  content[selectionProjectIndex].summaryContent),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+            ],
+          ));
     }
     if (selectionChallengeIndex == -2) {
       return ListView(
@@ -143,7 +203,10 @@ class MainPageContent extends StatelessWidget {
           ),
           Text(
               style: Apptheme.bodyBase,
-              content[selectionProjectIndex].impactContent)
+              content[selectionProjectIndex].impactContent),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.15,
+          ),
         ],
       );
     } else {
@@ -156,9 +219,21 @@ class MainPageContent extends StatelessWidget {
             ),
             Text(
                 style: Apptheme.titleSmall,
+                "Challenge: ${content[selectionProjectIndex].challengeContent[selectionChallengeIndex].STARTitle}"),
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+                style: Apptheme.bodyBase,
                 content[selectionProjectIndex]
                     .challengeContent[selectionChallengeIndex]
-                    .STARTitle),
+                    .challengeSummary),
+            const SizedBox(
+              height: 11,
+            ),
+            const Divider(
+              height: 1,
+            ),
             const SizedBox(
               height: 24,
             ),
@@ -224,7 +299,7 @@ class MainPageContent extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
-                        height: 320,
+                        height: 280,
                         padding: const EdgeInsets.symmetric(horizontal: 8),
                         child: Row(
                           children: [
@@ -243,7 +318,7 @@ class MainPageContent extends StatelessWidget {
                             Expanded(
                               flex: 4,
                               child: Text(
-                                  style: Apptheme.labelBase,
+                                  style: Apptheme.bodySmall,
                                   content[selectionProjectIndex]
                                       .challengeContent[selectionChallengeIndex]
                                       .imageContentList[imageIndex]
@@ -268,35 +343,157 @@ class MainPageContent extends StatelessWidget {
   }
 }
 
-class AboutMeWelcome extends StatelessWidget {
+class MainPageSideProjectContent extends StatelessWidget {
+  const MainPageSideProjectContent({
+    super.key,
+    required this.selectionProjectIndex,
+    required this.content,
+  });
+
+  final int selectionProjectIndex;
+  final List<SmallProjectContent> content;
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Nice to meet you',
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      child: ListView(
+        children: <Widget>[
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.15,
+          ),
+          Text(
               style: Apptheme.titleSmall,
+              "${content[selectionProjectIndex].projectTitle} Summary"),
+          const SizedBox(
+            height: 24,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                border: Border.all(color: Apptheme.black)),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                    style: Apptheme.labelBase,
+                    "My role: ${content[selectionProjectIndex].projectMyRole}"),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                    style: Apptheme.labelSmall,
+                    "Duration: ${content[selectionProjectIndex].projectDuration}"),
+                const SizedBox(
+                  height: 24,
+                ),
+                Text(
+                    style: Apptheme.labelSmall,
+                    "Topic: \n${content[selectionProjectIndex].projectTopic}"),
+              ],
             ),
-            SizedBox(
-              height: 24,
-            ),
-            Text(
-              'Welcome to my portfolio, please feel free to reach out if you are interested in my work.',
-              style: Apptheme.labelLarge,
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            Text(
-              'The portolfio itself is also a brief demonstration of how I approach product build. The site self made, powered by Flutter and Firebase with the focus on being functional, and low cost with clean interface in the shortest amount of time possible. This lean build methodology achieves functional software in the shortest amount of time possible that serves the need of being a designer`s portfolio',
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          Text(
               style: Apptheme.bodyBase,
-            )
-          ],
+              content[selectionProjectIndex].challengeSummary),
+          const SizedBox(
+            height: 24,
+          ),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: content[selectionProjectIndex].imageContentList.length,
+              itemBuilder: (BuildContext context, int imageIndex) {
+                return Column(
+                  children: [
+                    Container(
+                      height: 280,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 6,
+                            child: SizedBox(
+                              height: double.infinity,
+                              child: FutureImageBuilder(
+                                  content[selectionProjectIndex]
+                                      .imageContentList[imageIndex]
+                                      .imageLocation),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            flex: 4,
+                            child: Text(
+                                style: Apptheme.bodySmall,
+                                content[selectionProjectIndex]
+                                    .imageContentList[imageIndex]
+                                    .imageDescription),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                  ],
+                );
+              }),
+        ],
+      ),
+    );
+  }
+}
+
+class MainPageWelcome extends StatelessWidget {
+  const MainPageWelcome({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      child: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+              Text(
+                'Welcome to my portfolio',
+                style: Apptheme.titleSmall,
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              Text(
+                'This is a self-made website powered by flutter and firebase',
+                style: Apptheme.labelLarge,
+              ),
+              SizedBox(
+                height: 24,
+              ),
+              Text(
+                'The portfolio itself is also a brief demonstration of my approach to a product build. It is a site with minimal but functional features.',
+                style: Apptheme.bodyBase,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text(
+                'Due to NDA constrains some of the images may not be available. Please feel free to reach out if you are interested in my work.',
+                style: Apptheme.bodyBase,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+            ],
+          ),
         ),
       ),
     );

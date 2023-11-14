@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:howard_chen_portfolio/apptheme.dart';
 import 'class.dart';
-import 'dataparse.dart';
+import 'jsonparse.dart';
 import 'network.dart';
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
@@ -19,16 +19,19 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp
+
+  ({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Howard Chen Portfolio',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)
+            .copyWith(background: Apptheme.white),
       ),
       home: const FetchData(),
     );
@@ -36,7 +39,9 @@ class MyApp extends StatelessWidget {
 }
 
 class FetchData extends StatefulWidget {
-  const FetchData({super.key});
+  const FetchData
+
+  ({super.key});
 
   @override
   State<StatefulWidget> createState() => _FetchDataState();
@@ -50,11 +55,10 @@ class _FetchDataState extends State<FetchData> {
 
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: readProjectJsonOnline(),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<ProjectContent>> snapshot) {
+        future: readJsonStructureOnline(),
+        builder: (BuildContext context, AsyncSnapshot<JsonStructure> snapshot) {
           if (snapshot.hasData) {
-            return MyHomePage(content: snapshot.data!);
+            return MyHomePage(jsonContent: snapshot.data!);
           } else {
             return const Align(
                 alignment: Alignment.center,
@@ -66,25 +70,134 @@ class _FetchDataState extends State<FetchData> {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.content});
+  const MyHomePage
 
-  final List<ProjectContent> content;
+  ({super.key, required this.jsonContent});
+
+  final JsonStructure jsonContent;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  int _selectedProjectIndex = -1;
+  int _selectedPageIndex =
+  0; // 0 = Introduction, 1 = Experience, 2 = Projects, 3 = Small Projects
+  int _selectedProjectIndex = 0;
   int _selectedChallengeIndex = 0;
-  bool _itemSelected = false;
 
-  setSelectionState(int setProjectIndex, int setChallengeIndex) {
+  setSelectionState(int setPageIndex, int setProjectIndex,
+      int setChallengeIndex) {
     {
       setState(() {
+        _selectedPageIndex = setPageIndex;
         _selectedProjectIndex = setProjectIndex;
         _selectedChallengeIndex = setChallengeIndex;
       });
+    }
+  }
+
+  Widget projectNavigation() {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: widget.jsonContent.projectList.length,
+        itemBuilder: (BuildContext context, int projectIndex) {
+          return ExpansionTile(
+            tilePadding: EdgeInsets.symmetric(horizontal: 8),
+            title: Text(
+                style: Apptheme.labelSmall,
+                'Project ${projectIndex + 1}, ${widget.jsonContent
+                    .projectList[projectIndex].projectTitle}'),
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NavigationItem(
+                  buttonName: "Summary",
+                  isChallenge: false,
+                  isSelected: (_selectedPageIndex == 2 &&
+                      projectIndex == _selectedProjectIndex &&
+                      _selectedChallengeIndex == -1 )
+                      ? true
+                      : false,
+                  onCountSelected: () {
+                    setSelectionState(2, projectIndex, -1);
+                  }),
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: widget.jsonContent.projectList[projectIndex]
+                      .challengeContent.length,
+                  itemBuilder: (BuildContext context, int challengeIndex) {
+                    return NavigationItem(
+                        buttonName: widget.jsonContent.projectList[projectIndex]
+                            .challengeContent[challengeIndex].STARTitle,
+                        isChallenge: true,
+                        isSelected: (_selectedPageIndex == 2 &&projectIndex == _selectedProjectIndex &&
+                            challengeIndex == _selectedChallengeIndex)
+                            ? true
+                            : false,
+                        onCountSelected: () {
+                          setSelectionState(2, projectIndex, challengeIndex);
+                        });
+                  }),
+              NavigationItem(
+                  buttonName: "Impact",
+                  isChallenge: false,
+                  isSelected: (_selectedPageIndex == 2 &&
+                      projectIndex == _selectedProjectIndex &&
+                      _selectedChallengeIndex == -2)
+                      ? true
+                      : false,
+                  onCountSelected: () {
+                    setSelectionState(2, projectIndex, -2);
+                  }),
+              const SizedBox(
+                height: 16,
+              ),
+            ],
+          );
+        });
+  }
+
+  Widget smallProjectNavigation() {
+    return ListView.builder(
+        shrinkWrap: true,
+        itemCount: widget.jsonContent.smallProjectList.length,
+        itemBuilder: (BuildContext context, int projectIndex) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NavigationItem(
+                  buttonName: 'Other: ${widget.jsonContent.smallProjectList[projectIndex].projectTitle}',
+                  isChallenge: false,
+                  isSelected: (_selectedPageIndex == 3 && projectIndex == _selectedProjectIndex)
+                      ? true
+                      : false,
+                  onCountSelected: () {
+                    setSelectionState(3, projectIndex, 0);
+                  }),
+            ],
+          );
+        });
+  }
+
+  Widget getWidget() {
+    if (_selectedPageIndex == 0) {
+      return MainPageWelcome();
+    }
+    if (_selectedPageIndex == 2) {
+      return MainPageProjectContent
+        (
+          selectionProjectIndex: _selectedProjectIndex,
+          selectionChallengeIndex: _selectedChallengeIndex,
+          content: widget.jsonContent.projectList);
+    }
+    if (_selectedPageIndex == 3) {
+      return MainPageSideProjectContent
+        (
+          selectionProjectIndex: _selectedProjectIndex,
+          content: widget.jsonContent.smallProjectList);
+    } else {
+      return const Align(alignment: Alignment.center,
+          child: SizedBox(child: Text('failed to load'),));
     }
   }
 
@@ -102,94 +215,52 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ),
               Expanded(
                   flex: 2,
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: widget.content.length,
-                      itemBuilder: (BuildContext context, int projectIndex) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            NavigationItem(
-                                buttonName:
-                                    "${widget.content[projectIndex].projectTitle} summary",
-                                isChallenge: false,
-                                isSelected:
-                                    (projectIndex == _selectedProjectIndex &&
-                                            _selectedChallengeIndex == -1)
-                                        ? true
-                                        : false,
-                                onCountSelected: () {
-                                  if (_itemSelected == false) {
-                                    _itemSelected = true;
-                                  }
-                                  setSelectionState(projectIndex, -1);
-                                }),
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: widget.content[projectIndex]
-                                    .challengeContent.length,
-                                itemBuilder:
-                                    (BuildContext context, int challengeIndex) {
-                                  return NavigationItem(
-                                      buttonName: widget
-                                          .content[projectIndex]
-                                          .challengeContent[challengeIndex]
-                                          .STARTitle,
-                                      isChallenge: true,
-                                      isSelected: (projectIndex ==
-                                                  _selectedProjectIndex &&
-                                              challengeIndex ==
-                                                  _selectedChallengeIndex)
-                                          ? true
-                                          : false,
-                                      onCountSelected: () {
-                                        if (_itemSelected == false) {
-                                          _itemSelected = true;
-                                        }
-                                        setSelectionState(
-                                            projectIndex, challengeIndex);
-                                      });
-                                }),
-                            NavigationItem(
-                                buttonName:
-                                    "${widget.content[projectIndex].projectTitle} impact",
-                                isChallenge: false,
-                                isSelected:
-                                    (projectIndex == _selectedProjectIndex &&
-                                            _selectedChallengeIndex == -2)
-                                        ? true
-                                        : false,
-                                onCountSelected: () {
-                                  if (_itemSelected == false) {
-                                    _itemSelected = true;
-                                  }
-                                  setSelectionState(projectIndex, -2);
-                                }),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            const Divider(
-                              thickness: 1,
-                              height: 1,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                          ],
-                        );
-                      })),
+                  child: ScrollConfiguration(
+                    behavior: ScrollConfiguration.of(context)
+                        .copyWith(scrollbars: false),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          NavigationItem(
+                              buttonName: "Introduction",
+                              isChallenge: false,
+                              isSelected:
+                              (_selectedPageIndex == 0),
+                              onCountSelected: () {
+                                setState(() {
+                                  setSelectionState(0, 0, 0);
+                                });
+                              }),
+                          NavigationItem(
+                              buttonName: "Experience(Under maintenance)",
+                              isChallenge: false,
+                              isSelected:
+                              (_selectedPageIndex == 1),
+                              onCountSelected: () {
+                                setState(() {
+                                  setSelectionState(0, 0, 0);
+                                });
+                              }),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          projectNavigation(),
+                          smallProjectNavigation(),
+                        ],
+                      ),
+                    ),
+                  )),
               const SizedBox(
-                width: 23,
+                width: 24,
               ),
               Flexible(
-                  fit: FlexFit.loose,
-                  flex: 5,
-                  child: _itemSelected
-                      ? MainPageContent(
-                          selectionProjectIndex: _selectedProjectIndex,
-                          selectionChallengeIndex: _selectedChallengeIndex,
-                          content: widget.content)
-                      : AboutMeWelcome()),
+                fit: FlexFit.loose,
+                flex: 5,
+                child: getWidget(),
+
+              ),
               const SizedBox(
                 width: 24,
               ),
@@ -204,14 +275,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                             border: Border.all(width: 1),
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(5))),
+                            const BorderRadius.all(Radius.circular(5))),
                         child: Column(
                           children: [
                             InkWell(
                               child: Container(
                                   padding: const EdgeInsets.all(12),
                                   child: const Icon(
-                                    Icons.mail_outline,
+                                    Icons.mail_rounded,
                                     size: 24,
                                   )),
                               onTap: () {
@@ -223,10 +294,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             ),
                             InkWell(
                               child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  child: const Icon(
-                                    Icons.linked_camera_outlined,
-                                    size: 24,
+                                  width: 48,
+                                  height: 48,
+                                  padding: const EdgeInsets.all(12),
+                                  child: const Image(
+                                    image: AssetImage('linkedin_logo60px.png'),
                                   )),
                               onTap: () {
                                 _launchUrl(
@@ -237,7 +309,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.15,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.15,
                       ),
                     ],
                   )),
