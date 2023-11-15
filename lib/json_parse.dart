@@ -15,14 +15,12 @@ class JsonStructure {
   final List<SmallProjectContent> smallProjectList;
 
   factory JsonStructure.fromJson(Map<String, dynamic> parsedJson) {
-    var list1 = parsedJson['Projects'] as List;
+    List<dynamic> list1 = parsedJson['Projects'];
     List<ProjectContent> projectContent =
     list1.map((i) => ProjectContent.fromJson(i)).toList();
-    print ( projectContent);
-    var list = parsedJson['SmallProjects'] as List;
+    List<dynamic> list2 = parsedJson['SmallProjects'];
     List<SmallProjectContent> smallProjectContent =
-    list.map((i) => SmallProjectContent.fromJson(i)).toList();
-    print ( smallProjectContent);
+    list2.map((i) => SmallProjectContent.fromJson(i)).toList();
     return JsonStructure(
       projectList: projectContent,
       smallProjectList: smallProjectContent,
@@ -84,7 +82,7 @@ class ChallengeContent {
   final String actionContent;
   final String resultTitle;
   final String resultContent;
-  final List<ImageContent> imageContentList;
+  final List<ParagraphContent> imageContentList;
 
   ChallengeContent({
     required this.challengeSummary,
@@ -102,8 +100,8 @@ class ChallengeContent {
 
   factory ChallengeContent.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['ImageContentList'] as List;
-    List<ImageContent> content =
-        list.map((i) => ImageContent.fromJson(i)).toList();
+    List<ParagraphContent> content =
+        list.map((i) => ParagraphContent.fromJson(i)).toList();
     return ChallengeContent(
       challengeSummary: parsedJson['ChallengeSummary'],
       STARTitle: parsedJson['STARTitle'],
@@ -127,7 +125,7 @@ class SmallProjectContent {
   final String projectMyRole;
   final String projectDuration;
   final String challengeSummary;
-  final List<ImageContent> imageContentList;
+  final List<ParagraphContent> imageContentList;
 
   SmallProjectContent({
     required this.projectTitle,
@@ -140,8 +138,8 @@ class SmallProjectContent {
 
   factory SmallProjectContent.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['ImageContentList'] as List;
-    List<ImageContent> content =
-    list.map((i) => ImageContent.fromJson(i)).toList();
+    List<ParagraphContent> content =
+    list.map((i) => ParagraphContent.fromJson(i)).toList();
     return SmallProjectContent(
       projectTitle: parsedJson['ProjectTitle'],
       projectTopic: parsedJson['ProjectTopic'],
@@ -154,16 +152,18 @@ class SmallProjectContent {
 }
 
 @JsonSerializable(anyMap: true)
-class ImageContent {
+class ParagraphContent {
+  final String titleText;
   final String imageLocation;
-  final String imageDescription;
+  final String contentText;
 
-  ImageContent({required this.imageLocation, required this.imageDescription});
+  ParagraphContent({required this.titleText,required this.imageLocation, required this.contentText});
 
-  factory ImageContent.fromJson(Map<String, dynamic> parsedJson) {
-    return ImageContent(
+  factory ParagraphContent.fromJson(Map<String, dynamic> parsedJson) {
+    return ParagraphContent(
+      titleText: parsedJson['TitleText'],
       imageLocation: parsedJson['ImageLocation'],
-      imageDescription: parsedJson['ImageDescription'],
+      contentText: parsedJson['ContentText'],
     );
   }
 }

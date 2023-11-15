@@ -43,6 +43,7 @@ class Apptheme {
     color: prime600,
   );
   static const TextStyle labelLarge = TextStyle(
+    height: 1.5,
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 20,
@@ -50,6 +51,7 @@ class Apptheme {
     color: prime600,
   );
   static const TextStyle labelBase = TextStyle(
+    height: 1.5,
     fontFamily: fontName,
     fontWeight: FontWeight.w600,
     fontSize: 18,
@@ -57,6 +59,7 @@ class Apptheme {
     color: prime600,
   );
   static const TextStyle labelSmall = TextStyle(
+    height: 1.4,
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 16,
@@ -64,6 +67,7 @@ class Apptheme {
     color: prime600,
   );
   static const TextStyle labelTiny = TextStyle(
+    height: 1.3,
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 14,
@@ -71,6 +75,7 @@ class Apptheme {
     color: prime700,
   );
   static const TextStyle labelSmallHC = TextStyle(
+    height: 1.4,
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 16,
@@ -78,6 +83,7 @@ class Apptheme {
     color: prime100,
   );
   static const TextStyle labelTinyHC = TextStyle(
+    height: 1.3,
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 14,

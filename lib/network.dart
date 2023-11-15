@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'apptheme.dart';
-import 'jsonparse.dart';
+import 'app_theme.dart';
+import 'json_parse.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:firebase_storage/firebase_storage.dart';
@@ -28,29 +28,67 @@ Future<JsonStructure> readJsonStructureOnline() async {
   if (response.statusCode == 200) {
     var parsedJson = await json.decode(response.body);
     JsonStructure jsonStructure = JsonStructure.fromJson(parsedJson);
-
+    print('readjson success');
     return JsonStructure(
       projectList: jsonStructure.projectList,
       smallProjectList: jsonStructure.smallProjectList,
     );
   } else {
+    print('readjson failed');
     throw Exception('Failed to load project');
   }
 }
 
 late OverlayEntry overlayEntry;
 
-class FutureImageBuilder extends StatefulWidget {
+class FutureImageBuilder extends StatelessWidget {
   const FutureImageBuilder(this.imageLink, {super.key});
 
   final String imageLink;
 
+  Future<String> fetchImageUrl(String value) async {
+    return FirebaseStorage.instance.ref(value).getDownloadURL();
+  }
+
   @override
-  State<FutureImageBuilder> createState() => _FutureImageBuilderState();
+  Widget build(BuildContext context) {
+    print('---- FutureBuilder built');
+    return FutureBuilder<String>(
+        future: fetchImageUrl(
+          imageLink,
+        ),
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data != "No") {
+              print('----- data fetched, image built');
+              return FadeInImage.assetNetwork(
+                fadeOutDuration: const Duration(milliseconds: 100),
+                fadeInDuration: const Duration(milliseconds: 100),
+                placeholder: 'imageplaceholder.png',
+                image: snapshot.data!,
+                fit: BoxFit.cover,
+              );
+            } else {
+              return const Image(image: AssetImage('imageplaceholder.png'));
+            }
+          } else {
+            return const Image(image: AssetImage('imageplaceholder.png'));
+          }
+        });
+  }
 }
 
-class _FutureImageBuilderState extends State<FutureImageBuilder> {
-  void showHint(String location) {
+class ImageWithOverlay extends StatefulWidget {
+  const ImageWithOverlay(this.imageDownloadURL, {super.key});
+
+  final String imageDownloadURL;
+
+  @override
+  State<ImageWithOverlay> createState() => _ImageWithOverlayState();
+}
+
+class _ImageWithOverlayState extends State<ImageWithOverlay> {
+  void imageOverlay(String location) {
     overlayEntry = myOverlayEntry(location);
     Overlay.of(context).insert(overlayEntry);
   }
@@ -68,9 +106,9 @@ class _FutureImageBuilderState extends State<FutureImageBuilder> {
               decoration: const BoxDecoration(color: Color(0x66000000)),
               child: Align(
                 alignment: Alignment.center,
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.65,
-                  child: Image.network(
+                  child: FutureImageBuilder(
                     location,
                   ),
                 ),
@@ -81,34 +119,11 @@ class _FutureImageBuilderState extends State<FutureImageBuilder> {
   }
 
   @override
-  Future<String> fetchImageUrl(String value) async {
-    return FirebaseStorage.instance.ref(value).getDownloadURL();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-        future: fetchImageUrl(
-          widget.imageLink,
-        ),
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data != "No") {
-              return InkWell(
-                onTap: () {
-                  showHint(snapshot.data!);
-                },
-                child: Image.network(
-                  snapshot.data!,
-                  fit: BoxFit.cover,
-                ),
-              );
-            } else {
-              return const Image(image: AssetImage('imageplaceholder.png'));
-            }
-          } else {
-            return const Image(image: AssetImage('imageplaceholder.png'));
-          }
-        });
+    return InkWell(
+        onTap: () {
+          imageOverlay(widget.imageDownloadURL);
+        },
+        child: FutureImageBuilder(widget.imageDownloadURL));
   }
 }

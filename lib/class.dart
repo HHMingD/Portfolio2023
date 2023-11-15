@@ -1,8 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'apptheme.dart';
-import 'jsonparse.dart';
+import 'app_theme.dart';
+import 'json_parse.dart';
 import 'network.dart';
 
 class NavigationItem extends StatefulWidget {
@@ -28,7 +29,6 @@ class _NavigationItemState extends State<NavigationItem> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
@@ -74,6 +74,117 @@ class _NavigationItemState extends State<NavigationItem> {
   }
 }
 
+class MainPageWelcome extends StatelessWidget {
+  const MainPageWelcome(
+      {super.key, required this.navigateToProjects, required this.jsonContent});
+
+  final JsonStructure jsonContent;
+  final ValueSetter<int> navigateToProjects;
+
+  @override
+  Widget build(BuildContext context) {
+    print('--- ScrollConfiguration built');
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+      child: SingleChildScrollView(
+        child: SizedBox(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+              const Text(
+                'Welcome to my portfolio',
+                style: Apptheme.titleSmall,
+              ),
+              const SizedBox(height: 24),
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: jsonContent.projectList.length,
+                  itemBuilder: (BuildContext context, int projectIndex) {
+                    return Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 1),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(5))),
+                          child: InkWell(
+                              onTap: () => navigateToProjects(projectIndex),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: FutureImageBuilder(jsonContent
+                                        .projectList[projectIndex]
+                                        .challengeContent[0]
+                                        .imageContentList[0]
+                                        .imageLocation),
+                                  ),
+                                  const SizedBox(width: 24),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              style: Apptheme.titleSmall,
+                                              jsonContent.projectList[projectIndex].projectTitle),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                              style: Apptheme.labelSmall,
+                                              'Topics: ${jsonContent.projectList[projectIndex].projectTopic}'),
+                                        ],
+                                      ))
+                                ],
+                              )),
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        )
+                      ],
+                    );
+                  }),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text(
+                'This is a self-made website powered by flutter and firebase',
+                style: Apptheme.labelLarge,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text(
+                'The portfolio itself is also a brief demonstration of my approach to a product build. It is a site with minimal but functional features.',
+                style: Apptheme.bodyBase,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Text(
+                'Due to NDA constrains some of the images may not be available. Please feel free to reach out if you are interested in my work.',
+                style: Apptheme.bodyBase,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.15,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class MainPageProjectContent extends StatelessWidget {
   const MainPageProjectContent({
     super.key,
@@ -86,13 +197,20 @@ class MainPageProjectContent extends StatelessWidget {
   final int selectionChallengeIndex;
   final List<ProjectContent> content;
 
-  Widget customExpansionTile(String titleText, String contentText) {
+  Widget customExpansionTile(
+      String titleText, String contentText, String label) {
     return ExpansionTile(
       shape: const ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
       tilePadding: const EdgeInsets.all(8),
       collapsedTextColor: Apptheme.black,
-      title: Text(style: Apptheme.labelBase, titleText),
+      title: RichText(
+          text: TextSpan(children: <TextSpan>[
+        TextSpan(text: label, style: Apptheme.labelBase),
+        TextSpan(
+            text: titleText,
+            style: Apptheme.labelBase.copyWith(fontWeight: FontWeight.w500))
+      ])),
       key: GlobalKey(),
       childrenPadding: const EdgeInsets.all(8),
       children: <Widget>[
@@ -100,6 +218,12 @@ class MainPageProjectContent extends StatelessWidget {
           width: double.infinity,
           child: Text(style: Apptheme.bodyBase, contentText),
         ),
+        const SizedBox(
+          height: 15,
+        ),
+        const Divider(
+          height: 1,
+        )
       ],
     );
   }
@@ -189,25 +313,28 @@ class MainPageProjectContent extends StatelessWidget {
           ));
     }
     if (selectionChallengeIndex == -2) {
-      return ListView(
-        children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-          ),
-          Text(
-            style: Apptheme.titleSmall,
-            "${content[selectionProjectIndex].projectTitle} Impact",
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Text(
-              style: Apptheme.bodyBase,
-              content[selectionProjectIndex].impactContent),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-          ),
-        ],
+      return ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+            Text(
+              style: Apptheme.titleSmall,
+              "${content[selectionProjectIndex].projectTitle} Impact",
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+                style: Apptheme.bodyBase,
+                content[selectionProjectIndex].impactContent),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.15,
+            ),
+          ],
+        ),
       );
     } else {
       return ScrollConfiguration(
@@ -237,51 +364,47 @@ class MainPageProjectContent extends StatelessWidget {
             const SizedBox(
               height: 24,
             ),
-            labelSTAR('#Situation the team was in:'),
             customExpansionTile(
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .situationTitle,
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .situationContent,
-            ),
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .situationTitle,
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .situationContent,
+                'The Situation: '),
             const SizedBox(
               height: 16,
             ),
-            labelSTAR('#Tasks I was assigned:'),
             customExpansionTile(
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .taskTitle,
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .taskContent,
-            ),
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .taskTitle,
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .taskContent,
+                'The Task: '),
             const SizedBox(
               height: 16,
             ),
-            labelSTAR('#Actions I decided to take:'),
             customExpansionTile(
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .actionTitle,
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .actionContent,
-            ),
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .actionTitle,
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .actionContent,
+                'The Action: '),
             const SizedBox(
               height: 16,
             ),
-            labelSTAR('#Results the team bring:'),
             customExpansionTile(
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .resultTitle,
-              content[selectionProjectIndex]
-                  .challengeContent[selectionChallengeIndex]
-                  .resultContent,
-            ),
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .resultTitle,
+                content[selectionProjectIndex]
+                    .challengeContent[selectionChallengeIndex]
+                    .resultContent,
+                'The Result: '),
             const SizedBox(
               height: 24,
             ),
@@ -307,7 +430,7 @@ class MainPageProjectContent extends StatelessWidget {
                               flex: 6,
                               child: SizedBox(
                                 height: double.infinity,
-                                child: FutureImageBuilder(content[
+                                child: ImageWithOverlay(content[
                                         selectionProjectIndex]
                                     .challengeContent[selectionChallengeIndex]
                                     .imageContentList[imageIndex]
@@ -322,7 +445,7 @@ class MainPageProjectContent extends StatelessWidget {
                                   content[selectionProjectIndex]
                                       .challengeContent[selectionChallengeIndex]
                                       .imageContentList[imageIndex]
-                                      .imageDescription),
+                                      .contentText),
                             )
                           ],
                         ),
@@ -418,7 +541,7 @@ class MainPageSideProjectContent extends StatelessWidget {
                             flex: 6,
                             child: SizedBox(
                               height: double.infinity,
-                              child: FutureImageBuilder(
+                              child: ImageWithOverlay(
                                   content[selectionProjectIndex]
                                       .imageContentList[imageIndex]
                                       .imageLocation),
@@ -431,7 +554,7 @@ class MainPageSideProjectContent extends StatelessWidget {
                                 style: Apptheme.bodySmall,
                                 content[selectionProjectIndex]
                                     .imageContentList[imageIndex]
-                                    .imageDescription),
+                                    .contentText),
                           )
                         ],
                       ),
@@ -448,54 +571,68 @@ class MainPageSideProjectContent extends StatelessWidget {
   }
 }
 
-class MainPageWelcome extends StatelessWidget {
-  const MainPageWelcome({super.key});
+class ParagraphLayout {
+  //provide a layout-type parameters or directly call a method to use this widget.
+  const ParagraphLayout(
+    this.layoutType, {
+    required this.titleTextDisplay,
+    required this.imageDisplay,
+    required this.titleText,
+    required this.contentText,
+    required this.imageLink,
+  });
 
-  @override
-  Widget build(BuildContext context) {
-    return ScrollConfiguration(
-      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-      child: SingleChildScrollView(
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
-              ),
-              Text(
-                'Welcome to my portfolio',
-                style: Apptheme.titleSmall,
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                'This is a self-made website powered by flutter and firebase',
-                style: Apptheme.labelLarge,
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                'The portfolio itself is also a brief demonstration of my approach to a product build. It is a site with minimal but functional features.',
-                style: Apptheme.bodyBase,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              const Text(
-                'Due to NDA constrains some of the images may not be available. Please feel free to reach out if you are interested in my work.',
-                style: Apptheme.bodyBase,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
-              ),
-            ],
-          ),
-        ),
-      ),
+  final String layoutType;
+  final bool titleTextDisplay;
+  final bool imageDisplay;
+  final String titleText;
+  final String contentText;
+  final String imageLink;
+
+  Widget leftImage() {
+    return Row(
+      children: [
+        Expanded(flex: 1, child: FutureImageBuilder(imageLink)),
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                titleTextDisplay == false
+                    ? Text(titleText, style: Apptheme.titleSmall)
+                    : const SizedBox(),
+                Text(contentText, style: Apptheme.labelSmall),
+              ],
+            ))
+      ],
     );
+  }
+
+  Widget rightImage() {
+    return Row(
+      children: [
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                titleTextDisplay == false
+                    ? Text(titleText, style: Apptheme.titleSmall)
+                    : const SizedBox(),
+                Text(contentText, style: Apptheme.labelSmall),
+              ],
+            )),
+        Expanded(flex: 1, child: FutureImageBuilder(imageLink)),
+      ],
+    );
+  }
+
+  Widget layoutBuild(layoutType) {
+    if (layoutType == 'left') {
+      return leftImage();
+    }
+    if (layoutType == 'right') {
+      return rightImage();
+    } else {
+      return const Text('Layout parameter incorrect. Name widget directly');
+    }
   }
 }
