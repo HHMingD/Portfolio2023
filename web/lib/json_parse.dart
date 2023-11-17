@@ -33,7 +33,6 @@ class JsonStructure {
 class ProjectContent {
   final String projectTitle;
   final String projectTopic;
-  final String projectThumbnail;
   final String projectMyRole;
   final String teamComposition;
   final String projectDuration;
@@ -46,7 +45,6 @@ class ProjectContent {
   ProjectContent(
       {required this.projectTitle,
       required this.projectTopic,
-      required this.projectThumbnail,
       required this.projectMyRole,
       required this.summaryContent,
       required this.teamComposition,
@@ -67,7 +65,6 @@ class ProjectContent {
     return ProjectContent(
       projectTitle: parsedJson['ProjectTitle'],
       projectTopic: parsedJson['ProjectTopic'],
-      projectThumbnail: parsedJson['ProjectThumbnail'],
       projectMyRole: parsedJson['ProjectMyRole'],
       teamComposition: parsedJson['TeamComposition'],
       projectDuration: parsedJson['ProjectDuration'],

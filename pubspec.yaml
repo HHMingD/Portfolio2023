@@ -56,13 +56,25 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  fonts:
+    - family: Museo
+      fonts:
+      - asset: fonts/Museo 900.otf
+        weight: 900
+      - asset: fonts/Museo 700.otf
+        weight: 700
+      - asset: fonts/Museo 500.otf
+        weight: 500
+      - asset: fonts/Museo 300.otf
+        weight: 300
+      - asset: fonts/Museo 100.otf
+        weight: 100
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
 assets:
-  - content.json
   - imageplaceholder.png
   - linkedin_logo60px.png
   # To add assets to your application, add an assets section, like this:

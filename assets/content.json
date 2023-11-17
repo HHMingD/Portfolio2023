@@ -3,12 +3,28 @@
     {
       "ProjectTitle": "VR Exploration and Build",
       "ProjectTopic": "Spatial rendering, Design exploration, VR user experience, Metaverse",
+      "ProjectThumbnail": "images/1.cover.png",
       "ProjectMyRole": "The metaverse subject matter expert, In charge of building and executing the Research Routine and rapid VR prototyping",
       "TeamComposition": "2 experience designers, \n2 Strategic designers, \n2 Venture architects",
       "ProjectDuration": "6 months",
       "ProjectLocation": "London, Dubai, KSA",
       "SummaryContent": "Our client is a state-owned investment entity in GSA. \n\nAs this is the first ever sold case for the firm around the metaverse topic, we are in a pioneering role to experiment with the the firm's metaverse strategy.\n\nThe client have no prior knowledge in the field of metaverse, spatial rendering and digital marketing. They also realised that their business would require significant uplift in their digital outreach due to their geo-locational constrains. (Far from major markets with global talents)\n\nMost of our work would rely on improvisation as we uncover the potential of VR technology. We developed a method for rapid prototyping. To allow us to use an organic approach for this case. \n\nOur goal is to seek opportunities in building standalone VR products. \n\nI was the metaverse subject matter expert of this project in charge of the research routines and the prototype strategy and the production lead of the case.",
       "ImpactContent": "The project was the first ever sold metaverse project for the firm. \n\nWith our strategic input, our client made significant progress on building their own metaverse strategy.\n\nWe've had two major pivot during the period of my staffing.\nThe first phase was to explore the VR use case for the family and business setting. The second phase was to explore the feasibility of building VR based virtual community within our client's core social group (Employees and family).The third use case builds on top of the second phase result. We validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client's community. \n\nThe project extended from originally a 7 weeks project to a project lasting more than an year. It is still an on going project as of now (OCT 2023.) ",
+      "ParagraphContentList": [
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/1.1.1.png",
+          "ContentText": "Phase 1: Quick mock up to boost the team's understanding of virtual social interactions",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        }
+      ],
       "ChallengeContent": [
         {
           "STARTitle": "Rapid design exploration with emerging technology",
@@ -21,26 +37,58 @@
           "ActionContent": "The VR prototype which the external vendor offers were far from ideal. The team is struggling to achieve consistent output for the look and feel and the functions for the VR prototype \n\nI decided to take the lead and pivot the testing methodologies with new tools and a more agile approach: \n\n\u2022  Embracing the principal of 'seeing is believing'. Setting up the guiding principal that the only way to deliver meaningful insight is to put VR product in front of our testing participants. \n\u2022  Utilised VR mock ups to validate our hypothesis in demo sessions with the client senior stakeholders and through user research with a captive user group picked by the client side. \n\u2022  Key Pivot: Leading the team to Use the 'VRChat' to build quick and dirty VR experiences to test and gather insights, with extremely basic unity build. At time, we focused on simple script, look and feel, and design articulation.\n\n Leveraging my experience in Spatial rendering, we built 4 different VR scenes to explore the potential VR value with our client. ",
           "ResultTitle": "Organic approach help us land the VR proposition exactly where they need to be",
           "ResultContent": "\u2022  The level of flexibility was welcoming. The design team were able to coop with the need to rapidly change the direction of the project. \n\u2022  We were able to rapidly reflect the user feedback onto the VR scenario similar to the agile design process",
-          "ImageContentList": [
+          "ParagraphContentList": [
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.1.1.png",
-              "ContentText": "Phase 1: Quick mock up to boost the team's understanding of virtual social interactions"
+              "ContentText": "Phase 1: Quick mock up to boost the team's understanding of virtual social interactions",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.1.2.png",
-              "ContentText": "Phase 1: Testing with participants in the scene"
+              "ContentText": "Phase 1: Testing with participants in the scene",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.1.3.png",
-              "ContentText": "Phase 2: the objective for the testing"
+              "ContentText": "Phase 2: the objective for the testing",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.1.4.png",
-              "ContentText": "Phase 2: Profile of the testing participants"
+              "ContentText": "Phase 2: Profile of the testing participants",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             }
           ]
         },
@@ -55,16 +103,32 @@
           "ActionContent": "At the later stage of the projcet, it was evident that the captive user group from our client was not going ot be able to provide us enough insight to reflect the broader growth potential in VR as our client gets increasingly excited about the VR communities.\n\nAfter refinement, we have name the settings as 'the digital community use case', and 'the workroom use case' to be more precise on the value we want to bring. \n\n I than acquired the resource from the project leader to:\n\n\u2022  Leverage my proximity to the current VR aficionados (VRChat and other metaverse titles) for recruitment and invite them to explore potential VR use case for our clients. \n\u2022  Hosting open demo session for wider audience from different age group and gaming habits to collect their input on our VR use case",
           "ResultTitle": "A solid VR use case that unblocks our client's geolocational limits",
           "ResultContent": "We find that: \n\u2022  The aspect of VR communities currently present in apps such as VRChat could bring younger population to the proximity of our client's digital marketing effort. This is crucial to our client's long term goal for growth. \n\u2022  VR product is exceptionally effective for our client's isolated community in remote regions to connect with their loved ones. Especially connecting with young ones who we predicted to be the main VR users in the coming years.\n\nMain concern was:\n\u2022  VR lacks the wide scale adaptation when comparing with the current mobile apps.\n\u2022  Custom VR product build are extremely pricey.\n\nAlthough being one of the digital delivery method. It is less cost effective in growth potential when comparing with other digital channels. ",
-          "ImageContentList": [
+          "ParagraphContentList": [
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.2.1.png",
-              "ContentText": "Some of the key business value extracted from the research"
+              "ContentText": "Some of the key business value extracted from the research",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.2.2.png",
-              "ContentText": "Profiles of the individuals participated in the co-creation"
+              "ContentText": "Profiles of the individuals participated in the co-creation",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             }
           ]
         },
@@ -79,16 +143,32 @@
           "ActionContent": "With the result from the research sessions, I convinced the design team that the key for a successful VR build should be the explorative interactions with objects and other users instead of heavily scripted events. \n\nAs such, I begin the design of the new VR scene with:\n\u2022  Simple level design starting with interior design floor plan instead of game level design to capture the spatial experience most users are used to (Instead of surreal gaming vibes).\n\u2022  Utilising assets built previously. Production is mostly just the placement of the objects with special focus on achieving the artistic direction.\n\u2022  All items designed with interaction (sitting, mirror, pool table) built in, plus simple activities leveraging VRChat's physic engine (tennis, volleyball).",
           "ResultTitle": "Alignment with the client. Successfully materialised the essence of a VR use case",
           "ResultContent": "\u2022  A mock up VR experience that successfully communicated the proposed VR value in just 1.5 weeks. \n\u2022  Received positive feedback from senior stakeholders and clients.\n\u2022  VR space is used for client's future employee onboarding project. \n\nOur goal for design is to have the users to define the space with careful articulation of the object's affordance. ",
-          "ImageContentList": [
+          "ParagraphContentList": [
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.3.1.png",
-              "ContentText": "Scenery shot of the interior of the VR scene"
+              "ContentText": "Scenery shot of the interior of the VR scene",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/1.3.2.png",
-              "ContentText": "Top view of the VR scene"
+              "ContentText": "Top view of the VR scene",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             }
           ]
         }
@@ -97,12 +177,145 @@
     {
       "ProjectTitle": "B2B Web App: Disclosure Platform",
       "ProjectTopic": "User experience design, Full stack digital design, User research, Cross functional team, Agile development",
+      "ProjectThumbnail": "images/2.cover.png",
       "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning. Acting scram master",
       "TeamComposition": "1 experience designer, \n1 business analyst, \n4 Engineers(FE,BE)",
       "ProjectDuration": "4 months",
       "ProjectLocation": "London, Paris",
-      "SummaryContent": "Our client is a major international non-profit organisation. Their operation process requires a lot of manual tasks and this could invites a large margin of error\nWe are seeing these human errors causing harm to their reputation and increase the cost to their operation. All the manual tasks make it hard for them to scale, while seeing the demand growing by 3 fold in the past two years\n\nIt has become evident that Words and Excel would not be sufficient to support their future growth. We are tasked to build a B2B product that handles the scoring questionnaire, the customers response system and the E2E scoring journey.\n\nWe need to build a digital journey from the ground up. Demolishing undesirable process and create the new link in their operation. \n\nThis is a behemoth piece of work, we separate the work into many different streams. I work closely with the client team manager, the firm engineering team, and a business analyst for this work stream. I am responsible for the workstream's design operation.",
+      "SummaryContent": "Our client is a major international non-profit organisation aiming to further digitise their operation for scale. /n/nWe need to build a digital journey from the ground up. Demolishing undesirable process and create the new link in their operation. /n/nThis is a behemoth piece of work, we separate the work into many different streams. I work closely with the client team manager, the BCG engineering team, and a BCG business analyst for this work stream. I am responsible for the workstream's design operation.  ",
       "ImpactContent": "We delivered a functional product built in just 3 months that supports our client's E2E journey \n\nBeside delivering the product, the firm team's goal was to help our client make the transition into a tech company.\nOutside of the development work, we are also tasked with:\nUpskilling current employee\nBuild the in-house product team\nBurn the down the early risk of a product development. \n\nOur client is forced by the market to initiate change. The increasing public awareness to the climate crisis has propelled their business to multiply in the past few years.  If they are unable to ride the wave of hyper growth for climate industry, their business would be seriously challenged as the market would favor competitors with better products. \n\nOur work has been success in multiple front. The new product will be able to help our client solve their scaling issue in the short term. The long term strategy of the complete transformation will be achieved by the product team picked, and onboarded by the firm team. \n\nWe are hopeful that our influence will be crucial to our client's success in the short term future.",
+      "ParagraphContentList": [
+        {
+          "TitleText": "Solving a complex B2B problem",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Our client's operation requires a lot of manual tasks. Without validation, the manual tasks are causing a large margin of error damaging their reputation with increases the cost to their operation",
+          "Layout": "onlyText",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "Facilitating brain-storming workshops to problem-solve collectively ",
+          "SubtitleText": "8 work session with clients, 3 major collaborative workshop to problem solve",
+          "ImageLocation": "images/2.1.png",
+          "ContentText": "The client's operation was extremely complex. It was agreed that the quickest way to build our hypothesis is by collaborating with our clients. We had 3 major problem solving sessions and 8 work sessions to further iron out the details. ",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": true,
+            "Page": 2,
+            "Project": 1,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "Fostering the agile development set up",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Due to the staffing constrains, we have no product managers familiar with the agile process on the case. Designers on this case were the expert closest to the agile framework. I was tasked to build the agile development framework for my workstream. ",
+          "Layout": "onlyText",
+          "Link": {
+            "LinkActive": true,
+            "Page": 2,
+            "Project": 1,
+            "Challenge": 1
+          }
+        },
+        {
+          "TitleText": "Design to minimise human error",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Upon learning about the client’s operation. We identified that the key issue was the amount of mental calculation involved in the operation causing all of the issues mentioned above. Our hypothesis is that a well built interface for users to interact with data would be the solution.",
+          "Layout": "onlyText",
+          "Link": {
+            "LinkActive": true,
+            "Page": 2,
+            "Project": 1,
+            "Challenge": 2
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/2.2.png",
+          "ContentText": "Task overview to see the remaining tasks",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/2.3.png",
+          "ContentText": "Inviting clients to contribute to the wireframing effort. Non-designers could also have fun!",
+          "Layout": "right",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/2.4.png",
+          "ContentText": "Help centre to provide contextual assistance",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/2.5.png",
+          "ContentText": "Navigation rework to reflect the user sessions feedback",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/2.6.png",
+          "ContentText": "Carefully crafted panel to include all information in one screen without jumping back and forth. ",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "User research sessions to validate our deliverables",
+          "SubtitleText": "4 user research sessions with over 20 participants ",
+          "ImageLocation": "empty",
+          "ContentText": "The result from the user research sessions was resoundingly positive. the users were affirmative that the product we built will solve the issues they are facing. The sessions was documented and sent to the client for future upskilling programme.",
+          "Layout": "onlyText",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        }
+      ],
       "ChallengeContent": [
         {
           "STARTitle": "Problem solving Zero to one",
@@ -115,21 +328,45 @@
           "ActionContent": "\u2022  Hosting collaborative design session to extract insights from the clients and users and turn their ideas into design to speed up our process tremendously.\n\u2022  Creating collaborative design platform to collate the design insight across the client team. First draft of the design journey were done in just three days.\n\u2022  Investigate the blockers to the scalability. Create and iterate the product strategy for the problem solving",
           "ResultTitle": "Connected team align on the focus of the development after the first sprint cycle",
           "ResultContent": "\u2022  Successfully identified the core feature with the utmost priority to build in sprint one with no prior research. \n\u2022  Setting up abd maintained the platform for continuous collaboration on multiple boards ",
-          "ImageContentList": [
+          "ParagraphContentList": [
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.1.1.png",
-              "ContentText": "Co- working session and the effort to document the team's output"
+              "ContentText": "Co- working session and the effort to document the team's output",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.1.2.png",
-              "ContentText": "Initial site map for alignment. Phased out after roadmap on Azure was more tangible to assess the build effort"
+              "ContentText": "Initial site map for alignment. Phased out after roadmap on Azure was more tangible to assess the build effort",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.1.3.png",
-              "ContentText": "Product blueprint, marking the main five building blocks for prioritisation"
+              "ContentText": "Product blueprint, marking the main five building blocks for prioritisation",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             }
           ]
         },
@@ -144,11 +381,19 @@
           "ActionContent": "1. Building the agile development\n\u2022  Taking ownership of the design rituals on day one. \n\u2022  Assume the role of scram master, setting up the system of documenting development effort. \n2. Inviting the client to assume the product owner's role with baby steps\n\u2022  Commit to give them full visibility on the teams' capacity from the start to let the client manager understand the process. \n\u2022  Communicating the risk of unrealistic product development goals when there needs to be deprioritised.\n\u2022  Make an example by executing the agile rituals, then invite the client to assume the roles afterward. \n\u2022  Sidestepping the agile lead role, then have the client assume the responsibility as we give our continuous support on communicating with investors and senior executive members of the organisation. \n3. Explaining how and why we do product iterations. Bringing the zero to one MVP building experience to the project.\n4. Actively involve in product planning to set up the scope of the development and validate workplan to make sure we have a realistic timeline to deliver the product",
           "ResultTitle": "Good teaming performance from a quantifiable source",
           "ResultContent": "\u2022  The workstream is deemed as the most efficient team across the entire project base on the internal firm teaming survey. \n\u2022  The team members are happy with the level of exposure to the agile ways of working and would love to take on ownership on agile rituals voluntarily.\n\u2022  The client team's project manager was able to handle the operation of the team at the later half of the project. \n\u2022  With my active participation in product planning. The team cut the time need to build the product from four product iteration(32 weeks, 16 sprints) in to just three product iterations (24 weeks, 12 sprints). ",
-          "ImageContentList": [
+          "ParagraphContentList": [
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/image.jpg",
-              "ContentText": "The placement matrix of the team performance"
+              "ContentText": "The placement matrix of the team performance",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             }
           ]
         },
@@ -163,31 +408,71 @@
           "ActionContent": "\u2022  Small incremental changes to the design system while we design the product allowing us to churn out screens for testing as we improves the design system\n\u2022  As design stream lead, take ownership of the research session and synthesise the result for Case team share back. \n\u2022  Active QA session between the development team to ensure the quality of the end product and implement change if needed. ",
           "ResultTitle": "A functional product built in just 3 months with necessary validations",
           "ResultContent": "\u2022  Successfully cutting down 40% of time needed to complete the client's operation cycle which meets the strategic KPI set at the start of the project(Data from final user testing). \n\u2022  Extremely positive rating on all user sessions (In total 6 was held). The product has good usability and testing participants (future end users) are happy with the features and are affirmative that this is going to improve their operation. \n\u2022  Robust data validation at every single stage of the operation. ",
-          "ImageContentList": [
+          "ParagraphContentList": [
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.3.1.png",
-              "ContentText": "Lading page for the product with all score overview"
+              "ContentText": "Lading page for the product with all score overview",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.3.2.png",
-              "ContentText": "Overview of the statistic of a specific account"
+              "ContentText": "Overview of the statistic of a specific account",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.3.3.png",
-              "ContentText": "Task overview"
+              "ContentText": "Task overview",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.3.4.png",
-              "ContentText": "Overview of an account and for the highlight of the remaining action"
+              "ContentText": "Overview of an account and for the highlight of the remaining action",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             },
             {
               "TitleText": "",
+              "SubtitleText": "",
               "ImageLocation": "images/2.3.5.png",
-              "ContentText": "Action panel"
+              "ContentText": "Action panel",
+              "Layout": "column",
+              "Link": {
+                "LinkActive": false,
+                "Page": 0,
+                "Project": 0,
+                "Challenge": 0
+              }
             }
           ]
         }
@@ -201,21 +486,45 @@
       "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning. Acting scram master",
       "ProjectDuration": "3 weeks",
       "ChallengeSummary": "Ideating the concept of a genAI powered platform to document BOM (Documented Bills of Material) for a better experience ",
-      "ImageContentList": [
+      "ParagraphContentList": [
         {
           "TitleText": "",
+          "SubtitleText": "",
           "ImageLocation": "images/S1.1.1.png",
-          "ContentText": "BOM comparison for executives to assess differences in BOM"
+          "ContentText": "BOM comparison for executives to assess differences in BOM",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
         },
         {
           "TitleText": "",
+          "SubtitleText": "",
           "ImageLocation": "images/S1.1.2.png",
-          "ContentText": "Actions when comparing BOM"
+          "ContentText": "Actions when comparing BOM",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
         },
         {
           "TitleText": "",
+          "SubtitleText": "",
           "ImageLocation": "images/S1.1.2.png",
-          "ContentText": "Chronological tracking of a specific part thanks to other Gen AI features"
+          "ContentText": "Chronological tracking of a specific part thanks to other Gen AI features",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
         }
       ]
     }
