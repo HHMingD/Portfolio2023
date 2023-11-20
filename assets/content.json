@@ -8,14 +8,144 @@
       "TeamComposition": "2 experience designers, \n2 Strategic designers, \n2 Venture architects",
       "ProjectDuration": "6 months",
       "ProjectLocation": "London, Dubai, KSA",
-      "SummaryContent": "Our client is a state-owned investment entity in GSA. \n\nAs this is the first ever sold case for the firm around the metaverse topic, we are in a pioneering role to experiment with the the firm's metaverse strategy.\n\nThe client have no prior knowledge in the field of metaverse, spatial rendering and digital marketing. They also realised that their business would require significant uplift in their digital outreach due to their geo-locational constrains. (Far from major markets with global talents)\n\nMost of our work would rely on improvisation as we uncover the potential of VR technology. We developed a method for rapid prototyping. To allow us to use an organic approach for this case. \n\nOur goal is to seek opportunities in building standalone VR products. \n\nI was the metaverse subject matter expert of this project in charge of the research routines and the prototype strategy and the production lead of the case.",
+      "SummaryContent": "Our client is a state-owned investment entity in GSA. The client have no prior knowledge in the field of metaverse, spatial rendering and digital marketing. \n\nMost of our work would rely on improvisation as we uncover the potential of VR technology. \n\nI was the metaverse subject matter expert of this project in charge of the research routines and the prototype strategy and the production lead of the case.",
       "ImpactContent": "The project was the first ever sold metaverse project for the firm. \n\nWith our strategic input, our client made significant progress on building their own metaverse strategy.\n\nWe've had two major pivot during the period of my staffing.\nThe first phase was to explore the VR use case for the family and business setting. The second phase was to explore the feasibility of building VR based virtual community within our client's core social group (Employees and family).The third use case builds on top of the second phase result. We validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client's community. \n\nThe project extended from originally a 7 weeks project to a project lasting more than an year. It is still an on going project as of now (OCT 2023.) ",
       "ParagraphContentList": [
         {
           "TitleText": "",
           "SubtitleText": "",
-          "ImageLocation": "images/1.1.1.png",
-          "ContentText": "Phase 1: Quick mock up to boost the team's understanding of virtual social interactions",
+          "ImageLocation": "",
+          "ContentText": "The team treated the project as a traditional digital design project at the start. VR uses cases are vastly different from usual digital design cases and we had to pivot.",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "Rigorous research needed to learn about VR",
+          "SubtitleText": "15 expert interviews, 40 in person VR prototyping session, 200 response in quantitative research",
+          "ImageLocation": "images/1.1.png",
+          "ContentText": "VR the and immersive tech is a entirely unknown territory for the firm. The team had come to the consensus that we would need rigorous research to document evidence that advocates a business use case",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": true,
+            "Page": 2,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "Our client wants to attract young talents",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Our client needs to be in the proximity of great young talents according to their growth plan for the coming decade. The young population within various online VR community has great affinity to experimental tech and they are exactly the group our client wants to attract. ",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "Articulating business value of immersion tech",
+          "SubtitleText": "Positive responses from guerilla marketing",
+          "ImageLocation": "images/1.2.png",
+          "ContentText": "Our team made the initial hypothesis that a VR product could indeed bring the client's community together, while helping them attract young talents in various digital communities networks. We used guerrilla tactics to validate the hypothesis before we head into the build",
+          "Layout": "right",
+          "Link": {
+            "LinkActive": true,
+            "Page": 2,
+            "Project": 0,
+            "Challenge": 1
+          }
+        },
+        {
+          "TitleText": "Building VR",
+          "SubtitleText": "4 rooms built, 1 as testing environment and 2 delivered to client",
+          "ImageLocation": "",
+          "ContentText": "The VR rooms have been tested that foster great interaction and conversation within their community",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "The testing room, ",
+          "SubtitleText": "8 VR user interview sessions",
+          "ImageLocation": "images/1.3.png",
+          "ContentText": "The room was used for testing and user interview purposes. We learned about the usage of props, digital identities and how such space could afford genuine interaction. ",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "The campfire room",
+          "SubtitleText": "",
+          "ImageLocation": "images/1.4.png",
+          "ContentText": "This a room built for social interactions. The key goal of these room is to have various props for users ",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "The pillow fort",
+          "SubtitleText": "Positive user experience spotted during passive user studies. ",
+          "ImageLocation": "images/1.5.png",
+          "ContentText": "The pillow fort was a resounding success that surprised many senior stake holders. \n\nThe objects were fairly simple: motionless pillows you can drag and place. Despite its simplicity, this the place where we spot creativity being unleash as most of the participants enjoys shaping the pillows into different forms while they have plenty of genuine conversation.",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/1.6.png",
+          "ContentText": "Other objects built for simple interactions also received positive feedback including interactive fondue pots, cinema, interactive fireplace, football arena and fireworks ",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "Pivoting from failure: The Onboarding Room",
+          "SubtitleText": "Room built in 5 working days",
+          "ImageLocation": "images/1.7.png",
+          "ContentText": "The room was built in just 5 working days leveraging all the previous assets we procured. The room was available for our clients to onboard their new starters",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": true,
+            "Page": 2,
+            "Project": 0,
+            "Challenge": 2
+          }
+        },
+        {
+          "TitleText": "Capturing the look and feel as forms provides functions ",
+          "SubtitleText": "",
+          "ImageLocation": "images/1.8.png",
+          "ContentText": "Different from the usual 2D digital design, the look and feel itself should be regard as a feature too and this was accidentally overlooked. ",
           "Layout": "column",
           "Link": {
             "LinkActive": false,
@@ -182,7 +312,7 @@
       "TeamComposition": "1 experience designer, \n1 business analyst, \n4 Engineers(FE,BE)",
       "ProjectDuration": "4 months",
       "ProjectLocation": "London, Paris",
-      "SummaryContent": "Our client is a major international non-profit organisation aiming to further digitise their operation for scale. /n/nWe need to build a digital journey from the ground up. Demolishing undesirable process and create the new link in their operation. /n/nThis is a behemoth piece of work, we separate the work into many different streams. I work closely with the client team manager, the BCG engineering team, and a BCG business analyst for this work stream. I am responsible for the workstream's design operation.  ",
+      "SummaryContent": "Our client is a major international non-profit organisation aiming to further digitise their operation for scale. \n\nWe need to build a digital journey from the ground up. Demolishing undesirable process and create the new link in their operation. \n\nThis is a behemoth piece of work, we separate the work into many different streams. I work closely with the client team manager, the BCG engineering team, and a BCG business analyst for this work stream. I am responsible for the workstream's design operation.  ",
       "ImpactContent": "We delivered a functional product built in just 3 months that supports our client's E2E journey \n\nBeside delivering the product, the firm team's goal was to help our client make the transition into a tech company.\nOutside of the development work, we are also tasked with:\nUpskilling current employee\nBuild the in-house product team\nBurn the down the early risk of a product development. \n\nOur client is forced by the market to initiate change. The increasing public awareness to the climate crisis has propelled their business to multiply in the past few years.  If they are unable to ride the wave of hyper growth for climate industry, their business would be seriously challenged as the market would favor competitors with better products. \n\nOur work has been success in multiple front. The new product will be able to help our client solve their scaling issue in the short term. The long term strategy of the complete transformation will be achieved by the product team picked, and onboarded by the firm team. \n\nWe are hopeful that our influence will be crucial to our client's success in the short term future.",
       "ParagraphContentList": [
         {
@@ -228,7 +358,7 @@
           "TitleText": "Design to minimise human error",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "Upon learning about the client’s operation. We identified that the key issue was the amount of mental calculation involved in the operation causing all of the issues mentioned above. Our hypothesis is that a well built interface for users to interact with data would be the solution.",
+          "ContentText": "Upon learning about the client's operation. We identified that the key issue was the amount of mental calculation involved in the operation causing all of the issues mentioned above. Our hypothesis is that a well built interface for users to interact with data would be the solution.",
           "Layout": "onlyText",
           "Link": {
             "LinkActive": true,
@@ -481,16 +611,193 @@
   ],
   "SmallProjects": [
     {
-      "ProjectTitle": "Industrial good AI",
-      "ProjectTopic": "User experience design, GenAI, Industrial good",
-      "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning. Acting scram master",
+      "ProjectTitle": "Financial Advice platform",
+      "ProjectTopic": "UX, wireframe, Wealth Management",
+      "ProjectThumbnail": "images/S1.cover.png",
+      "ProjectMyRole": "Capturing the key elements from product requirements and turn them into wireframes. Creating user flows to help users document their financial behaviour.",
+      "ProjectDuration": "2 months",
+      "ChallengeSummary": "The delivery of financial advise needs to adhere to certain FCA regulations. On one hand we have identified that the financial advice is a highly desirable product for the average UK population. The other hand the FCA regulation has made it difficult for the financial advisor to deliver financial advice. Our goal is to create a service that connects the financial advisors and the average consumers while eliminating the barriers",
+      "ParagraphContentList": [
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S1.1.png",
+          "ContentText": "Using Gen AI to generate scenarios that effectively makes the future projection more relatable and tangible.",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S1.2.png",
+          "ContentText": "Gen AI creating relevant prompts as potential financial actions for the users to decided the best course of actions towards their goals",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S1.3.png",
+          "ContentText": "Super charge the financial advisor's ability to better document their customers with Gen AI assisted in their KYC process",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S1.4.png",
+          "ContentText": "Turning the data collected into instant annuity options without delay. As the users go through the KYC process",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S1.5.png",
+          "ContentText": "Conceptualising the reverse auction market for annuity and how Gen AI powered product can make the process seamless and effortless",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S1.6.png",
+          "ContentText": "IM dashboard tracking numerous sentiments allowing the managerial users to understand the general trend of their product and potential area for improvement",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        }
+      ]
+    },
+    {
+      "ProjectTitle": "Wealth Management Gen AI",
+      "ProjectTopic": "User experience design, GenAI, Wealth Management",
+      "ProjectThumbnail": "images/S2.cover.png",
+      "ProjectMyRole": "Leading the ideation of the GenAI product to prospective clients. Designing concept prototypes for story telling sessions.",
+      "ProjectDuration": "2 weeks",
+      "ChallengeSummary": "Capturing the essence of the Gen AI impact towards the wealth management industry. Speculating the potential application of the GenAI technology and contribute as the digital expert on the team and provide tech analytics towards potential implementation.",
+      "ParagraphContentList": [
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S2.1.png",
+          "ContentText": "Using Gen AI to generate scenarios that effectively makes the future projection more relatable and tangible.",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S2.2.png",
+          "ContentText": "Gen AI creating relevant prompts as potential financial actions for the users to decided the best course of actions towards their goals",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S2.3.png",
+          "ContentText": "Super charge the financial advisor's ability to better document their customers with Gen AI assisted in their KYC process",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S2.4.png",
+          "ContentText": "Turning the data collected into instant annuity options without delay. As the users go through the KYC process",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S2.5.png",
+          "ContentText": "Conceptualising the reverse auction market for annuity and how Gen AI powered product can make the process seamless and effortless",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        },
+        {
+          "TitleText": "",
+          "SubtitleText": "",
+          "ImageLocation": "images/S2.6.png",
+          "ContentText": "IM dashboard tracking numerous sentiments allowing the managerial users to understand the general trend of their product and potential area for improvement",
+          "Layout": "column",
+          "Link": {
+            "LinkActive": false,
+            "Page": 0,
+            "Project": 0,
+            "Challenge": 0
+          }
+        }
+      ]
+    },
+    {
+      "ProjectTitle": "Industrial good Gen AI",
+      "ProjectTopic": "User experience design, GenAI, Industrial Goods",
+      "ProjectThumbnail": "images/S3.cover.png",
+      "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning.",
       "ProjectDuration": "3 weeks",
       "ChallengeSummary": "Ideating the concept of a genAI powered platform to document BOM (Documented Bills of Material) for a better experience ",
       "ParagraphContentList": [
         {
           "TitleText": "",
           "SubtitleText": "",
-          "ImageLocation": "images/S1.1.1.png",
+          "ImageLocation": "images/S3.1.png",
           "ContentText": "BOM comparison for executives to assess differences in BOM",
           "Layout": "column",
           "Link": {
@@ -503,7 +810,7 @@
         {
           "TitleText": "",
           "SubtitleText": "",
-          "ImageLocation": "images/S1.1.2.png",
+          "ImageLocation": "images/S3.2.png",
           "ContentText": "Actions when comparing BOM",
           "Layout": "column",
           "Link": {
@@ -516,7 +823,7 @@
         {
           "TitleText": "",
           "SubtitleText": "",
-          "ImageLocation": "images/S1.1.2.png",
+          "ImageLocation": "images/S3.3.png",
           "ContentText": "Chronological tracking of a specific part thanks to other Gen AI features",
           "Layout": "column",
           "Link": {

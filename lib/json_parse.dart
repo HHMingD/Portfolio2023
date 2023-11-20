@@ -132,6 +132,7 @@ class ChallengeContent {
 class SmallProjectContent {
   final String projectTitle;
   final String projectTopic;
+  final String projectThumbnail;
   final String projectMyRole;
   final String projectDuration;
   final String challengeSummary;
@@ -140,6 +141,7 @@ class SmallProjectContent {
   SmallProjectContent({
     required this.projectTitle,
     required this.projectTopic,
+    required this.projectThumbnail,
     required this.projectMyRole,
     required this.projectDuration,
     required this.challengeSummary,
@@ -154,6 +156,7 @@ class SmallProjectContent {
       projectTitle: parsedJson['ProjectTitle'],
       projectTopic: parsedJson['ProjectTopic'],
       projectMyRole: parsedJson['ProjectMyRole'],
+      projectThumbnail:parsedJson['ProjectThumbnail'],
       projectDuration: parsedJson['ProjectDuration'],
       challengeSummary: parsedJson['ChallengeSummary'],
       paragraphContentList: content,

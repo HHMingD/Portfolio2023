@@ -1,10 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:url_launcher/link.dart';
 import 'app_theme.dart';
 import 'json_parse.dart';
 import 'network.dart';
@@ -79,10 +73,14 @@ class _NavigationItemState extends State<NavigationItem> {
 
 class MainPageWelcome extends StatelessWidget {
   const MainPageWelcome(
-      {super.key, required this.navigateToProjects, required this.jsonContent});
+      {super.key,
+      required this.navigateToProjects,
+      required this.jsonContent,
+      required this.deviceIsDesktop});
 
+  final bool deviceIsDesktop;
   final JsonStructure jsonContent;
-  final ValueSetter<int> navigateToProjects;
+  final ValueSetter<LinkAddress> navigateToProjects;
 
   @override
   Widget build(BuildContext context) {
@@ -94,35 +92,36 @@ class MainPageWelcome extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              deviceIsDesktop? SizedBox(
                 height: MediaQuery.of(context).size.height * 0.15,
-              ),
+              ): const SizedBox(),
               const SizedBox(height: 24),
               RichText(
                   text: TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: "A Product / UX / Service Designer ",
                     style: Apptheme.headlineLarge.copyWith(
-
-                        color: Apptheme.prime700,
-                        fontWeight: FontWeight.w900)),
+                        color: Apptheme.prime700, fontWeight: FontWeight.w900)),
                 TextSpan(
                     text:
                         'experienced in owning the whole of design process with tracked record of strong delivery at pace',
                     style: Apptheme.headlineLarge.copyWith(
-
-                        color: Apptheme.prime400,
-                        fontWeight: FontWeight.w700))
+                        color: Apptheme.prime400, fontWeight: FontWeight.w700))
               ])),
               const SizedBox(height: 48),
               ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: jsonContent.projectList.length,
                   itemBuilder: (BuildContext context, int projectIndex) {
                     return Column(
                       children: [
                         InkWell(
-                            onTap: () => navigateToProjects(projectIndex),
+                            onTap: () => navigateToProjects(LinkAddress(
+                                active: true,
+                                page: 2,
+                                project: projectIndex,
+                                challenge: -1)),
                             child: Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
@@ -171,6 +170,68 @@ class MainPageWelcome extends StatelessWidget {
                       ],
                     );
                   }),
+              ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: jsonContent.smallProjectList.length,
+                  itemBuilder: (BuildContext context, int smallProjectIndex) {
+                    return Column(
+                      children: [
+                        InkWell(
+                            onTap: () => navigateToProjects(LinkAddress(
+                                active: true,
+                                page: 3,
+                                project: smallProjectIndex,
+                                challenge: 0)),
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                  border: Border.all(width: 1),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(5))),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: FutureImageBuilder(jsonContent
+                                        .smallProjectList[smallProjectIndex]
+                                        .projectThumbnail),
+                                  ),
+                                  const SizedBox(width: 24),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              style: Apptheme.titleLarge
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                              jsonContent
+                                                  .smallProjectList[
+                                                      smallProjectIndex]
+                                                  .projectTitle),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                              style: Apptheme.titleSmall,
+                                              'Topics: ${jsonContent.smallProjectList[smallProjectIndex].projectTopic}'),
+                                        ],
+                                      ))
+                                ],
+                              ),
+                            )),
+                        const SizedBox(
+                          height: 24,
+                        )
+                      ],
+                    );
+                  }),
               const SizedBox(
                 height: 24,
               ),
@@ -194,7 +255,7 @@ class MainPageWelcome extends StatelessWidget {
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.15,
-              ),
+              )
             ],
           ),
         ),
@@ -206,9 +267,9 @@ class MainPageWelcome extends StatelessWidget {
 class MainPageProjectContent extends StatelessWidget {
   const MainPageProjectContent({
     super.key,
+    required this.deviceIsDesktop,
     required this.selectionProjectIndex,
     required this.selectionChallengeIndex,
-    required this.mobile,
     required this.content,
     required this.previousPage,
     required this.nextPage,
@@ -216,9 +277,9 @@ class MainPageProjectContent extends StatelessWidget {
     required this.navigateToProjects,
   });
 
+  final bool deviceIsDesktop;
   final int selectionProjectIndex;
   final int selectionChallengeIndex;
-  final bool mobile;
   final List<ProjectContent> content;
   final VoidCallback previousPage;
   final VoidCallback nextPage;
@@ -237,7 +298,8 @@ class MainPageProjectContent extends StatelessWidget {
         TextSpan(text: label, style: Apptheme.titleMedium),
         TextSpan(
             text: titleText,
-            style: Apptheme.titleMedium.copyWith(fontWeight: FontWeight.w500, color: Apptheme.prime900))
+            style: Apptheme.titleMedium.copyWith(
+                fontWeight: FontWeight.w500, color: Apptheme.prime900))
       ])),
       key: GlobalKey(),
       childrenPadding: const EdgeInsets.all(8),
@@ -326,6 +388,7 @@ class MainPageProjectContent extends StatelessWidget {
             height: 24,
           ),
           ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount:
                   content[selectionProjectIndex].paragraphContentList.length,
@@ -454,6 +517,7 @@ class MainPageProjectContent extends StatelessWidget {
             height: 24,
           ),
           ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
@@ -513,7 +577,7 @@ class MainPageProjectContent extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   border: Border.all(color: Apptheme.black)),
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               height: 52,
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -522,7 +586,7 @@ class MainPageProjectContent extends StatelessWidget {
                 ],
               ),
             )),
-        SizedBox(
+        const SizedBox(
           width: 16,
         ),
         Expanded(
@@ -538,13 +602,12 @@ class MainPageProjectContent extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       const Icon(Icons.arrow_forward_rounded, size: 36),
-                      mobile ? const SizedBox(width: 16) : const SizedBox(),
-                      mobile
-                          ? Text(
-                              nextpageSummary,
-                              style: Apptheme.titleSmall,
-                            )
-                          : const SizedBox(),
+                      Expanded(
+                        child: Text(
+                          nextpageSummary,
+                          style: Apptheme.titleSmall,
+                        ),
+                      )
                     ]),
               )),
         ),
@@ -558,15 +621,15 @@ class MainPageProjectContent extends StatelessWidget {
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: ListView(
         children: [
-          SizedBox(
+          deviceIsDesktop? SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
-          ),
+          ): const SizedBox(),
           mainPageContent(),
           const SizedBox(height: 24),
           pageNavigation(),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
-          ),
+          )
         ],
       ),
     );
@@ -576,10 +639,12 @@ class MainPageProjectContent extends StatelessWidget {
 class MainPageSideProjectContent extends StatelessWidget {
   const MainPageSideProjectContent({
     super.key,
+    required this.deviceIsDesktop,
     required this.selectionProjectIndex,
     required this.content,
   });
 
+  final bool deviceIsDesktop;
   final int selectionProjectIndex;
   final List<SmallProjectContent> content;
 
@@ -589,12 +654,12 @@ class MainPageSideProjectContent extends StatelessWidget {
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: ListView(
         children: <Widget>[
-          SizedBox(
+          deviceIsDesktop? SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
-          ),
+          ): const SizedBox(),
           Text(
               style: Apptheme.headlineSmall,
-              "${content[selectionProjectIndex].projectTitle} Summary"),
+              content[selectionProjectIndex].projectTitle),
           const SizedBox(
             height: 24,
           ),
@@ -634,10 +699,11 @@ class MainPageSideProjectContent extends StatelessWidget {
             height: 24,
           ),
           ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount:
                   content[selectionProjectIndex].paragraphContentList.length,
-              itemBuilder: (BuildContext context, int imageIndex) {
+              itemBuilder: (BuildContext context, int paragraphIndex) {
                 return Column(
                   children: [
                     Container(
@@ -651,7 +717,7 @@ class MainPageSideProjectContent extends StatelessWidget {
                               height: double.infinity,
                               child: ImageWithOverlay(
                                   content[selectionProjectIndex]
-                                      .paragraphContentList[imageIndex]
+                                      .paragraphContentList[paragraphIndex]
                                       .imageLocation),
                             ),
                           ),
@@ -661,7 +727,7 @@ class MainPageSideProjectContent extends StatelessWidget {
                             child: Text(
                                 style: Apptheme.bodyMedium,
                                 content[selectionProjectIndex]
-                                    .paragraphContentList[imageIndex]
+                                    .paragraphContentList[paragraphIndex]
                                     .contentText),
                           )
                         ],
@@ -673,6 +739,9 @@ class MainPageSideProjectContent extends StatelessWidget {
                   ],
                 );
               }),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.15,
+          )
         ],
       ),
     );
@@ -712,13 +781,11 @@ class ParagraphLayout {
           onTap: () {
             navigation(linkAddress);
           },
-          child: Container(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                'See More >>',
-                style: Apptheme.bodyLarge.copyWith(color: Apptheme.blue),
-              ),
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              'See More >>',
+              style: Apptheme.bodyLarge.copyWith(color: Apptheme.blue),
             ),
           ),
         ),
