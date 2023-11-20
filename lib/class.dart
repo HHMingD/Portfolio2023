@@ -100,8 +100,7 @@ class MainPageWelcome extends StatelessWidget {
                   text: TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: "A Product / UX / Service Designer ",
-                    style: Apptheme.headlineLarge.copyWith(
-                        color: Apptheme.prime700, fontWeight: FontWeight.w900)),
+                    style: Apptheme.themeData.textTheme.headlineLarge),
                 TextSpan(
                     text:
                         'experienced in owning the whole of design process with tracked record of strong delivery at pace',

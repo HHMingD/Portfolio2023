@@ -6,13 +6,20 @@ ThemeData getAppTheme(BuildContext context, bool isDarkTheme) {
     textTheme: Theme.of(context)
         .textTheme
         .copyWith(
-      titleSmall:
-      Theme.of(context).textTheme.titleSmall?.copyWith(fontSize: 11),
-    )
+          headlineLarge: Apptheme.titleSmall.copyWith(color: Apptheme.white),
+          headlineMedium:
+              Apptheme.headlineMedium.copyWith(color: Apptheme.white),
+          headlineSmall: Apptheme.headlineSmall.copyWith(color: Apptheme.white),
+          titleLarge: Apptheme.titleLarge.copyWith(color: Apptheme.white),
+          titleMedium: Apptheme.titleMedium.copyWith(color: Apptheme.white),
+          titleSmall: Apptheme.titleSmall.copyWith(color: Apptheme.white),
+          bodyLarge: Apptheme.bodyLarge.copyWith(color: Apptheme.white),
+          bodyMedium: Apptheme.bodyMedium.copyWith(color: Apptheme.white),
+        )
         .apply(
-      bodyColor: isDarkTheme ? Colors.white : Colors.black,
-      displayColor: Colors.grey,
-    ),
+          bodyColor: isDarkTheme ? Colors.white : Colors.black,
+          displayColor: Colors.grey,
+        ),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.all(
           isDarkTheme ? Colors.orange : Colors.purple),
@@ -22,11 +29,20 @@ ThemeData getAppTheme(BuildContext context, bool isDarkTheme) {
     appBarTheme: AppBarTheme(
         backgroundColor: isDarkTheme ? Colors.black : Colors.white,
         iconTheme:
-        IconThemeData(color: isDarkTheme ? Colors.white : Colors.black54)),
+            IconThemeData(color: isDarkTheme ? Colors.white : Colors.black54)),
   );
 }
 
 class Apptheme {
+  static ThemeData themeData = ThemeData(
+      useMaterial3: true,
+      primaryColor: Apptheme.black,
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)
+          .copyWith(background: Apptheme.white, surfaceTint: Apptheme.white),
+      primaryColorLight: Apptheme.white,
+      primaryColorDark: Apptheme.black,
+      textTheme: Apptheme.textTheme);
+
   static const String fontName = 'Museo';
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
@@ -41,7 +57,7 @@ class Apptheme {
   static const Color prime700 = Color(0xFF151C3F);
   static const Color prime800 = Color(0xFF0C1023);
   static const Color prime900 = Color(0xFF020307);
-
+  static const Color noColor = Color(0x00000000);
 
   static const TextTheme textTheme = TextTheme(
     headlineLarge: headlineLarge,
@@ -132,7 +148,6 @@ class Apptheme {
     color: prime100,
   );
   static const TextStyle bodyLarge = TextStyle(
-
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 18,
@@ -140,7 +155,6 @@ class Apptheme {
     color: prime900,
   );
   static const TextStyle bodyMedium = TextStyle(
-
     fontFamily: fontName,
     fontWeight: FontWeight.w500,
     fontSize: 16,

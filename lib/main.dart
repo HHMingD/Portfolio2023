@@ -25,13 +25,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Howard Chen Portfolio',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)
-            .copyWith(background: Apptheme.white),
+      theme: Apptheme.themeData,
+      darkTheme: Apptheme.themeData.copyWith(
+        colorScheme: ColorScheme.fromSeed(seedColor: Apptheme.black),
+        scaffoldBackgroundColor: Apptheme.black,
+        iconTheme: const IconThemeData(color: Apptheme.white),
+        textTheme: Apptheme.textTheme.copyWith(
+          headlineLarge: Apptheme.headlineLarge.copyWith(color: Apptheme.white),
+          headlineMedium: Apptheme.headlineMedium.copyWith(color: Apptheme.white),
+          headlineSmall: Apptheme.headlineSmall.copyWith(color: Apptheme.white),
+          titleLarge: Apptheme.titleLarge.copyWith(color: Apptheme.white),
+          titleMedium: Apptheme.titleMedium.copyWith(color: Apptheme.white),
+          titleSmall: Apptheme.titleSmall.copyWith(color: Apptheme.white),
+          bodyLarge: Apptheme.bodyLarge.copyWith(color: Apptheme.white),
+          bodyMedium: Apptheme.bodyMedium.copyWith(color: Apptheme.white),
+        ),
       ),
-//      darkTheme: ThemeData.dark(),
-//      themeMode: ThemeMode.system,
+//      darkTheme: getAppTheme(context, true),
+      themeMode: ThemeMode.system,
       home: const FetchData(),
     );
   }
@@ -90,10 +101,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   void closeExpansionTiles(int pageValue, int projectValue) {
     for (var i = 0; i < widget.jsonContent.projectList.length; i++) {
-      if (i != projectValue) {
-        if (deviceIsDesktop == true) {
-          controller[_selectedProjectIndex].collapse();
-        }
+      if (i != projectValue && deviceIsDesktop == true) {
+        controller[i].collapse();
       }
     }
     if (pageValue == 2) {
@@ -493,8 +502,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget mobileLayout() {
     return Scaffold(
       drawer: Drawer(
-        backgroundColor: Apptheme.white,
-        surfaceTintColor: Apptheme.white,
+        surfaceTintColor: Apptheme.noColor,
         child: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: ListView(
@@ -510,7 +518,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ),
       appBar: AppBar(
-        surfaceTintColor: Apptheme.prime100,
+        surfaceTintColor: Apptheme.noColor,
         backgroundColor: Apptheme.white,
       ),
       body: Center(
