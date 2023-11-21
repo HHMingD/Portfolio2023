@@ -123,9 +123,9 @@ class _ImageWithOverlayState extends State<ImageWithOverlay> {
         },
         child: Container(
             padding: const EdgeInsets.all(8),
-            decoration: const BoxDecoration(
-                color: Apptheme.imageContrast,
-                borderRadius: BorderRadius.all(Radius.circular(8))),
+            decoration: BoxDecoration(
+                color: Theme.of(context).primaryColorLight,
+                borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: FutureImageBuilder(widget.imageDownloadURL)));
   }
 }

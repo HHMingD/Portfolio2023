@@ -10,6 +10,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'firebase_options.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 void main() async {
   await Firebase.initializeApp(
@@ -25,22 +26,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Howard Chen Portfolio',
-      theme: Apptheme.themeData,
-      darkTheme: Apptheme.themeData.copyWith(
-        colorScheme: ColorScheme.fromSeed(seedColor: Apptheme.black),
-        scaffoldBackgroundColor: Apptheme.black,
-        iconTheme: const IconThemeData(color: Apptheme.white),
-        textTheme: Apptheme.textTheme.copyWith(
-          headlineLarge: Apptheme.headlineLarge.copyWith(color: Apptheme.white),
-          headlineMedium: Apptheme.headlineMedium.copyWith(color: Apptheme.white),
-          headlineSmall: Apptheme.headlineSmall.copyWith(color: Apptheme.white),
-          titleLarge: Apptheme.titleLarge.copyWith(color: Apptheme.white),
-          titleMedium: Apptheme.titleMedium.copyWith(color: Apptheme.white),
-          titleSmall: Apptheme.titleSmall.copyWith(color: Apptheme.white),
-          bodyLarge: Apptheme.bodyLarge.copyWith(color: Apptheme.white),
-          bodyMedium: Apptheme.bodyMedium.copyWith(color: Apptheme.white),
-        ),
-      ),
+      theme: Apptheme.light(),
+      darkTheme: Apptheme.dark(),
 //      darkTheme: getAppTheme(context, true),
       themeMode: ThemeMode.system,
       home: const FetchData(),
@@ -206,7 +193,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           clipBehavior: Clip.hardEdge,
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-              border: Border.all(width: 1),
+              border: Border.all(
+                  width: 1, color: Theme.of(context).primaryColorDark),
               borderRadius: const BorderRadius.all(Radius.circular(5))),
           child: deviceIsDesktop
               ? Column(
@@ -230,8 +218,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           width: 48,
                           height: 48,
                           padding: const EdgeInsets.all(12),
-                          child: const Image(
-                            image: AssetImage('linkedin_logo60px.png'),
+                          child: const Icon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 24,
                           )),
                       onTap: () {
                         _launchUrl(
@@ -518,9 +507,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         ),
       ),
       appBar: AppBar(
-        surfaceTintColor: Apptheme.noColor,
-        backgroundColor: Apptheme.white,
-      ),
+          bottom: const PreferredSize(
+        preferredSize: Size.fromHeight(1),
+        child: Divider(height: 1),
+      )),
       body: Center(
         child: Container(
           constraints: const BoxConstraints(maxWidth: 1400),

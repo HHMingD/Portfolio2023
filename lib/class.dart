@@ -41,10 +41,10 @@ class _NavigationItemState extends State<NavigationItem> {
             padding: EdgeInsets.all(isHovered ? 7 : 8),
             decoration: isHovered
                 ? BoxDecoration(
-                    color: widget.isSelected ? Apptheme.black : Apptheme.white,
-                    border: Border.all(width: 1, color: Apptheme.black))
+                    color: widget.isSelected ? Theme.of(context).primaryColor : Theme.of(context).scaffoldBackgroundColor,
+                    border: Border.all(width: 1, color: Theme.of(context).primaryColor))
                 : BoxDecoration(
-                    color: widget.isSelected ? Apptheme.black : Apptheme.white,
+                    color: widget.isSelected ? Theme.of(context).primaryColor : Theme.of(context).scaffoldBackgroundColor,
                   ),
             child: RichText(
               text: TextSpan(
@@ -52,14 +52,14 @@ class _NavigationItemState extends State<NavigationItem> {
                   TextSpan(
                     text: widget.buttonName,
                     style: widget.isSelected
-                        ? Apptheme.titleSmallHC
-                        : Apptheme.titleSmall,
+                        ? Apptheme.titleSmall.copyWith(color: Theme.of(context).scaffoldBackgroundColor)
+                        : Apptheme.titleSmall.copyWith(color: Theme.of(context).primaryColor),
                   ),
                   widget.isChallenge == true
                       ? TextSpan(
                           style: widget.isSelected
-                              ? Apptheme.labelTinyHC
-                              : Apptheme.labelTiny,
+                              ? Apptheme.labelTiny.copyWith(color: Theme.of(context).scaffoldBackgroundColor)
+                              : Apptheme.labelTiny.copyWith(color: Theme.of(context).primaryColor),
                           text: '   //Challenge'.replaceAll(' ', '\u00A0'),
                         )
                       : const TextSpan(),
@@ -92,20 +92,23 @@ class MainPageWelcome extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              deviceIsDesktop? SizedBox(
-                height: MediaQuery.of(context).size.height * 0.15,
-              ): const SizedBox(),
+              deviceIsDesktop
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.15,
+                    )
+                  : const SizedBox(),
               const SizedBox(height: 24),
-              RichText(
-                  text: TextSpan(children: <TextSpan>[
+              Text.rich(
+                 TextSpan(children: <TextSpan>[
                 TextSpan(
                     text: "A Product / UX / Service Designer ",
-                    style: Apptheme.themeData.textTheme.headlineLarge),
-                TextSpan(
+                    style: Apptheme.headlineLarge.copyWith(
+                         fontWeight: FontWeight.w700, color: Theme.of(context).primaryColorDark)),
+                   TextSpan(
                     text:
                         'experienced in owning the whole of design process with tracked record of strong delivery at pace',
                     style: Apptheme.headlineLarge.copyWith(
-                        color: Apptheme.prime400, fontWeight: FontWeight.w700))
+                         fontWeight: FontWeight.w700, color: Theme.of(context).splashColor))
               ])),
               const SizedBox(height: 48),
               ListView.builder(
@@ -124,7 +127,7 @@ class MainPageWelcome extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 1),
+                                  border: Border.all(width: 1,color: Theme.of(context).primaryColor),
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(5))),
                               child: Row(
@@ -185,8 +188,7 @@ class MainPageWelcome extends StatelessWidget {
                             child: Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                  border: Border.all(width: 1),
-                                  borderRadius: const BorderRadius.all(
+                                  border: Border.all(width: 1,color: Theme.of(context).primaryColor),                                  borderRadius: const BorderRadius.all(
                                       Radius.circular(5))),
                               child: Row(
                                 children: [
@@ -286,19 +288,23 @@ class MainPageProjectContent extends StatelessWidget {
   final ValueSetter<LinkAddress> navigateToProjects;
 
   Widget customExpansionTile(
-      String titleText, String contentText, String label) {
+      String titleText, String contentText, String label, BuildContext context) {
     return ExpansionTile(
+
       shape: const ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
       tilePadding: const EdgeInsets.all(8),
-      collapsedTextColor: Apptheme.black,
       title: RichText(
           text: TextSpan(children: <TextSpan>[
-        TextSpan(text: label, style: Apptheme.titleMedium),
+        TextSpan(
+            text: label,
+            style: Apptheme.titleMedium
+                .copyWith(color: Theme.of(context).primaryColor)),
         TextSpan(
             text: titleText,
             style: Apptheme.titleMedium.copyWith(
-                fontWeight: FontWeight.w500, color: Apptheme.prime900))
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).primaryColor))
       ])),
       key: GlobalKey(),
       childrenPadding: const EdgeInsets.all(8),
@@ -317,7 +323,7 @@ class MainPageProjectContent extends StatelessWidget {
     );
   }
 
-  Widget mainPageContent() {
+  Widget mainPageContent(BuildContext context) {
     if (selectionChallengeIndex == -1) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -331,7 +337,7 @@ class MainPageProjectContent extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Apptheme.black)),
+                border: Border.all(color: Theme.of(context).primaryColor)),
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +480,7 @@ class MainPageProjectContent extends StatelessWidget {
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
                   .situationContent,
-              'The Situation: '),
+              'The Situation: ', context),
           const SizedBox(
             height: 16,
           ),
@@ -485,7 +491,7 @@ class MainPageProjectContent extends StatelessWidget {
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
                   .taskContent,
-              'The Task: '),
+              'The Task: ', context),
           const SizedBox(
             height: 16,
           ),
@@ -496,7 +502,7 @@ class MainPageProjectContent extends StatelessWidget {
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
                   .actionContent,
-              'The Action: '),
+              'The Action: ', context),
           const SizedBox(
             height: 16,
           ),
@@ -507,7 +513,7 @@ class MainPageProjectContent extends StatelessWidget {
               content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
                   .resultContent,
-              'The Result: '),
+              'The Result: ', context),
           const SizedBox(
             height: 24,
           ),
@@ -567,7 +573,7 @@ class MainPageProjectContent extends StatelessWidget {
     }
   }
 
-  Widget pageNavigation() {
+  Widget pageNavigation(BuildContext context) {
     return Row(
       children: [
         InkWell(
@@ -575,7 +581,7 @@ class MainPageProjectContent extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  border: Border.all(color: Apptheme.black)),
+                  border: Border.all(color: Theme.of(context).primaryColor)),
               padding: const EdgeInsets.all(8),
               height: 52,
               child: const Row(
@@ -594,7 +600,7 @@ class MainPageProjectContent extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    border: Border.all(color: Apptheme.black)),
+                    border: Border.all(color: Theme.of(context).primaryColor)),
                 padding: const EdgeInsets.all(8),
                 height: 52,
                 child: Row(
@@ -620,12 +626,14 @@ class MainPageProjectContent extends StatelessWidget {
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: ListView(
         children: [
-          deviceIsDesktop? SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-          ): const SizedBox(),
-          mainPageContent(),
+          deviceIsDesktop
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                )
+              : const SizedBox(),
+          mainPageContent(context),
           const SizedBox(height: 24),
-          pageNavigation(),
+          pageNavigation(context),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.15,
           )
@@ -653,9 +661,11 @@ class MainPageSideProjectContent extends StatelessWidget {
       behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
       child: ListView(
         children: <Widget>[
-          deviceIsDesktop? SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
-          ): const SizedBox(),
+          deviceIsDesktop
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.15,
+                )
+              : const SizedBox(),
           Text(
               style: Apptheme.headlineSmall,
               content[selectionProjectIndex].projectTitle),
@@ -665,7 +675,7 @@ class MainPageSideProjectContent extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                border: Border.all(color: Apptheme.black)),
+                border: Border.all(color: Theme.of(context).primaryColor)),
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
