@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:howard_chen_portfolio/app_theme.dart';
 import 'class.dart';
 import 'json_parse.dart';
 import 'network.dart';
-import 'dart:convert';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'firebase_options.dart';
@@ -77,11 +73,11 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> {
   Key projectKey = GlobalKey();
-  int _selectedPageIndex = 0;
 
   // 0 = Introduction, 1 = Experience, 2 = Projects, 3 = Small Projects
+  int _selectedPageIndex = 0;
   int _selectedProjectIndex = 0;
   int _selectedChallengeIndex = 0;
   late bool deviceIsDesktop;
@@ -97,92 +93,134 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     }
   }
 
-  void setSelectionState(
-      int setPageIndex, int setProjectIndex, int setChallengeIndex) {
+  void setSelectionState(LinkAddress address) {
     {
       setState(() {
         projectKey = GlobalKey();
-        _selectedPageIndex = setPageIndex;
-        _selectedProjectIndex = setProjectIndex;
-        _selectedChallengeIndex = setChallengeIndex;
+        _selectedPageIndex = address.page;
+        _selectedProjectIndex = address.project;
+        _selectedChallengeIndex = address.challenge;
       });
     }
   }
 
   nextPageSummary<String>() {
-    if (_selectedChallengeIndex <
-        widget.jsonContent.projectList[_selectedProjectIndex].challengeContent
-                .length -
-            1) {
-      return "Next up: ${widget.jsonContent.projectList[_selectedProjectIndex].challengeContent[_selectedChallengeIndex + 1].STARTitle}";
-    }
-    if (_selectedChallengeIndex ==
-        widget.jsonContent.projectList[_selectedProjectIndex].challengeContent
-                .length -
-            1) {
-      return "Next up: Project Impact";
-    }
-    if (_selectedChallengeIndex ==
-            widget.jsonContent.projectList[_selectedProjectIndex]
-                .challengeContent.length &&
-        _selectedProjectIndex < widget.jsonContent.projectList.length - 1) {
-      return "Next Project";
+    if (_selectedPageIndex == 2) {
+      if (_selectedChallengeIndex <
+          widget.jsonContent.projectList[_selectedProjectIndex].challengeContent
+                  .length -
+              1) {
+        return "Next up: ${widget.jsonContent.projectList[_selectedProjectIndex].challengeContent[_selectedChallengeIndex + 1].STARTitle}";
+      }
+      if (_selectedChallengeIndex ==
+          widget.jsonContent.projectList[_selectedProjectIndex].challengeContent
+                  .length -
+              1) {
+        return "Next up: Project Impact";
+      }
+      if (_selectedChallengeIndex ==
+              widget.jsonContent.projectList[_selectedProjectIndex]
+                  .challengeContent.length &&
+          _selectedProjectIndex < widget.jsonContent.projectList.length - 1) {
+        return "Next Project";
+      } else {
+        return "Back to summary";
+      }
     } else {
-      return "Back to summary";
+      if (_selectedPageIndex == 3 &&
+          _selectedProjectIndex <
+              widget.jsonContent.smallProjectList.length - 1) {
+        return "Next up: ${widget.jsonContent.smallProjectList[_selectedProjectIndex + 1].projectTitle} ";
+      } else {
+        return "Back to summary";
+      }
     }
   }
 
   void setNextPage() {
-    setState(() {
-      projectKey = GlobalKey();
-
+    if (_selectedPageIndex == 2) {
       if (_selectedChallengeIndex <
           widget.jsonContent.projectList[_selectedProjectIndex].challengeContent
               .length) {
-        _selectedChallengeIndex = _selectedChallengeIndex + 1;
+        setSelectionState(LinkAddress(
+            active: true,
+            page: _selectedPageIndex,
+            project: _selectedProjectIndex,
+            challenge: _selectedChallengeIndex + 1));
       } else {
         if (_selectedProjectIndex < widget.jsonContent.projectList.length - 1) {
-          if (deviceIsDesktop == true) {
-            controller[_selectedProjectIndex].collapse();
-            controller[_selectedProjectIndex + 1].expand();
-          }
-          _selectedChallengeIndex = -1;
-          _selectedProjectIndex = _selectedProjectIndex + 1;
+          closeExpansionTiles(_selectedPageIndex, _selectedProjectIndex + 1);
+          setSelectionState(LinkAddress(
+              active: true,
+              page: _selectedPageIndex,
+              project: _selectedProjectIndex + 1,
+              challenge: -1));
         } else {
-          if (deviceIsDesktop == true) {
-            controller[_selectedProjectIndex].collapse();
-          }
-          _selectedPageIndex = 0;
-          _selectedProjectIndex = 0;
-          _selectedChallengeIndex = 0;
+          closeExpansionTiles(_selectedPageIndex, _selectedProjectIndex);
+          setSelectionState(
+              LinkAddress(active: true, page: 0, project: 0, challenge: 0));
         }
       }
+    }
+    if (_selectedPageIndex == 3) {
+      if (_selectedProjectIndex <
+          widget.jsonContent.smallProjectList.length - 1) {
+        setSelectionState(LinkAddress(
+            active: true,
+            page: _selectedPageIndex,
+            project: _selectedProjectIndex + 1,
+            challenge: -1));
+      } else {
+        setSelectionState(
+            LinkAddress(active: true, page: 0, project: 0, challenge: 0));
+      }
+    } else {
+      print('Navigation value incorrect');
+    }
+
+    setState(() {
+      projectKey = GlobalKey();
     });
   }
 
   void setPreviousPage() {
-    setState(() {
-      projectKey = GlobalKey();
-      if (_selectedChallengeIndex > 0) {
-        _selectedChallengeIndex = _selectedChallengeIndex - 1;
+    if (_selectedPageIndex == 2) {
+      if (_selectedChallengeIndex > -1) {
+        setSelectionState(LinkAddress(
+            active: true,
+            page: _selectedPageIndex,
+            project: _selectedProjectIndex,
+            challenge: _selectedChallengeIndex - 1));
       } else {
         if (_selectedProjectIndex > 0) {
           if (deviceIsDesktop == true) {
-            controller[_selectedProjectIndex].collapse();
-            controller[_selectedProjectIndex - 1].expand();
+            closeExpansionTiles(_selectedPageIndex, _selectedProjectIndex - 1);
           }
-          _selectedChallengeIndex = -1;
-          _selectedProjectIndex = _selectedProjectIndex - 1;
+          setSelectionState(LinkAddress(
+              active: true,
+              page: _selectedPageIndex,
+              project: _selectedProjectIndex - 1,
+              challenge: -1));
         } else {
-          if (deviceIsDesktop == true) {
-            controller[_selectedProjectIndex].collapse();
-          }
-          _selectedPageIndex = 0;
-          _selectedProjectIndex = 0;
-          _selectedChallengeIndex = 0;
+          setSelectionState(
+              LinkAddress(active: true, page: 0, project: 0, challenge: 0));
         }
       }
-    });
+    }
+    if (_selectedPageIndex == 3) {
+      if (_selectedProjectIndex > 0) {
+        setSelectionState(LinkAddress(
+            active: true,
+            page: _selectedPageIndex,
+            project: _selectedProjectIndex - 1,
+            challenge: -1));
+      } else {
+        setSelectionState(
+            LinkAddress(active: true, page: 0, project: 0, challenge: 0));
+      }
+    } else {
+      print('Navigation value incorrect');
+    }
   }
 
   Widget quickLinks(bool deviceIsDesktop) {
@@ -250,8 +288,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           width: 48,
                           height: 48,
                           padding: const EdgeInsets.all(12),
-                          child: const Image(
-                            image: AssetImage('linkedin_logo60px.png'),
+                          child: const Icon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 24,
                           )),
                       onTap: () {
                         _launchUrl(
@@ -281,14 +320,16 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 isChallenge: false,
                 isSelected: (_selectedPageIndex == 0),
                 onCountSelected: () {
-                  setSelectionState(0, 0, 0);
+                  setSelectionState(LinkAddress(
+                      active: true, page: 0, project: 0, challenge: 0));
                 }),
             NavigationItem(
                 buttonName: "Experience(Under maintenance)",
                 isChallenge: false,
                 isSelected: (_selectedPageIndex == 1),
                 onCountSelected: () {
-                  setSelectionState(0, 0, 0);
+                  setSelectionState(LinkAddress(
+                      active: true, page: 0, project: 0, challenge: 0));
                 }),
             const SizedBox(
               height: 8,
@@ -335,7 +376,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       : false,
                   onCountSelected: () {
                     closeExpansionTiles(2, projectIndex);
-                    setSelectionState(2, projectIndex, -1);
+                    setSelectionState(LinkAddress(
+                        active: true,
+                        page: 2,
+                        project: projectIndex,
+                        challenge: -1));
                   }),
               ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -354,7 +399,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             : false,
                         onCountSelected: () {
                           closeExpansionTiles(2, projectIndex);
-                          setSelectionState(2, projectIndex, challengeIndex);
+                          setSelectionState(LinkAddress(
+                              active: true,
+                              page: 2,
+                              project: projectIndex,
+                              challenge: challengeIndex));
                         });
                   }),
               NavigationItem(
@@ -368,11 +417,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       ? true
                       : false,
                   onCountSelected: () {
-                    setSelectionState(
-                        2,
-                        projectIndex,
-                        widget.jsonContent.projectList[projectIndex]
-                            .challengeContent.length);
+                    setSelectionState(LinkAddress(
+                        active: true,
+                        page: 2,
+                        project: projectIndex,
+                        challenge: widget.jsonContent.projectList[projectIndex]
+                            .challengeContent.length));
                   }),
               const SizedBox(
                 height: 16,
@@ -401,7 +451,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       : false,
                   onCountSelected: () {
                     closeExpansionTiles(3, -1);
-                    setSelectionState(3, projectIndex, 0);
+                    setSelectionState(LinkAddress(
+                        active: true,
+                        page: 3,
+                        project: projectIndex,
+                        challenge: 0));
                   }),
             ],
           );
@@ -411,39 +465,26 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget getContent() {
     if (_selectedPageIndex == 0) {
       return MainPageWelcome(
-          key: projectKey,
-          deviceIsDesktop: deviceIsDesktop,
           jsonContent: widget.jsonContent,
           navigateToProjects: (LinkAddress value) {
             if (deviceIsDesktop == true) {
               closeExpansionTiles(value.page, value.project);
             }
-            setSelectionState(value.page, value.project, value.challenge);
+            setSelectionState(value);
           });
     }
     if (_selectedPageIndex == 2) {
       return MainPageProjectContent(
-        key: projectKey,
-        deviceIsDesktop: deviceIsDesktop,
         selectionProjectIndex: _selectedProjectIndex,
         selectionChallengeIndex: _selectedChallengeIndex,
         content: widget.jsonContent.projectList,
-        previousPage: setPreviousPage,
-        nextPage: setNextPage,
-        nextpageSummary: nextPageSummary(),
         navigateToProjects: (LinkAddress value) {
-          setSelectionState(
-            value.page,
-            value.project,
-            value.challenge,
-          );
+          setSelectionState(value);
         },
       );
     }
     if (_selectedPageIndex == 3) {
       return MainPageSideProjectContent(
-          key: projectKey,
-          deviceIsDesktop: deviceIsDesktop,
           selectionProjectIndex: _selectedProjectIndex,
           content: widget.jsonContent.smallProjectList);
     } else {
@@ -472,7 +513,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ),
               Expanded(
                 flex: 5,
-                child: getContent(),
+                child: ContentColumnFrame(
+                  key: projectKey,
+                  bottomNavigationActive:
+                      _selectedPageIndex == 3 || _selectedPageIndex == 2,
+                  deviceIsDesktop: deviceIsDesktop,
+                  widget: getContent(),
+                  navigation: BottomNavigation(
+                    previousPage: setPreviousPage,
+                    nextPage: setNextPage,
+                    nextPageSummary: nextPageSummary(),
+                  ),
+                ),
               ),
               const SizedBox(
                 width: 24,
@@ -521,7 +573,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 width: 16,
               ),
               Expanded(
-                child: getContent(),
+                child: ContentColumnFrame(
+                    key: projectKey,
+                    bottomNavigationActive:
+                        _selectedPageIndex == 3 || _selectedPageIndex == 2,
+                    deviceIsDesktop: deviceIsDesktop,
+                    widget: getContent(),
+                    navigation: BottomNavigation(
+                      previousPage: setPreviousPage,
+                      nextPage: setNextPage,
+                      nextPageSummary: nextPageSummary(),
+                    )),
               ),
               const SizedBox(
                 width: 16,

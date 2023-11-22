@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
-import 'app_theme.dart';
 import 'json_parse.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -61,9 +60,10 @@ class FutureImageBuilder extends StatelessWidget {
             return ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: FadeInImage.assetNetwork(
-                fadeOutDuration: const Duration(milliseconds: 100),
-                fadeInDuration: const Duration(milliseconds: 100),
+                fadeOutDuration: const Duration(milliseconds: 200),
+                fadeInDuration: const Duration(milliseconds: 200),
                 placeholder: 'imageplaceholder.png',
+                placeholderFit: BoxFit.cover,
                 image: snapshot.data!,
                 fit: BoxFit.cover,
               ),
@@ -96,7 +96,7 @@ class _ImageWithOverlayState extends State<ImageWithOverlay> {
         builder: (context) {
           return GestureDetector(
             onTap: () {
-              overlayEntry?.remove();
+              overlayEntry.remove();
             },
             child: Container(
               padding: const EdgeInsets.all(32),
