@@ -39,6 +39,8 @@ dependencies:
   firebase_storage: ^11.4.1
   url_launcher: 6.2.1
   font_awesome_flutter: 10.6.0
+  google_fonts: ^6.1.0
+  firebase_analytics: ^10.7.2
 
 dev_dependencies:
   flutter_test:
@@ -58,18 +60,38 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   fonts:
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Black.ttf
+          weight: 900
+        - asset: fonts/Montserrat-ExtraBold.ttf
+          weight: 800
+        - asset: fonts/Montserrat-Bold.ttf
+          weight: 700
+        - asset: fonts/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: fonts/Montserrat-Regular.ttf
+          weight: 400
+        - asset: fonts/Montserrat-Light.ttf
+          weight: 300
+        - asset: fonts/Montserrat-ExtraLight.ttf
+          weight: 200
+        - asset: fonts/Montserrat-Thin.ttf
+          weight: 100
     - family: Museo
       fonts:
-      - asset: fonts/Museo 900.otf
-        weight: 900
-      - asset: fonts/Museo 700.otf
-        weight: 700
-      - asset: fonts/Museo 500.otf
-        weight: 500
-      - asset: fonts/Museo 300.otf
-        weight: 300
-      - asset: fonts/Museo 100.otf
-        weight: 100
+        - asset: fonts/Museo 900.otf
+          weight: 900
+        - asset: fonts/Museo 700.otf
+          weight: 700
+        - asset: fonts/Museo 500.otf
+          weight: 500
+        - asset: fonts/Museo 300.otf
+          weight: 300
+        - asset: fonts/Museo 100.otf
+          weight: 100
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

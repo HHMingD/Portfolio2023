@@ -38,9 +38,8 @@ class ProjectContent {
   final String teamComposition;
   final String projectDuration;
   final String projectLocation;
-  final String summaryContent;
-  final String impactContent;
-  final List<ParagraphContent> paragraphContentList;
+  final List<ParagraphContent> summaryContentList;
+  final List<ParagraphContent> impactContentList;
   final List<ChallengeContent> challengeContent;
 
   ProjectContent(
@@ -48,21 +47,24 @@ class ProjectContent {
       required this.projectTopic,
       required this.projectThumbnail,
       required this.projectMyRole,
-      required this.summaryContent,
+
       required this.teamComposition,
       required this.projectDuration,
       required this.projectLocation,
-      required this.impactContent,
-      required this.paragraphContentList,
+        required this.summaryContentList,
+      required this.impactContentList,
       required this.challengeContent});
 
   factory ProjectContent.fromJson(Map<String, dynamic> parsedJson) {
     var list1 = parsedJson['ChallengeContent'] as List;
     List<ChallengeContent> challengeContent =
         list1.map((i) => ChallengeContent.fromJson(i)).toList();
-    var list2 = parsedJson['ParagraphContentList'] as List;
-    List<ParagraphContent> paragraphContent =
+    var list2 = parsedJson['SummaryContentList'] as List;
+    List<ParagraphContent> summaryContent =
         list2.map((i) => ParagraphContent.fromJson(i)).toList();
+    var list3 = parsedJson['ImpactContentList'] as List;
+    List<ParagraphContent> impactContent =
+    list3.map((i) => ParagraphContent.fromJson(i)).toList();
 
     return ProjectContent(
       projectTitle: parsedJson['ProjectTitle'],
@@ -72,9 +74,8 @@ class ProjectContent {
       teamComposition: parsedJson['TeamComposition'],
       projectDuration: parsedJson['ProjectDuration'],
       projectLocation: parsedJson['ProjectLocation'],
-      summaryContent: parsedJson['SummaryContent'],
-      impactContent: parsedJson['ImpactContent'],
-      paragraphContentList: paragraphContent,
+      summaryContentList: summaryContent,
+      impactContentList: impactContent,
       challengeContent: challengeContent,
     );
   }
