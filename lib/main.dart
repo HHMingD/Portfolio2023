@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:howard_chen_portfolio/app_theme.dart';
 import 'class.dart';
@@ -9,6 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'firebase_options.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'tools.dart';
 
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
@@ -133,6 +133,7 @@ class NavigationPanel extends StatefulWidget {
 
 class _NavigationPanelState extends State<NavigationPanel> {
   bool selected = false;
+
   void closeExpansionTiles(int pageValue, int projectValue) {
     for (var i = 0; i < widget.jsonContent.projectList.length; i++) {
       if (i != projectValue) {
@@ -153,6 +154,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
     }
     super.initState();
   }
+
   Widget projectNavigation() {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
@@ -173,17 +175,14 @@ class _NavigationPanelState extends State<NavigationPanel> {
                         widget.linkAdress.challenge == -1)
                     ? true
                     : false,
-                onCountSelected: () {
+                onItemSelection: () {
                   widget.navigateToProjects(LinkAddress(
                       active: true,
                       page: 2,
                       project: projectIndex,
                       challenge: -1));
-
                 }),
-            ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
+            ColumnBuilder(
                 itemCount: widget.jsonContent.projectList[projectIndex]
                     .challengeContent.length,
                 itemBuilder: (BuildContext context, int challengeIndex) {
@@ -196,13 +195,12 @@ class _NavigationPanelState extends State<NavigationPanel> {
                               challengeIndex == widget.linkAdress.challenge)
                           ? true
                           : false,
-                      onCountSelected: () {
+                      onItemSelection: () {
                         widget.navigateToProjects(LinkAddress(
                             active: true,
                             page: 2,
                             project: projectIndex,
                             challenge: challengeIndex));
-
                       });
                 }),
             NavigationItem(
@@ -215,14 +213,13 @@ class _NavigationPanelState extends State<NavigationPanel> {
                                 .challengeContent.length)
                     ? true
                     : false,
-                onCountSelected: () {
+                onItemSelection: () {
                   widget.navigateToProjects(LinkAddress(
                       active: true,
                       page: 2,
                       project: projectIndex,
                       challenge: widget.jsonContent.projectList[projectIndex]
                           .challengeContent.length));
-
                 }),
             const SizedBox(
               height: 16,
@@ -249,7 +246,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
                         projectIndex == widget.linkAdress.project)
                     ? true
                     : false,
-                onCountSelected: () {
+                onItemSelection: () {
                   widget.navigateToProjects(LinkAddress(
                       active: true,
                       page: 3,
@@ -474,56 +471,59 @@ class _MyHomePageState extends State<MyHomePage> {
         Scaffold(
           backgroundColor: Apptheme.noColor,
           body: Center(
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 1600),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const SizedBox(
-                    width: 32,
-                  ),
-                  Expanded(
-                      flex: 2,
-                      child: _selectedPageIndex != 0
-                          ? NavigationPanel(
-                              jsonContent: widget.jsonContent,
-                              linkAdress: LinkAddress(
-                                  active: true,
-                                  page: _selectedPageIndex,
-                                  project: _selectedProjectIndex,
-                                  challenge: _selectedChallengeIndex),
-                              navigateToProjects: (LinkAddress value) {
-                                setSelectionState(value);
-                              },
-                            )
-                          : const SizedBox()),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  Expanded(
-                    flex: 5,
-                    child: ContentFrame(
-                      key: projectKey,
-                      bottomNavigationActive:
-                          _selectedPageIndex == 3 || _selectedPageIndex == 2,
-                      deviceIsDesktop: deviceIsDesktop,
-                      contentWidget: getContent(),
-                      navigation: BottomNavigation(
-                        previousPage: setPreviousPage,
-                        nextPage: setNextPage,
-                        nextPageSummary: nextPageSummary(),
-                      ),
+            child: _selectedPageIndex == 0
+                ? MainPageWelcome(
+                jsonContent: widget.jsonContent,
+                navigateToProjects: (LinkAddress value) {
+                  setSelectionState(value);
+                })
+                : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const SizedBox(
+                  width: 32,
+                ),
+                Expanded(
+                    flex: 2,
+                    child: _selectedPageIndex != 0
+                        ? NavigationPanel(
+                      jsonContent: widget.jsonContent,
+                      linkAdress: LinkAddress(
+                          active: true,
+                          page: _selectedPageIndex,
+                          project: _selectedProjectIndex,
+                          challenge: _selectedChallengeIndex),
+                      navigateToProjects: (LinkAddress value) {
+                        setSelectionState(value);
+                      },
+                    )
+                        : const SizedBox()),
+                const SizedBox(
+                  width: 24,
+                ),
+                Expanded(
+                  flex: 5,
+                  child: ContentFrame(
+                    key: projectKey,
+                    bottomNavigationActive: _selectedPageIndex == 3 ||
+                        _selectedPageIndex == 2,
+                    deviceIsDesktop: deviceIsDesktop,
+                    contentWidget: getContent(),
+                    navigation: BottomNavigation(
+                      previousPage: setPreviousPage,
+                      nextPage: setNextPage,
+                      nextPageSummary: nextPageSummary(),
                     ),
                   ),
-                  const SizedBox(
-                    width: 24,
-                  ),
-                  const Expanded(flex: 2, child: QuickLinks()),
-                  const SizedBox(
-                    width: 32,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  width: 24,
+                ),
+                const Expanded(flex: 2, child: QuickLinks()),
+                const SizedBox(
+                  width: 32,
+                ),
+              ],
             ),
           ),
         ),

@@ -1,88 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:howard_chen_portfolio/main.dart';
 import 'app_theme.dart';
 import 'json_parse.dart';
 import 'network.dart';
-
-class NavigationItem extends StatefulWidget {
-  const NavigationItem({
-    super.key,
-    required this.buttonName,
-    required this.isChallenge,
-    required this.onCountSelected,
-    required this.isSelected,
-  });
-
-  final String buttonName;
-  final VoidCallback onCountSelected;
-  final bool isChallenge;
-  final bool isSelected;
-
-  @override
-  State<NavigationItem> createState() => _NavigationItemState();
-}
-
-class _NavigationItemState extends State<NavigationItem> {
-  bool isHovered = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: InkWell(
-          onTap: () {
-            widget.onCountSelected();
-          },
-          onHover: (val) {
-            setState(() {
-              isHovered = val;
-            });
-          },
-          child: Container(
-              padding: EdgeInsets.all(isHovered ? 7 : 8),
-              decoration: isHovered
-                  ? BoxDecoration(
-                      color: widget.isSelected
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).scaffoldBackgroundColor,
-                      border: Border.all(
-                          width: 1, color: Theme.of(context).primaryColor))
-                  : BoxDecoration(
-                      color: widget.isSelected
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context).scaffoldBackgroundColor,
-                    ),
-              child: widget.isChallenge
-                  ? RichText(
-                      text: TextSpan(
-                        text: widget.buttonName,
-                        style: widget.isSelected
-                            ? Apptheme.labelMedium.copyWith(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                fontWeight: FontWeight.w400)
-                            : Apptheme.labelMedium.copyWith(
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.w400),
-                      ),
-                    )
-                  : RichText(
-                      text: TextSpan(
-                        text: widget.buttonName,
-                        style: widget.isSelected
-                            ? Apptheme.labelMedium.copyWith(
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                fontWeight: FontWeight.w600)
-                            : Apptheme.labelMedium.copyWith(
-                                color: Theme.of(context).primaryColor,
-                                fontWeight: FontWeight.w600),
-                      ),
-                    ))),
-    );
-  }
-}
+import 'tools.dart';
 
 class MainPageWelcome extends StatelessWidget {
   const MainPageWelcome(
@@ -96,163 +20,51 @@ class MainPageWelcome extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          SizedBox(height: MediaQuery.of(context).size.height * 0.15,),
-          RichText(
-              text: TextSpan(children: <TextSpan>[
-            TextSpan(
-                text: "Hi! I am Howard, \n",
-                style: Apptheme.headlineSmall
-                    .copyWith(color: Theme.of(context).primaryColorLight)),
-            TextSpan(
-                text: "A Product / UX / UI Designer ",
-                style: Apptheme.headlineMedium.copyWith(
-                    fontWeight: FontWeight.w900,
-                    color: Theme.of(context).primaryColor)),
-            TextSpan(
-                text:
-                    "experienced in owning the whole of design process with tracked record of strong delivery at pace",
-                style: Apptheme.headlineMedium
-                    .copyWith(color: Theme.of(context).primaryColorLight)),
-          ])),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.20,
           ),
+          Container(
+            constraints: const BoxConstraints(maxWidth: 1600),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 6,
+                  child: RichText(
+                      text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                        text: "Hi! I am Howard, \n",
+                        style: Apptheme.headlineLarge.copyWith(
+                            color: Theme.of(context).primaryColorLight)),
+                    TextSpan(
+                        text: "A Product / UX / UI Designer ",
+                        style: Apptheme.headlineLarge.copyWith(
+                            fontWeight: FontWeight.w900,
+                            color: Theme.of(context).primaryColor)),
+                    TextSpan(
+                        text:
+                            "experienced in owning the whole of design process with tracked record of strong delivery at pace",
+                        style: Apptheme.headlineLarge.copyWith(
+                            color: Theme.of(context).primaryColorLight)),
+                  ])),
+                ),
+                const Expanded(flex: 4, child: QuickLinks()),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.20,
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.60,
+            child: Carousel(
+                jsonContent: jsonContent,
+                navigateToProjects: navigateToProjects),
+          ),
+          const SizedBox(height: 48),
           Container(
             constraints: const BoxConstraints(maxWidth: 800),
             child: Column(
               children: [
-                const SizedBox(height: 48),
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: jsonContent.projectList.length,
-                    itemBuilder: (BuildContext context, int projectIndex) {
-                      return Column(
-                        children: [
-                          InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              onTap: () => navigateToProjects(LinkAddress(
-                                  active: true,
-                                  page: 2,
-                                  project: projectIndex,
-                                  challenge: -1)),
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).scaffoldBackgroundColor,
-                                    border: Border.all(
-                                        width: 1,
-                                        color: Theme.of(context).primaryColor),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(5))),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: FutureImageBuilder(jsonContent
-                                          .projectList[projectIndex]
-                                          .projectThumbnail),
-                                    ),
-                                    const SizedBox(width: 24),
-                                    Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                style: Apptheme.titleMedium,
-                                                jsonContent
-                                                    .projectList[projectIndex]
-                                                    .projectTitle),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            Text(
-                                                style: Apptheme.labelMedium,
-                                                'Topics: ${jsonContent.projectList[projectIndex].projectTopic}'),
-                                          ],
-                                        ))
-                                  ],
-                                ),
-                              )),
-                          const SizedBox(
-                            height: 24,
-                          )
-                        ],
-                      );
-                    }),
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: jsonContent.smallProjectList.length,
-                    itemBuilder: (BuildContext context, int smallProjectIndex) {
-                      return Column(
-                        children: [
-                          InkWell(
-                              customBorder: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              onTap: () => navigateToProjects(LinkAddress(
-                                  active: true,
-                                  page: 3,
-                                  project: smallProjectIndex,
-                                  challenge: 0)),
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                decoration: BoxDecoration(
-                                    color:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                    border: Border.all(
-                                        width: 1,
-                                        color: Theme.of(context).primaryColor),
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(5))),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: FutureImageBuilder(jsonContent
-                                          .smallProjectList[smallProjectIndex]
-                                          .projectThumbnail),
-                                    ),
-                                    const SizedBox(width: 24),
-                                    Expanded(
-                                        flex: 1,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                style: Apptheme.titleMedium,
-                                                jsonContent
-                                                    .smallProjectList[
-                                                        smallProjectIndex]
-                                                    .projectTitle),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            Text(
-                                                style: Apptheme.labelMedium,
-                                                'Topics: ${jsonContent.smallProjectList[smallProjectIndex].projectTopic}'),
-                                          ],
-                                        ))
-                                  ],
-                                ),
-                              )),
-                          const SizedBox(
-                            height: 24,
-                          )
-                        ],
-                      );
-                    }),
                 const Text(
                   'Due to NDA constrains some of the images may not be available. Please feel free to reach out if you are interested in learning more about my work.',
                   style: Apptheme.bodyMedium,
@@ -438,9 +250,7 @@ class MainPageProjectContent extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+          ColumnBuilder(
               itemCount:
                   content[selectionProjectIndex].summaryContentList.length,
               itemBuilder: (BuildContext context, int paragraphIndex) {
@@ -491,9 +301,7 @@ class MainPageProjectContent extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+          ColumnBuilder(
               itemCount:
                   content[selectionProjectIndex].impactContentList.length,
               itemBuilder: (BuildContext context, int paragraphIndex) {
@@ -619,9 +427,7 @@ class MainPageProjectContent extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+          ColumnBuilder(
               itemCount: content[selectionProjectIndex]
                   .challengeContent[selectionChallengeIndex]
                   .paragraphContentList
@@ -695,6 +501,9 @@ class MainPageProjectContent extends StatelessWidget {
                 child: const Row(
                   children: [
                     Icon(Icons.arrow_back),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Text(
                       "Back to home",
                       style: Apptheme.titleSmall,
@@ -717,12 +526,13 @@ class MainPageSideProjectContent extends StatelessWidget {
     super.key,
     required this.selectionProjectIndex,
     required this.content,
-  required this.navigateToProjects,
+    required this.navigateToProjects,
   });
 
   final int selectionProjectIndex;
   final List<SmallProjectContent> content;
   final ValueSetter<LinkAddress> navigateToProjects;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -746,6 +556,9 @@ class MainPageSideProjectContent extends StatelessWidget {
                 child: const Row(
                   children: [
                     Icon(Icons.arrow_back),
+                    SizedBox(
+                      width: 8,
+                    ),
                     Text(
                       "Back to home",
                       style: Apptheme.titleSmall,
@@ -762,7 +575,6 @@ class MainPageSideProjectContent extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
@@ -817,9 +629,7 @@ class MainPageSideProjectContent extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
+              ColumnBuilder(
                   itemCount: content[selectionProjectIndex]
                       .paragraphContentList
                       .length,
@@ -966,7 +776,7 @@ class BottomNavigation extends StatelessWidget {
                         const Icon(Icons.arrow_forward_rounded, size: 36),
                         Expanded(
                           child: Text(
-                            maxLines:2,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             nextPageSummary,
                             style: Apptheme.labelLarge,
@@ -981,304 +791,183 @@ class BottomNavigation extends StatelessWidget {
   }
 }
 
-class ParagraphLayout {
-  //provide a layout-type parameters or directly call a method to use this widget.
-  const ParagraphLayout({
-    required this.layoutType,
-    required this.titleTextDisplay,
-    required this.titleText,
-    required this.subtitleText,
-    required this.contentText,
-    required this.imageLink,
-    required this.context,
-    required this.linkAddress,
-    required this.navigation,
-  });
+class Carousel extends StatefulWidget {
+  const Carousel(
+      {super.key, required this.jsonContent, required this.navigateToProjects});
 
-  final String layoutType;
-  final bool titleTextDisplay;
-  final String titleText;
-  final String subtitleText;
-  final String contentText;
-  final String imageLink;
-  final BuildContext context;
+  final JsonStructure jsonContent;
+  final ValueSetter<LinkAddress> navigateToProjects;
+
+  @override
+  State<Carousel> createState() => _CarouselState();
+}
+
+class _CarouselState extends State<Carousel> {
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(viewportFraction: 0.4, initialPage: 1000);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        PageView.builder(
+            controller: _pageController,
+            itemBuilder: (BuildContext context, int projectIndex) {
+              if (projectIndex % 5 < widget.jsonContent.projectList.length) {
+                return OverviewItem(
+                  projectThumbnail: widget.jsonContent
+                      .projectList[projectIndex % 5].projectThumbnail,
+                  projectTitle: widget
+                      .jsonContent.projectList[projectIndex % 5].projectTitle,
+                  projectTopic: widget
+                      .jsonContent.projectList[projectIndex % 5].projectTopic,
+                  onItemSelection: widget.navigateToProjects,
+                  linkAddress: (LinkAddress(
+                      active: true,
+                      page: 2,
+                      project: projectIndex % 5,
+                      challenge: -1)),
+                );
+              } else {
+                return OverviewItem(
+                  projectThumbnail: widget
+                      .jsonContent
+                      .smallProjectList[projectIndex % 5 -
+                          widget.jsonContent.projectList.length]
+                      .projectThumbnail,
+                  projectTitle: widget
+                      .jsonContent
+                      .smallProjectList[projectIndex % 5 -
+                          widget.jsonContent.projectList.length]
+                      .projectTitle,
+                  projectTopic: widget
+                      .jsonContent
+                      .smallProjectList[projectIndex % 5 -
+                          widget.jsonContent.projectList.length]
+                      .projectTopic,
+                  onItemSelection: widget.navigateToProjects,
+                  linkAddress: LinkAddress(
+                      active: true,
+                      page: 3,
+                      project: projectIndex % 5 -
+                          widget.jsonContent.projectList.length,
+                      challenge: -1),
+                );
+              }
+            }),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: HoverEffect(
+            transparentBackground: true,
+            context: context,
+            child: SizedBox(
+              width: 48,
+              height: 48,
+              child: GestureDetector(
+                onTap: () {
+                  _pageController.previousPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeIn);
+                },
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 48,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: HoverEffect(
+            transparentBackground: true,
+            context: context,
+            child: SizedBox(
+              width: 48,
+              height: 48,
+              child: GestureDetector(
+                onTap: () {
+                  _pageController.nextPage(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeIn);
+                },
+                child: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 48,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class OverviewItem extends StatelessWidget {
+  const OverviewItem(
+      {super.key,
+      required this.projectThumbnail,
+      required this.projectTitle,
+      required this.projectTopic,
+      required this.onItemSelection,
+      required this.linkAddress});
+
+  final String projectThumbnail;
+  final String projectTitle;
+  final String projectTopic;
+  final ValueSetter<LinkAddress> onItemSelection;
   final LinkAddress linkAddress;
-  final ValueSetter<LinkAddress> navigation;
 
-  Widget linkToSeeMore() {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 8,
-        ),
-        InkWell(
-          onTap: () {
-            navigation(linkAddress);
-          },
-          child: Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              'See More >>',
-              style: Apptheme.bodyLarge.copyWith(color: Apptheme.blue),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 8,
-        ),
-      ],
-    );
-  }
-
-  Widget imageComponent() {
-    if (imageLink != "") {
-      return Column(
-        children: [
-          const SizedBox(
-            height: 12,
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-            ),
-            child: ImageWithOverlay(imageLink),
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-        ],
-      );
-    } else {
-      return const SizedBox();
-    }
-  }
-
-  Widget titleTextComponent() {
-    if (titleText != "") {
-      return Column(
-        children: <Widget>[
-          titleText != ""
-              ? Text(titleText, style: Apptheme.titleLarge)
-              : const SizedBox(),
-          titleText != ""
-              ? const SizedBox(
-                  height: 12,
-                )
-              : const SizedBox(),
-        ],
-      );
-    } else {
-      return const SizedBox();
-    }
-  }
-
-  Widget subtitleTextComponent() {
-    return Column(
-      children: <Widget>[
-        subtitleText != ""
-            ? Text(subtitleText,
-                style: Apptheme.labelLarge.copyWith(
-                    color: Apptheme.blue, fontWeight: FontWeight.w700))
-            : const SizedBox(),
-        subtitleText != ""
-            ? const SizedBox(
-                height: 12,
-              )
-            : const SizedBox(),
-      ],
-    );
-  }
-
-  Widget contentTextComponent() {
-    return RichText(
-        text: TextSpan(children: [
-      const WidgetSpan(
-          child: SizedBox(
-        width: 30,
-      )),
-      TextSpan(text: contentText, style: Apptheme.bodyLarge)
-    ]));
-  }
-
-  Widget textOnly() {
-    return SizedBox(
-//      width: double.infinity,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                titleTextComponent(),
-                subtitleTextComponent(),
-              ],
-            ),
-          ),
-          const SizedBox(
-            width: 24,
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                contentTextComponent(),
-                linkAddress.active ? linkToSeeMore() : const SizedBox(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget columnImage() {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          titleTextComponent(),
-          subtitleTextComponent(),
-          imageComponent(),
-          const SizedBox(
-            height: 8,
-          ),
-          contentTextComponent(),
-          linkAddress.active ? linkToSeeMore() : const SizedBox(),
-        ],
-      ),
-    );
-  }
-
-  Widget leftImage() {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          titleTextComponent(),
-          subtitleTextComponent(),
-          Row(
-            children: [
-              Expanded(
-                flex: 1,
-                child: imageComponent(),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      contentTextComponent(),
-                      linkAddress.active ? linkToSeeMore() : const SizedBox(),
-                    ],
-                  ))
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget rightImage() {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          titleTextComponent(),
-          subtitleTextComponent(),
-          Row(
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      contentTextComponent(),
-                      linkAddress.active ? linkToSeeMore() : const SizedBox(),
-                    ],
-                  )),
-              const SizedBox(
-                width: 16,
-              ),
-              Expanded(
-                flex: 1,
-                child: imageComponent(),
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget statement() {
+  @override
+  Widget build(BuildContext context) {
     return Container(
-        width: double.infinity,
         padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(color: Theme.of(context).hoverColor),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 24,
+        child: GestureDetector(
+          onTap: () {
+            onItemSelection(linkAddress);
+          },
+          child: HoverEffect(
+            transparentBackground: false,
+            context: context,
+            child: Stack(
+              children: <Widget>[
+                FutureImageBuilder(projectThumbnail),
+                const SizedBox(width: 24),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        border: Border.all(color: Apptheme.black),
+                        color: Apptheme.white),
+                    padding: const EdgeInsets.all(16),
+                    width: 300,
+                    height: 350,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(style: Apptheme.titleMedium, projectTitle),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                            style: Apptheme.labelMedium,
+                            'Topics: $projectTopic'),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            Text(titleText, style: Apptheme.labelLarge),
-            const SizedBox(
-              height: 12,
-            ),
-            Text(contentText, style: Apptheme.headlineMedium),
-            const SizedBox(
-              height: 24,
-            ),
-          ],
+          ),
         ));
-  }
-
-  Widget layoutSelector() {
-    if (layoutType == 'left') {
-      return leftImage();
-    }
-    if (layoutType == 'right') {
-      return rightImage();
-    }
-    if (layoutType == 'column') {
-      return columnImage();
-    }
-    if (layoutType == 'statement') {
-      return statement();
-    }
-    if (layoutType == 'onlyText') {
-      return textOnly();
-    } else {
-      return const Align(
-        alignment: Alignment.center,
-        child: Text("layout not definied"),
-      );
-    }
-  }
-
-  Widget layoutBuild(layoutType) {
-    if (layoutType == 'left') {
-      return leftImage();
-    }
-    if (layoutType == 'right') {
-      return rightImage();
-    }
-    if (layoutType == 'column') {
-      return rightImage();
-    }
-    if (layoutType == 'statement') {
-      return rightImage();
-    }
-    if (layoutType == 'onlyText') {
-      return rightImage();
-    } else {
-      return const Text('Layout parameter incorrect. Name widget directly');
-    }
   }
 }
