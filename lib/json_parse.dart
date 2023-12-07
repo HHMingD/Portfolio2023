@@ -1,12 +1,6 @@
-import 'package:flutter/material.dart';
-
 // import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 // import 'package:cached_network_image/cached_network_image.dart';
-import 'dart:async';
-import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'package:flutter/services.dart';
 
 @JsonSerializable(anyMap: true)
 class JsonStructure {
@@ -33,7 +27,9 @@ class JsonStructure {
 class ProjectContent {
   final String projectTitle;
   final String projectTopic;
+  final String projectClient;
   final String projectThumbnail;
+  final String projectVideoPreview;
   final String projectMyRole;
   final String teamComposition;
   final String projectDuration;
@@ -45,13 +41,14 @@ class ProjectContent {
   ProjectContent(
       {required this.projectTitle,
       required this.projectTopic,
+      required this.projectClient,
       required this.projectThumbnail,
+      required this.projectVideoPreview,
       required this.projectMyRole,
-
       required this.teamComposition,
       required this.projectDuration,
       required this.projectLocation,
-        required this.summaryContentList,
+      required this.summaryContentList,
       required this.impactContentList,
       required this.challengeContent});
 
@@ -64,12 +61,14 @@ class ProjectContent {
         list2.map((i) => ParagraphContent.fromJson(i)).toList();
     var list3 = parsedJson['ImpactContentList'] as List;
     List<ParagraphContent> impactContent =
-    list3.map((i) => ParagraphContent.fromJson(i)).toList();
+        list3.map((i) => ParagraphContent.fromJson(i)).toList();
 
     return ProjectContent(
       projectTitle: parsedJson['ProjectTitle'],
       projectTopic: parsedJson['ProjectTopic'],
+      projectClient: parsedJson['ProjectClient'],
       projectThumbnail: parsedJson['ProjectThumbnail'],
+      projectVideoPreview: parsedJson['ProjectVideoPreview'],
       projectMyRole: parsedJson['ProjectMyRole'],
       teamComposition: parsedJson['TeamComposition'],
       projectDuration: parsedJson['ProjectDuration'],
@@ -133,7 +132,9 @@ class ChallengeContent {
 class SmallProjectContent {
   final String projectTitle;
   final String projectTopic;
+  final String projectClient;
   final String projectThumbnail;
+  final String projectVideoPreview;
   final String projectMyRole;
   final String projectDuration;
   final String challengeSummary;
@@ -142,7 +143,9 @@ class SmallProjectContent {
   SmallProjectContent({
     required this.projectTitle,
     required this.projectTopic,
+    required this.projectClient,
     required this.projectThumbnail,
+    required this.projectVideoPreview,
     required this.projectMyRole,
     required this.projectDuration,
     required this.challengeSummary,
@@ -153,11 +156,14 @@ class SmallProjectContent {
     var list = parsedJson['ParagraphContentList'] as List;
     List<ParagraphContent> content =
         list.map((i) => ParagraphContent.fromJson(i)).toList();
+
     return SmallProjectContent(
       projectTitle: parsedJson['ProjectTitle'],
       projectTopic: parsedJson['ProjectTopic'],
+      projectClient: parsedJson['ProjectClient'],
+      projectThumbnail: parsedJson['ProjectThumbnail'],
+      projectVideoPreview: parsedJson['ProjectVideoPreview'],
       projectMyRole: parsedJson['ProjectMyRole'],
-      projectThumbnail:parsedJson['ProjectThumbnail'],
       projectDuration: parsedJson['ProjectDuration'],
       challengeSummary: parsedJson['ChallengeSummary'],
       paragraphContentList: content,

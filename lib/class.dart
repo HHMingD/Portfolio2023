@@ -1,12 +1,10 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:howard_chen_portfolio/main.dart';
 import 'app_theme.dart';
 import 'json_parse.dart';
 import 'network.dart';
 import 'tools.dart';
+import 'package:books_finder/books_finder.dart';
 
 class MainPageWelcome extends StatelessWidget {
   const MainPageWelcome(
@@ -21,12 +19,15 @@ class MainPageWelcome extends StatelessWidget {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.20,
+            height: MediaQuery.of(context).size.height * 0.40,
           ),
           Container(
             constraints: const BoxConstraints(maxWidth: 1600),
             child: Row(
               children: [
+                const SizedBox(
+                  width: 32,
+                ),
                 Expanded(
                   flex: 6,
                   child: RichText(
@@ -47,15 +48,29 @@ class MainPageWelcome extends StatelessWidget {
                             color: Theme.of(context).primaryColorLight)),
                   ])),
                 ),
-                const Expanded(flex: 4, child: QuickLinks()),
+                Expanded(
+                    flex: 4,
+                    child: HoverEffect(
+                      context: context,
+                      transparentBackground: false,
+                      child: Row(
+                        children: [
+                          QuickLinks(),
+                          GetBook(),
+                        ],
+                      ),
+                    )),
+                const SizedBox(
+                  width: 32,
+                )
               ],
             ),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.20,
+          const SizedBox(
+            height: 48,
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 0.60,
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.70,
             child: Carousel(
                 jsonContent: jsonContent,
                 navigateToProjects: navigateToProjects),
@@ -90,7 +105,7 @@ class MainPageWelcome extends StatelessWidget {
                         context: context,
                         linkAddress: LinkAddress(
                             active: false, page: 0, project: 0, challenge: 0),
-                        navigation: (Value) {})
+                        navigation: (value) {})
                     .layoutSelector(),
                 const SizedBox(
                   height: 48,
@@ -732,14 +747,36 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          InkWell(
+    return Row(
+      children: [
+        InkWell(
+            customBorder: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            onTap: previousPage,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              padding: const EdgeInsets.all(8),
+              height: 68,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(Icons.arrow_back_rounded, size: 36),
+                ],
+              ),
+            )),
+        const SizedBox(
+          width: 16,
+        ),
+        Expanded(
+          child: InkWell(
               customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              onTap: previousPage,
+              onTap: nextPage,
               child: Container(
                 decoration: BoxDecoration(
                   color: Theme.of(context).scaffoldBackgroundColor,
@@ -747,46 +784,22 @@ class BottomNavigation extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.all(8),
                 height: 68,
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(Icons.arrow_back_rounded, size: 36),
-                  ],
-                ),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      const Icon(Icons.arrow_forward_rounded, size: 36),
+                      Expanded(
+                        child: Text(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          nextPageSummary,
+                          style: Apptheme.labelLarge,
+                        ),
+                      )
+                    ]),
               )),
-          const SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: InkWell(
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                onTap: nextPage,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  height: 68,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        const Icon(Icons.arrow_forward_rounded, size: 36),
-                        Expanded(
-                          child: Text(
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            nextPageSummary,
-                            style: Apptheme.labelLarge,
-                          ),
-                        )
-                      ]),
-                )),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
@@ -808,7 +821,7 @@ class _CarouselState extends State<Carousel> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(viewportFraction: 0.4, initialPage: 1000);
+    _pageController = PageController(viewportFraction: 0.3, initialPage: 1000);
   }
 
   @override
@@ -817,11 +830,14 @@ class _CarouselState extends State<Carousel> {
       children: [
         PageView.builder(
             controller: _pageController,
+            pageSnapping: false,
             itemBuilder: (BuildContext context, int projectIndex) {
               if (projectIndex % 5 < widget.jsonContent.projectList.length) {
-                return OverviewItem(
+                return PreviewItem(
                   projectThumbnail: widget.jsonContent
                       .projectList[projectIndex % 5].projectThumbnail,
+                  projectVideoPreview: widget.jsonContent
+                      .projectList[projectIndex % 5].projectVideoPreview,
                   projectTitle: widget
                       .jsonContent.projectList[projectIndex % 5].projectTitle,
                   projectTopic: widget
@@ -834,12 +850,17 @@ class _CarouselState extends State<Carousel> {
                       challenge: -1)),
                 );
               } else {
-                return OverviewItem(
+                return PreviewItem(
                   projectThumbnail: widget
                       .jsonContent
                       .smallProjectList[projectIndex % 5 -
                           widget.jsonContent.projectList.length]
                       .projectThumbnail,
+                  projectVideoPreview: widget
+                      .jsonContent
+                      .smallProjectList[projectIndex % 5 -
+                          widget.jsonContent.projectList.length]
+                      .projectVideoPreview,
                   projectTitle: widget
                       .jsonContent
                       .smallProjectList[projectIndex % 5 -
@@ -909,16 +930,18 @@ class _CarouselState extends State<Carousel> {
   }
 }
 
-class OverviewItem extends StatelessWidget {
-  const OverviewItem(
+class PreviewItem extends StatelessWidget {
+  const PreviewItem(
       {super.key,
       required this.projectThumbnail,
+      required this.projectVideoPreview,
       required this.projectTitle,
       required this.projectTopic,
       required this.onItemSelection,
       required this.linkAddress});
 
   final String projectThumbnail;
+  final String projectVideoPreview;
   final String projectTitle;
   final String projectTopic;
   final ValueSetter<LinkAddress> onItemSelection;
@@ -926,48 +949,47 @@ class OverviewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(24),
-        child: GestureDetector(
-          onTap: () {
-            onItemSelection(linkAddress);
-          },
-          child: HoverEffect(
-            transparentBackground: false,
-            context: context,
-            child: Stack(
-              children: <Widget>[
-                FutureImageBuilder(projectThumbnail),
-                const SizedBox(width: 24),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(color: Apptheme.black),
-                        color: Apptheme.white),
-                    padding: const EdgeInsets.all(16),
-                    width: 300,
-                    height: 350,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(style: Apptheme.titleMedium, projectTitle),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                            style: Apptheme.labelMedium,
-                            'Topics: $projectTopic'),
-                      ],
-                    ),
+    return GestureDetector(
+      onTap: () {
+        onItemSelection(linkAddress);
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Stack(
+          children: <Widget>[
+            VideoPlayerScreen(projectVideoPreview),
+            Align(
+              alignment: Alignment.center,
+              child: HoverEffect(
+                context: context,
+                transparentBackground: false,
+                child: Container(
+                  decoration: const BoxDecoration(color: Apptheme.white),
+                  constraints: const BoxConstraints(maxWidth: 320),
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FirebaseFutureImageBuilder(projectThumbnail),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(style: Apptheme.titleMedium, projectTitle),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                          style: Apptheme.labelMedium, 'Topics: $projectTopic'),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

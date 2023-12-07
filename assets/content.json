@@ -3,7 +3,9 @@
     {
       "ProjectTitle": "VR Exploration and Build",
       "ProjectTopic": "Spatial rendering, Design exploration, VR user experience, Metaverse",
+      "ProjectClient": "A Major GSA Sovereign Fund",
       "ProjectThumbnail": "images/1.cover.png",
+      "ProjectVideoPreview": "videos/1.preview.mp4",
       "ProjectMyRole": "The metaverse subject matter expert, In charge of building and executing the Research Routine and rapid VR prototyping",
       "TeamComposition": "2 experience designers, \n2 Strategic designers, \n2 Venture architects",
       "ProjectDuration": "6 months",
@@ -375,7 +377,9 @@
     {
       "ProjectTitle": "B2B Web App: Disclosure Platform",
       "ProjectTopic": "User experience design, Full stack digital design, User research, Cross functional team, Agile development",
+      "ProjectClient": "A global Climate Tech Firm",
       "ProjectThumbnail": "images/2.cover.png",
+      "ProjectVideoPreview": "videos/1.preview.mp4",
       "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning. Acting scram master",
       "TeamComposition": "1 experience designer, \n1 business analyst, \n4 Engineers(FE,BE)",
       "ProjectDuration": "4 months",
@@ -707,7 +711,9 @@
     {
       "ProjectTitle": "Financial Advice platform",
       "ProjectTopic": "UX, wireframe, Wealth Management",
+      "ProjectClient": "A FTSE 100 Wealth Management Firm",
       "ProjectThumbnail": "images/S1.cover.png",
+      "ProjectVideoPreview": "videos/S1.preview.mp4",
       "ProjectMyRole": "Capturing the key elements from product requirements and turn them into wireframes. Creating user flows to help users document their financial behaviour.",
       "ProjectDuration": "2 months",
       "ChallengeSummary": "The delivery of financial advise needs to adhere to certain FCA regulations. On one hand we have identified that the financial advice is a highly desirable product for the average UK population. The other hand the FCA regulation has made it difficult for the financial advisor to deliver financial advice. Our goal is to create a service that connects the financial advisors and the average consumers while eliminating the barriers",
@@ -795,7 +801,9 @@
     {
       "ProjectTitle": "Wealth Management Gen AI",
       "ProjectTopic": "User experience design, GenAI, Wealth Management",
+      "ProjectClient": "Multiple Major Wealth Management Firm across London, Belgium and Netherlands",
       "ProjectThumbnail": "images/S2.cover.png",
+      "ProjectVideoPreview": "videos/S2.preview.mp4",
       "ProjectMyRole": "Leading the ideation of the GenAI product to prospective clients. Designing concept prototypes for story telling sessions.",
       "ProjectDuration": "2 weeks",
       "ChallengeSummary": "Capturing the essence of the Gen AI impact towards the wealth management industry. Speculating the potential application of the GenAI technology and contribute as the digital expert on the team and provide tech analytics towards potential implementation.",
@@ -883,7 +891,9 @@
     {
       "ProjectTitle": "Industrial good Gen AI",
       "ProjectTopic": "User experience design, GenAI, Industrial Goods",
+      "ProjectClient": "Major MedTech Company",
       "ProjectThumbnail": "images/S3.cover.png",
+      "ProjectVideoPreview": "videos/S3.preview.mp4",
       "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning.",
       "ProjectDuration": "3 weeks",
       "ChallengeSummary": "Ideating the concept of a genAI powered platform to document BOM (Documented Bills of Material) for a better experience ",
