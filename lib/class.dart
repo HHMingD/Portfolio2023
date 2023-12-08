@@ -1,10 +1,14 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:howard_chen_portfolio/main.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'main.dart';
 import 'app_theme.dart';
 import 'json_parse.dart';
 import 'network.dart';
 import 'tools.dart';
-import 'package:books_finder/books_finder.dart';
+
+
 
 class MainPageWelcome extends StatelessWidget {
   const MainPageWelcome(
@@ -22,14 +26,14 @@ class MainPageWelcome extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.40,
           ),
           Container(
-            constraints: const BoxConstraints(maxWidth: 1600),
+            constraints: const BoxConstraints(maxWidth: 1400),
             child: Row(
               children: [
                 const SizedBox(
                   width: 32,
                 ),
                 Expanded(
-                  flex: 6,
+                  flex: 3,
                   child: RichText(
                       text: TextSpan(children: <TextSpan>[
                     TextSpan(
@@ -48,17 +52,13 @@ class MainPageWelcome extends StatelessWidget {
                             color: Theme.of(context).primaryColorLight)),
                   ])),
                 ),
-                Expanded(
-                    flex: 4,
-                    child: HoverEffect(
-                      context: context,
-                      transparentBackground: false,
-                      child: Row(
-                        children: [
-                          QuickLinks(),
-                          GetBook(),
-                        ],
-                      ),
+                const SizedBox(
+                  width: 24,
+                ),
+                const Expanded(
+                    flex: 1,
+                    child: QuickLinks(
+                      verticalLayout: false,
                     )),
                 const SizedBox(
                   width: 32,
@@ -85,7 +85,7 @@ class MainPageWelcome extends StatelessWidget {
                   style: Apptheme.bodyMedium,
                 ),
                 const SizedBox(
-                  height: 24,
+                  height: 23,
                 ),
                 const Divider(
                   height: 1,
@@ -93,6 +93,7 @@ class MainPageWelcome extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
+//                GetBook(navigateToProjects: (LinkAddress value) {navigateToProjects(value);},),
                 ParagraphLayout(
                         layoutType: "column",
                         titleTextDisplay: true,
@@ -103,8 +104,7 @@ class MainPageWelcome extends StatelessWidget {
                             'The portfolio itself is also a demonstration of my approach to product builds. The ability to carried out coding projects like this greatly helped my design delivery capability and communication with engineers. \n\nIf you are a design student looking for free portfolio solutions, or are just simply interesting in the tech set up please do reach out.',
                         imageLink: 'images/Coding.png',
                         context: context,
-                        linkAddress: LinkAddress(
-                            active: false, page: 0, project: 0, challenge: 0),
+                        linkAddress: LinkAddress(active: false, 0, 0, 0),
                         navigation: (value) {})
                     .layoutSelector(),
                 const SizedBox(
@@ -510,8 +510,7 @@ class MainPageProjectContent extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  navigateToProjects(LinkAddress(
-                      active: true, page: 0, project: 0, challenge: 0));
+                  navigateToProjects(LinkAddress(0, 0, 0));
                 },
                 child: const Row(
                   children: [
@@ -565,8 +564,7 @@ class MainPageSideProjectContent extends StatelessWidget {
             children: <Widget>[
               InkWell(
                 onTap: () {
-                  navigateToProjects(LinkAddress(
-                      active: true, page: 0, project: 0, challenge: 0));
+                  navigateToProjects(LinkAddress(active: true, 0, 0, 0));
                 },
                 child: const Row(
                   children: [
@@ -817,11 +815,23 @@ class Carousel extends StatefulWidget {
 
 class _CarouselState extends State<Carousel> {
   late PageController _pageController;
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(viewportFraction: 0.3, initialPage: 1000);
+    _timer = Timer.periodic(
+        const Duration(seconds: 4),
+        (Timer t) => _pageController.nextPage(
+            duration: const Duration(milliseconds: 500), curve: Curves.easeIn));
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -843,11 +853,8 @@ class _CarouselState extends State<Carousel> {
                   projectTopic: widget
                       .jsonContent.projectList[projectIndex % 5].projectTopic,
                   onItemSelection: widget.navigateToProjects,
-                  linkAddress: (LinkAddress(
-                      active: true,
-                      page: 2,
-                      project: projectIndex % 5,
-                      challenge: -1)),
+                  linkAddress:
+                      (LinkAddress(active: true, 2, projectIndex % 5, -1)),
                 );
               } else {
                 return PreviewItem(
@@ -874,10 +881,9 @@ class _CarouselState extends State<Carousel> {
                   onItemSelection: widget.navigateToProjects,
                   linkAddress: LinkAddress(
                       active: true,
-                      page: 3,
-                      project: projectIndex % 5 -
-                          widget.jsonContent.projectList.length,
-                      challenge: -1),
+                      3,
+                      projectIndex % 5 - widget.jsonContent.projectList.length,
+                      -1),
                 );
               }
             }),
@@ -895,9 +901,10 @@ class _CarouselState extends State<Carousel> {
                       duration: const Duration(milliseconds: 200),
                       curve: Curves.easeIn);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_ios,
                   size: 48,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
               ),
             ),
@@ -917,9 +924,10 @@ class _CarouselState extends State<Carousel> {
                       duration: const Duration(milliseconds: 200),
                       curve: Curves.easeIn);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_forward_ios,
                   size: 48,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
               ),
             ),
@@ -927,6 +935,66 @@ class _CarouselState extends State<Carousel> {
         ),
       ],
     );
+  }
+}
+
+Future<void> _launchUrl(String webpagelink) async {
+  if (!await launchUrl(Uri.parse(webpagelink))) {
+    throw Exception(webpagelink);
+  }
+}
+
+class QuickLinks extends StatelessWidget {
+  const QuickLinks({super.key, this.verticalLayout = true});
+
+  final bool verticalLayout;
+
+  List<Widget> linkIcon() {
+    return [
+      InkWell(
+        child: Container(
+            padding: const EdgeInsets.all(12),
+            child: const Icon(
+              Icons.mail_rounded,
+              size: 24,
+            )),
+        onTap: () {
+          _launchUrl('mailto:howard8479@gmail.com');
+        },
+      ),
+      const SizedBox(
+        height: 8,
+        width: 8,
+      ),
+      InkWell(
+        child: Container(
+            width: 48,
+            height: 48,
+            padding: const EdgeInsets.all(12),
+            child: const Icon(
+              FontAwesomeIcons.linkedinIn,
+              size: 24,
+            )),
+        onTap: () {
+          _launchUrl('https://www.linkedin.com/in/howard-h-chen/');
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (verticalLayout == true) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: linkIcon(),
+      );
+    } else {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: linkIcon(),
+      );
+    }
   }
 }
 
@@ -966,7 +1034,6 @@ class PreviewItem extends StatelessWidget {
                 child: Container(
                   decoration: const BoxDecoration(color: Apptheme.white),
                   constraints: const BoxConstraints(maxWidth: 320),
-                  padding: const EdgeInsets.all(16),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -993,3 +1060,4 @@ class PreviewItem extends StatelessWidget {
     );
   }
 }
+

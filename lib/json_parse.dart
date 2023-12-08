@@ -190,14 +190,14 @@ class ParagraphContent {
 
   factory ParagraphContent.fromJson(Map<String, dynamic> parsedJson) {
     bool linkActive = parsedJson['Link']["LinkActive"];
-    int linkAdressPage = parsedJson['Link']["Page"];
-    int linkAdressProject = parsedJson['Link']["Project"];
-    int linkAdressChallenge = parsedJson['Link']["Challenge"];
+    int linkAddressPage = parsedJson['Link']["Page"];
+    int linkAddressProject = parsedJson['Link']["Project"];
+    int linkAddressChallenge = parsedJson['Link']["Challenge"];
     LinkAddress linkAddress = LinkAddress(
         active: linkActive,
-        page: linkAdressPage,
-        project: linkAdressProject,
-        challenge: linkAdressChallenge);
+        linkAddressPage,
+        linkAddressProject,
+        linkAddressChallenge);
 
     return ParagraphContent(
       titleText: parsedJson['TitleText'],
@@ -212,24 +212,25 @@ class ParagraphContent {
 
 @JsonSerializable(anyMap: true)
 class LinkAddress {
-  final bool active;
   final int page;
   final int project;
   final int challenge;
+  final bool active;
 
-  LinkAddress({
-    required this.active,
-    required this.page,
-    required this.project,
-    required this.challenge,
+  LinkAddress(
+    this.page,
+    this.project,
+    this.challenge, {
+    this.active = true,
   });
 
   factory LinkAddress.fromJson(Map<String, dynamic> parsedJson) {
     return LinkAddress(
+
+      parsedJson['Page'],
+      parsedJson['Project'],
+      parsedJson['Challenge'],
       active: parsedJson['LinkActive'],
-      page: parsedJson['Page'],
-      project: parsedJson['Project'],
-      challenge: parsedJson['Challenge'],
     );
   }
 }

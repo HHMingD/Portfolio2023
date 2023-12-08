@@ -1,14 +1,15 @@
+
 import 'package:flutter/material.dart';
-import 'package:howard_chen_portfolio/app_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'firebase_options.dart';
+
+import 'app_theme.dart';
 import 'class.dart';
 import 'json_parse.dart';
 import 'network.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'firebase_options.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'tools.dart';
+import 'about_me.dart';
 
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
@@ -68,50 +69,6 @@ class _FetchDataState extends State<FetchData> {
   }
 }
 
-class QuickLinks extends StatelessWidget {
-  const QuickLinks({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Wrap(
-          children: <Widget>[
-            InkWell(
-              child: Container(
-                  padding: const EdgeInsets.all(12),
-                  child: const Icon(
-                    Icons.mail_rounded,
-                    size: 24,
-                  )),
-              onTap: () {
-                _launchUrl('mailto:howard8479@gmail.com');
-              },
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            InkWell(
-              child: Container(
-                  width: 48,
-                  height: 48,
-                  padding: const EdgeInsets.all(12),
-                  child: const Icon(
-                    FontAwesomeIcons.linkedinIn,
-                    size: 24,
-                  )),
-              onTap: () {
-                _launchUrl('https://www.linkedin.com/in/howard-h-chen/');
-              },
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
 class NavigationPanel extends StatefulWidget {
   const NavigationPanel({
     super.key,
@@ -153,10 +110,9 @@ class _NavigationPanelState extends State<NavigationPanel> {
   }
 
   Widget projectNavigation() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          childCount: widget.jsonContent.projectList.length,
-          (BuildContext context, int projectIndex) {
+    return ColumnBuilder(
+      itemCount: widget.jsonContent.projectList.length,
+      itemBuilder: (BuildContext context, int projectIndex) {
         return ExpansionTile(
           tilePadding: const EdgeInsets.symmetric(horizontal: 8),
           title: Text(
@@ -173,11 +129,7 @@ class _NavigationPanelState extends State<NavigationPanel> {
                     ? true
                     : false,
                 onItemSelection: () {
-                  widget.navigateToProjects(LinkAddress(
-                      active: true,
-                      page: 2,
-                      project: projectIndex,
-                      challenge: -1));
+                  widget.navigateToProjects(LinkAddress(2, projectIndex, -1));
                 }),
             ColumnBuilder(
                 itemCount: widget.jsonContent.projectList[projectIndex]
@@ -193,11 +145,8 @@ class _NavigationPanelState extends State<NavigationPanel> {
                           ? true
                           : false,
                       onItemSelection: () {
-                        widget.navigateToProjects(LinkAddress(
-                            active: true,
-                            page: 2,
-                            project: projectIndex,
-                            challenge: challengeIndex));
+                        widget.navigateToProjects(
+                            LinkAddress(2, projectIndex, challengeIndex));
                       });
                 }),
             NavigationItem(
@@ -212,10 +161,9 @@ class _NavigationPanelState extends State<NavigationPanel> {
                     : false,
                 onItemSelection: () {
                   widget.navigateToProjects(LinkAddress(
-                      active: true,
-                      page: 2,
-                      project: projectIndex,
-                      challenge: widget.jsonContent.projectList[projectIndex]
+                      2,
+                      projectIndex,
+                      widget.jsonContent.projectList[projectIndex]
                           .challengeContent.length));
                 }),
             const SizedBox(
@@ -223,15 +171,15 @@ class _NavigationPanelState extends State<NavigationPanel> {
             ),
           ],
         );
-      }),
+      },
     );
   }
 
   Widget smallProjectNavigation() {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-          childCount: widget.jsonContent.smallProjectList.length,
-          (BuildContext context, int projectIndex) {
+    return ColumnBuilder(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      itemCount: widget.jsonContent.smallProjectList.length,
+      itemBuilder: (BuildContext context, int projectIndex) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -244,15 +192,12 @@ class _NavigationPanelState extends State<NavigationPanel> {
                     ? true
                     : false,
                 onItemSelection: () {
-                  widget.navigateToProjects(LinkAddress(
-                      active: true,
-                      page: 3,
-                      project: projectIndex,
-                      challenge: 0));
+                  widget.navigateToProjects(
+                      LinkAddress(active: true, 3, projectIndex, 0));
                 }),
           ],
         );
-      }),
+      },
     );
   }
 
@@ -264,11 +209,11 @@ class _NavigationPanelState extends State<NavigationPanel> {
       padding: const EdgeInsets.all(8),
       child: ScrollConfiguration(
         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
-        child: CustomScrollView(
-          shrinkWrap: true,
-          slivers: [
-            SliverToBoxAdapter(
-              child: Container(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
                 padding: const EdgeInsets.all(8),
                 child: Text(
                   'All projects:',
@@ -276,10 +221,10 @@ class _NavigationPanelState extends State<NavigationPanel> {
                       .copyWith(color: Theme.of(context).primaryColorDark),
                 ),
               ),
-            ),
-            projectNavigation(),
-            smallProjectNavigation(),
-          ],
+              projectNavigation(),
+              smallProjectNavigation(),
+            ],
+          ),
         ),
       ),
     );
@@ -356,19 +301,15 @@ class _MyHomePageState extends State<MyHomePage> {
               .length) {
         setSelectionState(LinkAddress(
             active: true,
-            page: _selectedPageIndex,
-            project: _selectedProjectIndex,
-            challenge: _selectedChallengeIndex + 1));
+            _selectedPageIndex,
+            _selectedProjectIndex,
+            _selectedChallengeIndex + 1));
       } else {
         if (_selectedProjectIndex < widget.jsonContent.projectList.length - 1) {
           setSelectionState(LinkAddress(
-              active: true,
-              page: _selectedPageIndex,
-              project: _selectedProjectIndex + 1,
-              challenge: -1));
+              active: true, _selectedPageIndex, _selectedProjectIndex + 1, -1));
         } else {
-          setSelectionState(
-              LinkAddress(active: true, page: 0, project: 0, challenge: 0));
+          setSelectionState(LinkAddress(0, 0, 0));
         }
       }
     }
@@ -376,13 +317,9 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_selectedProjectIndex <
           widget.jsonContent.smallProjectList.length - 1) {
         setSelectionState(LinkAddress(
-            active: true,
-            page: _selectedPageIndex,
-            project: _selectedProjectIndex + 1,
-            challenge: -1));
+            active: true, _selectedPageIndex, _selectedProjectIndex + 1, -1));
       } else {
-        setSelectionState(
-            LinkAddress(active: true, page: 0, project: 0, challenge: 0));
+        setSelectionState(LinkAddress(0, 0, 0));
       }
     } else {
       print('Navigation value incorrect');
@@ -394,39 +331,93 @@ class _MyHomePageState extends State<MyHomePage> {
       if (_selectedChallengeIndex > -1) {
         setSelectionState(LinkAddress(
             active: true,
-            page: _selectedPageIndex,
-            project: _selectedProjectIndex,
-            challenge: _selectedChallengeIndex - 1));
+            _selectedPageIndex,
+            _selectedProjectIndex,
+            _selectedChallengeIndex - 1));
       } else {
         if (_selectedProjectIndex > 0) {
           setSelectionState(LinkAddress(
-              active: true,
-              page: _selectedPageIndex,
-              project: _selectedProjectIndex - 1,
-              challenge: -1));
+              active: true, _selectedPageIndex, _selectedProjectIndex - 1, -1));
         } else {
-          setSelectionState(
-              LinkAddress(active: true, page: 0, project: 0, challenge: 0));
+          setSelectionState(LinkAddress(active: true, 0, 0, 0));
         }
       }
     }
     if (_selectedPageIndex == 3) {
       if (_selectedProjectIndex > 0) {
         setSelectionState(LinkAddress(
-            active: true,
-            page: _selectedPageIndex,
-            project: _selectedProjectIndex - 1,
-            challenge: -1));
+            active: true, _selectedPageIndex, _selectedProjectIndex - 1, -1));
       } else {
-        setSelectionState(
-            LinkAddress(active: true, page: 0, project: 0, challenge: 0));
+        setSelectionState(LinkAddress(0, 0, 0));
       }
     } else {
       print('Navigation value incorrect');
     }
   }
 
-  Widget getContent() {
+  Widget contentPageMainFrame(Widget content) {
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 1400),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(
+            width: 32,
+          ),
+          Expanded(
+              flex: 2,
+              child: _selectedPageIndex != 0
+                  ? NavigationPanel(
+                      jsonContent: widget.jsonContent,
+                      linkAdress: LinkAddress(
+                          active: true,
+                          _selectedPageIndex,
+                          _selectedProjectIndex,
+                          _selectedChallengeIndex),
+                      navigateToProjects: (LinkAddress value) {
+                        setSelectionState(value);
+                      },
+                    )
+                  : const SizedBox()),
+          const SizedBox(
+            width: 24,
+          ),
+          Expanded(
+            flex: 5,
+            child: ContentFrame(
+              key: projectKey,
+              bottomNavigationActive:
+                  _selectedPageIndex == 3 || _selectedPageIndex == 2,
+              deviceIsDesktop: deviceIsDesktop,
+              contentWidget: content,
+              navigation: BottomNavigation(
+                previousPage: setPreviousPage,
+                nextPage: setNextPage,
+                nextPageSummary: nextPageSummary(),
+              ),
+            ),
+          ),
+          const SizedBox(
+            width: 24,
+          ),
+          const Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  QuickLinks(),
+                ],
+              )),
+          const SizedBox(
+            width: 32,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget loadPage() {
     if (_selectedPageIndex == 0) {
       return MainPageWelcome(
           jsonContent: widget.jsonContent,
@@ -434,24 +425,29 @@ class _MyHomePageState extends State<MyHomePage> {
             setSelectionState(value);
           });
     }
+    if (_selectedPageIndex == 1) {
+      return AboutMeSection(navigateToProjects: (LinkAddress value) {
+        setSelectionState(value);
+      });
+    }
     if (_selectedPageIndex == 2) {
-      return MainPageProjectContent(
+      return contentPageMainFrame(MainPageProjectContent(
         selectionProjectIndex: _selectedProjectIndex,
         selectionChallengeIndex: _selectedChallengeIndex,
         content: widget.jsonContent.projectList,
         navigateToProjects: (LinkAddress value) {
           setSelectionState(value);
         },
-      );
+      ));
     }
     if (_selectedPageIndex == 3) {
-      return MainPageSideProjectContent(
+      return contentPageMainFrame(MainPageSideProjectContent(
         selectionProjectIndex: _selectedProjectIndex,
         content: widget.jsonContent.smallProjectList,
         navigateToProjects: (LinkAddress value) {
           setSelectionState(value);
         },
-      );
+      ));
     } else {
       return const Align(
           alignment: Alignment.center,
@@ -468,60 +464,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Scaffold(
           backgroundColor: Apptheme.noColor,
           body: Center(
-            child: _selectedPageIndex == 0
-                ? MainPageWelcome(
-                jsonContent: widget.jsonContent,
-                navigateToProjects: (LinkAddress value) {
-                  setSelectionState(value);
-                })
-                : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                const SizedBox(
-                  width: 32,
-                ),
-                Expanded(
-                    flex: 2,
-                    child: _selectedPageIndex != 0
-                        ? NavigationPanel(
-                      jsonContent: widget.jsonContent,
-                      linkAdress: LinkAddress(
-                          active: true,
-                          page: _selectedPageIndex,
-                          project: _selectedProjectIndex,
-                          challenge: _selectedChallengeIndex),
-                      navigateToProjects: (LinkAddress value) {
-                        setSelectionState(value);
-                      },
-                    )
-                        : const SizedBox()),
-                const SizedBox(
-                  width: 24,
-                ),
-                Expanded(
-                  flex: 5,
-                  child: ContentFrame(
-                    key: projectKey,
-                    bottomNavigationActive: _selectedPageIndex == 3 ||
-                        _selectedPageIndex == 2,
-                    deviceIsDesktop: deviceIsDesktop,
-                    contentWidget: getContent(),
-                    navigation: BottomNavigation(
-                      previousPage: setPreviousPage,
-                      nextPage: setNextPage,
-                      nextPageSummary: nextPageSummary(),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 24,
-                ),
-                const Expanded(flex: 2, child: QuickLinks()),
-                const SizedBox(
-                  width: 32,
-                ),
-              ],
-            ),
+            child: loadPage(),
           ),
         ),
       ],
@@ -548,9 +491,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       jsonContent: widget.jsonContent,
                       linkAdress: LinkAddress(
                           active: true,
-                          page: _selectedPageIndex,
-                          project: _selectedPageIndex,
-                          challenge: _selectedPageIndex),
+                          _selectedPageIndex,
+                          _selectedPageIndex,
+                          _selectedPageIndex),
                       navigateToProjects: (LinkAddress value) {
                         setSelectionState(value);
                       },
@@ -584,7 +527,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       bottomNavigationActive:
                           _selectedPageIndex == 3 || _selectedPageIndex == 2,
                       deviceIsDesktop: deviceIsDesktop,
-                      contentWidget: getContent(),
+                      contentWidget: loadPage(),
                       navigation: BottomNavigation(
                         previousPage: setPreviousPage,
                         nextPage: setNextPage,
@@ -671,11 +614,5 @@ class _AnimatedGradientState extends State<AnimatedGradient> {
         ),
       ],
     ));
-  }
-}
-
-Future<void> _launchUrl(String webpagelink) async {
-  if (!await launchUrl(Uri.parse(webpagelink))) {
-    throw Exception(webpagelink);
   }
 }

@@ -5,12 +5,17 @@ import 'network.dart';
 
 class HoverEffect extends StatefulWidget {
   const HoverEffect(
-      {super.key, required this.child, required this.transparentBackground, required this.context});
+      {super.key,
+      required this.child,
+      this.backGroundColor = Apptheme.noColor,
+      this.transparentBackground = false,
+      required this.context});
 
   final bool transparentBackground;
+  final Color backGroundColor;
+
   final BuildContext context;
   final Widget child;
-
 
   @override
   State<HoverEffect> createState() => _HoverEffectState();
@@ -19,8 +24,9 @@ class HoverEffect extends StatefulWidget {
 class _HoverEffectState extends State<HoverEffect> {
   bool isHover = false;
   late Color borderColor;
-  late Color backGroundColor;
+  late Color lateBackGroundColor;
   late Color hoverColor;
+
   void _incrementEnter(PointerEvent details) {
     setState(() {
       isHover = true;
@@ -32,17 +38,21 @@ class _HoverEffectState extends State<HoverEffect> {
       isHover = false;
     });
   }
+
   @override
   void initState() {
-
-    if(widget.transparentBackground){
+    if (widget.transparentBackground) {
       borderColor = Apptheme.noColor;
       hoverColor = Apptheme.noColor;
-      backGroundColor = Apptheme.noColor;
+      lateBackGroundColor = Apptheme.noColor;
     } else {
       borderColor = Theme.of(widget.context).primaryColor;
       hoverColor = Theme.of(widget.context).scaffoldBackgroundColor;
-      backGroundColor = Theme.of(widget.context).scaffoldBackgroundColor;
+      if (widget.backGroundColor == Apptheme.noColor) {
+        lateBackGroundColor = Theme.of(widget.context).scaffoldBackgroundColor;
+      } else {
+        lateBackGroundColor = widget.backGroundColor;
+      }
     }
     super.initState();
   }
@@ -57,12 +67,9 @@ class _HoverEffectState extends State<HoverEffect> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: backGroundColor,
+            color: lateBackGroundColor,
             border: Border.all(
-                width: 1,
-                color: isHover
-                    ? borderColor
-                    : hoverColor)),
+                width: 1, color: isHover ? borderColor : hoverColor)),
         child: widget.child,
       ),
     );
