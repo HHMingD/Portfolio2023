@@ -821,10 +821,10 @@ class _CarouselState extends State<Carousel> {
   void initState() {
     super.initState();
     _pageController = PageController(viewportFraction: 0.3, initialPage: 1000);
-    _timer = Timer.periodic(
-        const Duration(seconds: 4),
-        (Timer t) => _pageController.nextPage(
-            duration: const Duration(milliseconds: 500), curve: Curves.easeIn));
+//    _timer = Timer.periodic(
+//        const Duration(seconds: 4),
+//        (Timer t) => _pageController.nextPage(
+//            duration: const Duration(milliseconds: 500), curve: Curves.easeIn));
   }
 
   @override
@@ -1054,6 +1054,8 @@ class PreviewItem extends StatelessWidget {
                 ),
               ),
             ),
+
+
           ],
         ),
       ),

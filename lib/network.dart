@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:books_finder/books_finder.dart';
 
-final contentRef = FirebaseStorage.instance.ref('content/content.json');
+final contentRef = FirebaseStorage.instance.ref('content.json');
 
 Future<List<ProjectContent>> readProjectJsonOnline() async {
   final String url = await contentRef.getDownloadURL();
@@ -46,7 +46,6 @@ class ImageBuilder extends StatelessWidget {
   const ImageBuilder(this.imageLink, {super.key});
 
   final String imageLink;
-
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +117,7 @@ class _ImageWithOverlayState extends State<ImageWithOverlay> {
         builder: (context) {
           return GestureDetector(
             onTap: () {
-              overlayEntry?.remove();
+              overlayEntry.remove();
             },
             child: Container(
               padding: const EdgeInsets.all(32),
@@ -162,37 +161,49 @@ class VideoPlayerScreen extends StatefulWidget {
 }
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
-  late VideoPlayerController _controller;
-  late Future<void> _initializeVideoPlayerFuture;
+  late VideoPlayerController? _controller;
+  late String downloadUrl;
+  bool controllerIsInitialised = false;
+
+  Future<String> getVideoUrl() async {
+    return FirebaseStorage.instance.ref(widget.videoUrl).getDownloadURL();
+  }
 
   @override
   void initState() {
-    super.initState();
-    _initializeVideoPlayerFuture = FirebaseStorage.instance
-        .ref(widget.videoUrl)
-        .getDownloadURL()
-        .then((value) {
-      _controller = VideoPlayerController.networkUrl(Uri.parse(value));
-      _controller.initialize();
-      _controller.setLooping(true);
-      _controller.play();
+    getVideoUrl().then((value) {
+      _controller = VideoPlayerController.networkUrl(Uri.parse(value))
+        ..initialize().then((value) {
+          _controller?.setVolume(0);
+          _controller?.setLooping(true);
+          _controller?.play().then((_) {
+            setState(() {
+              controllerIsInitialised = true;
+            });
+          });
+        });
     });
+
+    super.initState();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Complete the code in the next step.
     return FutureBuilder(
-      future: _initializeVideoPlayerFuture,
+      future: getVideoUrl(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return VideoPlayer(_controller);
+          return controllerIsInitialised
+              ? VideoPlayer(_controller!)
+              : const Center(
+            child: CircularProgressIndicator(),
+          );
         } else {
           return const Center(
             child: CircularProgressIndicator(),
@@ -203,11 +214,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   }
 }
 
-
-
 class GetBook extends StatelessWidget {
+  const GetBook({super.key, required this.navigateToProjects});
 
-  Future<List<Book>> books (String bookTitle) async {
+  final ValueSetter<LinkAddress> navigateToProjects;
+
+  Future<List<Book>> books(String bookTitle) async {
     return queryBooks(
       bookTitle,
       queryType: QueryType.intitle,
@@ -216,30 +228,78 @@ class GetBook extends StatelessWidget {
       orderBy: OrderBy.relevance,
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder<List<Book>>(
+    return FutureBuilder<List<Book>>(
         future: books("Technofeudalism"),
         builder: (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
           if (snapshot.hasData) {
-//            print(snapshot.data![0].info.imageLinks);
+//            print(snapshot.data![0].info.authors);
 //            print(snapshot.data![0].info.imageLinks['thumbnail'].toString());
-            return HoverEffect(
-              context: context,
-              transparentBackground: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('The book I am currently reading:', style: Apptheme.labelMedium,),
-                  const SizedBox(height: 8,),
-                  Text(snapshot.data![0].info.title, style: Apptheme.titleMedium),
-                  const SizedBox(height: 8,),
-                  Image.network(snapshot.data![0].info.imageLinks['thumbnail'].toString())
-                ],
-              ),
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'The book I am currently reading:',
+                  style: Apptheme.labelMedium,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(5))),
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.network(snapshot
+                          .data![0].info.imageLinks['thumbnail']
+                          .toString()),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(snapshot.data![0].info.title,
+                                style: Apptheme.titleMedium),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Text(snapshot.data![0].info.authors[0],
+                                style: Apptheme.bodyMedium),
+                            Text(
+                              snapshot.data![0].info.description,
+                              style: Apptheme.bodyMedium,
+                              maxLines: 5,
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                navigateToProjects(LinkAddress(1, 0, 0));
+                              },
+                              child: HoverEffect(
+                                context: context,
+                                backGroundColor: Apptheme.prime100,
+                                child: const Text('Suggest a book for me'),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             );
-          }else{
+          } else {
             return HoverEffect(
               context: context,
               transparentBackground: false,
@@ -247,8 +307,17 @@ class GetBook extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('The book I am currently reading:', style: Apptheme.labelMedium,),
-                  SizedBox(height: 8,),
+                  Text(
+                    'The book I am currently reading:',
+                    style: Apptheme.labelMedium,
+                  ),
+                  Text(
+                    'For all who landed on my portfolio, it would be a great idea to know if you have any recommendation for books you like to read".',
+                    style: Apptheme.bodyLarge,
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
                   Text("Loading", style: Apptheme.titleMedium)
                 ],
               ),
