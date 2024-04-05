@@ -1,376 +1,128 @@
 {
-  "Projects": [
+  "SmallProjects": [
     {
       "ProjectTitle": "VR Exploration and Build",
-      "ProjectTopic": "Spatial rendering, Design exploration, VR user experience, Metaverse",
+      "ProjectTopic": "Flexible design process, Spatial rendering, Design exploration, VR user experience",
       "ProjectClient": "A Major GSA Sovereign Fund",
       "ProjectThumbnail": "images/1.cover.png",
       "ProjectVideoPreview": "videos/1.preview.mp4",
-      "ProjectMyRole": "The metaverse subject matter expert, In charge of building and executing the Research Routine and rapid VR prototyping",
-      "TeamComposition": "2 experience designers, \n2 Strategic designers, \n2 Venture architects",
+      "ProjectMyRole": "The metaverse subject matter expert, in charge of assembling and executing the Research Routine and lead the rapid prototyping process",
+      "TeamComposition": "2 Experience designers,\n4 Strategic designers,\n2 Venture architects",
       "ProjectDuration": "6 months",
       "ProjectLocation": "London, Dubai, KSA",
-      "ImpactContentLis": "The project was the first ever sold metaverse project for the firm. \n\nWith our strategic input, our client made significant progress on building their own metaverse strategy.\n\nWe've had two major pivot during the period of my staffing.\nThe first phase was to explore the VR use case for the family and business setting. The second phase was to explore the feasibility of building VR based virtual community within our client's core social group (Employees and family).The third use case builds on top of the second phase result. We validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client's community. \n\nThe project extended from originally a 7 weeks project to a project lasting more than an year. It is still an on going project as of now (OCT 2023.) ",
-      "SummaryContentList": [
+      "ChallengeSummary": "The project was the first-ever immersive technology-built project for the firm.\n\nThe initial goal was to build VR solutions for our target audience, separated from their loved ones over long distances. The team later pivoted the direction to focus on utilizing emerging technology to build a digital community attracting young talents.\n\nWe validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client's community. The project extended from originally a 7-week project to a project lasting more than a year. It is still an ongoing project as of now (OCT 2023). With our strategic input, our client made significant progress in building their own metaverse strategy.",
+      "ParagraphContentList": [
         {
           "TitleText": "Intro",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "Our client is a state-owned investment entity in GSA. The client have no prior knowledge in the field of metaverse, spatial rendering and digital marketing. I was the metaverse subject matter expert of this project in charge of the research routines and the prototype strategy and the production lead of the case",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "Our client faces a unique challenge: Geolocation isolation.\nThey wish to use emerging technologies to help them connect with their loved ones. VR was deemed as a promising technology to help them eliminate the barrier of distance.",
+          "Layout": "column"
         },
-
         {
-          "TitleText": "Designing for VR is different ",
+          "TitleText": "The Initial Problem Statement",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "The team treated the project as a traditional digital design project at the start. We then learned that VR uses cases are vastly different from usual digital design cases and we had to pivot. Most of our work would rely on pivoting digital design methodology as we uncover the potential of VR technology.",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "How might we help our client, located in a remote location, better connect with each other and their loved ones?",
+          "Layout": "statement"
         },
         {
-          "TitleText": "The Problem Statement:",
+          "TitleText": "Key challenge 1: No prototyping strategies exists",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "How might we help our client, locate in a remote location, to better connect with each other and their loved ones?",
-          "Layout": "statement",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "VR prototyping strategies are focusing on gaming experience. There are no existing rapid prototyping methods available for the business validation process we ran.",
+          "Layout": "column"
         },
-
         {
-          "TitleText": "Rigorous research needed to learn about VR",
-          "SubtitleText": "15 expert interviews, 40 in person VR prototyping session, 200 response in quantitative research",
+          "TitleText": "Key challenge 2: Designing for VR requires a different digital approach",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Building for VR is less about feature focus but creating spaces with a specific purpose in mind, similar to architecture design and spatial design.",
+          "Layout": "column"
+        },
+        {
+          "TitleText": "Investigating target user needs and VR desirability",
+          "SubtitleText": "15 expert interviews, 40+ in-person VR prototyping sessions, 200+ responses in quantitative research.",
           "ImageLocation": "images/1.1.png",
-          "ContentText": "VR the and immersive tech is a entirely unknown territory for the firm. The team had come to the consensus that we would need rigorous research to document evidence that advocates a business use case",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": true,
-            "Page": 2,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The team started by conducting user interviews. This helped us learn about the user perception of VR technology and their struggle with being separated from their loved ones.",
+          "Layout": "column"
         },
         {
-          "TitleText": "Our client wants to attract young talents",
+          "TitleText": "Uncovering the client's business problem: Attracting young talents",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "Our client needs to be in the proximity of great young talents according to their growth plan for the coming decade. The young population within various online VR community has great affinity to experimental tech and they are exactly the group our client wants to attract. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "We came to realize that one of the reasons why the client wants 'better connections with loved ones' was, in fact, because of their need to make their work environment better for younger employees, so that they can get young generations to commit to their vision and cause.",
+          "Layout": "column"
         },
         {
-          "TitleText": "Articulating business value of immersion tech",
-          "SubtitleText": "Positive responses from guerilla marketing",
+          "TitleText": " The Pivoted Problem Statement",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "How might we create a digital community that is built to attract a younger audience, which eliminates the alienating effects caused by distance to prospective talents.",
+          "Layout": "statement"
+        },
+        {
+          "TitleText": "Articulating the business value of immersion tech",
+          "SubtitleText": "Proving the point with guerrilla marketing",
           "ImageLocation": "images/1.2.png",
-          "ContentText": "Our team made the initial hypothesis that a VR product could indeed bring the client's community together, while helping them attract young talents in various digital communities networks. We used guerrilla tactics to validate the hypothesis before we head into the build",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": true,
-            "Page": 2,
-            "Project": 0,
-            "Challenge": 1
-          }
+          "ContentText": "The team's initial hypothesis was that a dedicated digital community could contribute to many fronts of our client's ambition, especially in recruiting and team morale. We used guerrilla marketing tactics to validate the hypothesis before heading into the VR demo build.",
+          "Layout": "column"
         },
         {
           "TitleText": "Building VR",
-          "SubtitleText": "4 rooms built, 1 as testing environment and 2 delivered to client",
+          "SubtitleText": "4 rooms built, 1 as a testing environment, 1 as a demo, and 2 delivered to the client.",
           "ImageLocation": "",
-          "ContentText": "The VR rooms have been tested that foster great interaction and conversation within their community",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The VR rooms have been tested to foster great interaction and conversation within their community.",
+          "Layout": "column"
         },
         {
-          "TitleText": "The testing room, ",
-          "SubtitleText": "8 VR user interview sessions",
+          "TitleText": "The testing room",
+          "SubtitleText": "Result after conducting additional 8 VR user interview sessions.",
           "ImageLocation": "images/1.3.png",
-          "ContentText": "The room was used for testing and user interview purposes. We learned about the usage of props, digital identities and how such space could afford genuine interaction. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The room was used for testing and user interview purposes. We learned about the usage of props, digital identities, and how such space could afford genuine interaction.",
+          "Layout": "column"
         },
         {
           "TitleText": "The campfire room",
           "SubtitleText": "",
           "ImageLocation": "images/1.4.png",
-          "ContentText": "This a room built for social interactions. The key goal of these room is to have various props for users ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "This is a room built for social interactions. The key goal of these rooms is to have various props for users.",
+          "Layout": "column"
         },
         {
           "TitleText": "The pillow fort",
           "SubtitleText": "Positive user experience spotted during passive user studies. ",
           "ImageLocation": "images/1.5.png",
-          "ContentText": "The pillow fort was a resounding success that surprised many senior stake holders. \n\nThe objects were fairly simple: motionless pillows you can drag and place. Despite its simplicity, this the place where we spot creativity being unleash as most of the participants enjoys shaping the pillows into different forms while they have plenty of genuine conversation.",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The pillow fort was a resounding success that surprised many senior stakeholders. The objects were fairly simple: motionless pillows you can drag and place. Despite its simplicity, this is the place where we spot creativity being unleashed as most of the participants enjoy shaping the pillows into different forms while they have plenty of genuine conversation.",
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/1.6.png",
-          "ContentText": "Other objects built for simple interactions also received positive feedback including interactive fondue pots, cinema, interactive fireplace, football arena and fireworks ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "Other objects built for simple interactions also received positive feedback, including interactive fondue pots, cinema, interactive fireplace, football arena, and fireworks.",
+          "Layout": "column"
         },
         {
           "TitleText": "Pivoting from failure: The Onboarding Room",
           "SubtitleText": "Room built in 5 working days",
           "ImageLocation": "images/1.7.png",
-          "ContentText": "The room was built in just 5 working days leveraging all the previous assets we procured. The room was available for our clients to onboard their new starters",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": true,
-            "Page": 2,
-            "Project": 0,
-            "Challenge": 2
-          }
+          "ContentText": "The room was built in just 5 working days leveraging all the previous assets we procured. The room was available for our clients to onboard their new starters.",
+          "Layout": "column"
         },
         {
-          "TitleText": "Capturing the look and feel as forms provides functions ",
+          "TitleText": "Capturing the look and feel as forms provide functions",
           "SubtitleText": "",
           "ImageLocation": "images/1.8.png",
-          "ContentText": "Different from the usual 2D digital design, the look and feel itself should be regard as a feature too and this was accidentally overlooked. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        }
-      ],
-      "ImpactContentList": [
+          "ContentText": "Different from the usual 2D digital design, the look and feel itself should be regarded as a feature too, and this was accidentally overlooked.",
+          "Layout": "column"
+        },
         {
-          "TitleText": "",
+          "TitleText": "Key takeaway:",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "The project was the first ever sold metaverse project for the firm. With our strategic input, our client made significant progress on building their own metaverse strategy",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        },
-        {
-          "TitleText": "We had two major pivot: ",
-          "SubtitleText": "",
-          "ImageLocation": "",
-          "ContentText": "The first phase was to explore the VR use case for the family and business setting. The second phase was to explore the feasibility of building VR based virtual community within our client's core social group (Employees and family).The third use case builds on top of the second phase result. We validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client's community. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        },
-        {
-          "TitleText": "",
-          "SubtitleText": "",
-          "ImageLocation": "",
-          "ContentText": "The project extended from a initially 7 weeks project to a project lasting more than an year. It is still an on going project as of now (OCT 2023.) ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        }
-      ],
-      "ChallengeContent": [
-        {
-          "STARTitle": "Find a way to execute design exploration in a industry with no quick and dirty prototyping tools",
-          "ChallengeSummary": "The VR design is new to the modern UX process. Most of the work is done following the gaming industry pattern. Tools like figma does not yet exist on the platform. It is up to the designer to set up their environment to find the right solution to uncover the value VR is going to be able to bring ",
-          "SituationTitle": "Lacking tools with rapid prototyping capabilities",
-          "SituationContent": "Design with VR would need a very different approach from the traditional UI/UX point of view. This is uncharted territory for both the firm and our client. \n\n\u2022  No rapid prototyping tools. The time it takes to test a concept is significantly longer comparing to the traditional UI/UX 2D digital project.\n\u2022  The project has a short time span initially. we need to put together a convince use case that would help our client's business in a short 7 weeks sprint.",
-          "TaskTitle": "Creating VR use case hypothesis with a plan to validate it",
-          "TaskContent": "Initially, the team was planning to leverage external vendor to build VR prototypes for validation. The task was given as follows: \n\n\u2022  Define methods to build VR prototypes \n\u2022  Define the research routines to extract insights. \n\u2022  Communicate the initial hypothesis with the prototype built by external vendor",
-          "ActionTitle": "Defining a rapid prototyping routine that currently does not exist in the industry",
-          "ActionContent": "The VR prototype which the external vendor offers were far from ideal. The team is struggling to achieve consistent output for the look and feel and the functions for the VR prototype \n\nI decided to take the lead and pivot the testing methodologies with new tools and a more agile approach: \n\n\u2022  Embracing the principal of 'seeing is believing'. Setting up the guiding principal that the only way to deliver meaningful insight is to put VR product in front of our testing participants. \n\u2022  Utilised VR mock ups to validate our hypothesis in demo sessions with the client senior stakeholders and through user research with a captive user group picked by the client side. \n\u2022  Key Pivot: Leading the team to Use the 'VRChat' to build quick and dirty VR experiences to test and gather insights, with extremely basic unity build. At time, we focused on simple script, look and feel, and design articulation.\n\n Leveraging my experience in Spatial rendering, we built 4 different VR scenes to explore the potential VR value with our client. ",
-          "ResultTitle": "Organic approach help us land the VR proposition exactly where they need to be",
-          "ResultContent": "\u2022  The level of flexibility was welcoming. The design team were able to coop with the need to rapidly change the direction of the project. \n\u2022  We were able to rapidly reflect the user feedback onto the VR scenario similar to the agile design process",
-          "ParagraphContentList": [
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.1.1.png",
-              "ContentText": "Phase 1: Quick mock up to boost the team's understanding of virtual social interactions",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.1.2.png",
-              "ContentText": "Phase 1: Testing with participants in the scene",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.1.3.png",
-              "ContentText": "Phase 2: the objective for the testing",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.1.4.png",
-              "ContentText": "Phase 2: Profile of the testing participants",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            }
-          ]
-        },
-        {
-          "STARTitle": "Explain the business value of immersive tech and digital community to non-digital-first client and colleagues",
-          "ChallengeSummary": "After rounds of testing and design exploration, it is now up to us to translate the findings into actions for our client. The firm had many different frameworks to frame the business issues and provide solutions. However, in our case, we have to proceed with out those existing materials as the firm is lacking talent and proper research in this topic prior to this project.",
-          "SituationTitle": "VR business strategy from scratch and no prior research from the firm",
-          "SituationContent": "\u2022  Lack of support from the rest of the firm as this is considered to be a new territory for the firm\n\u2022  Team consists of experienced tech consultants, but no prior experience in VR, spatial rendering, digital community and gaming.\n\u2022  Ambiguous VR use cases through desk research making it hard for the team to align on the ideal proposition. \n\nOur team needs to explore the VR use cases and uncover the Business value it could bring to our client. \n\nThis section is mostly about the general VR strategy planning",
-          "TaskTitle": "Pioneer the process for both the firm and the client by giving input on the metaverse matter",
-          "TaskContent": "Initially, we were expected to explore the VR use cases in both the family setting and the business setting with our client. we were tasked to explore VR product values in these space for our clients. \n\nOur task:\n\u2022  Put together VR use cases and potential business value from research findings\n\u2022  Make the strategy planning to help our client solve the problem they are facing (Isolation) and drive growth for the future expansion of their organisation",
-          "ActionTitle": "Source real world VR aficionados to co-create our VR strategy for our client",
-          "ActionContent": "At the later stage of the projcet, it was evident that the captive user group from our client was not going ot be able to provide us enough insight to reflect the broader growth potential in VR as our client gets increasingly excited about the VR communities.\n\nAfter refinement, we have name the settings as 'the digital community use case', and 'the workroom use case' to be more precise on the value we want to bring. \n\n I than acquired the resource from the project leader to:\n\n\u2022  Leverage my proximity to the current VR aficionados (VRChat and other metaverse titles) for recruitment and invite them to explore potential VR use case for our clients. \n\u2022  Hosting open demo session for wider audience from different age group and gaming habits to collect their input on our VR use case",
-          "ResultTitle": "A solid VR use case that unblocks our client's geolocational limits",
-          "ResultContent": "We find that: \n\u2022  The aspect of VR communities currently present in apps such as VRChat could bring younger population to the proximity of our client's digital marketing effort. This is crucial to our client's long term goal for growth. \n\u2022  VR product is exceptionally effective for our client's isolated community in remote regions to connect with their loved ones. Especially connecting with young ones who we predicted to be the main VR users in the coming years.\n\nMain concern was:\n\u2022  VR lacks the wide scale adaptation when comparing with the current mobile apps.\n\u2022  Custom VR product build are extremely pricey.\n\nAlthough being one of the digital delivery method. It is less cost effective in growth potential when comparing with other digital channels. ",
-          "ParagraphContentList": [
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.2.1.png",
-              "ContentText": "Some of the key business value extracted from the research",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.2.2.png",
-              "ContentText": "Profiles of the individuals participated in the co-creation",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            }
-          ]
-        },
-        {
-          "STARTitle": "Requested to build interactive VR prototype in 7 days ",
-          "ChallengeSummary": "Building VR scene is a short amount of time is difficult. As the rest of the team is occupied, I will have to pivot and build a scene that communicates our hypothesis of the VR use case to the client in just 7 days",
-          "SituationTitle": "Unsuccessful communication causing unsatisfying results. ",
-          "SituationContent": "Partnered VR studio delivered unsatisfactory result for VR demo session. The firm team needs to come up with alternatives in short amount of time for client presentation.\n\nThe main reasons for suboptimal delivery are:\n\u2022  The team collectively overlooked the look and feel the client was looking for. The result of the VR scene is simply too much like 'video game'\n\u2022  The complicated, linear progression of the demo contradicts some of explorative nature of the VR environment. The usability is not at a satisfactory level.",
-          "TaskTitle": "Build the VR scene under time pressure",
-          "TaskContent": "The team was tasked to:\n\u2022  Replace the VR scene produced by the partnered studio in just 1.5 weeks.\n\u2022  Test and optimise the environment, making sure it is ready to host the VR demo session for visitors. ",
-          "ActionTitle": "Simple level design but more focused on capturing the look and feel and easy interactions",
-          "ActionContent": "With the result from the research sessions, I convinced the design team that the key for a successful VR build should be the explorative interactions with objects and other users instead of heavily scripted events. \n\nAs such, I begin the design of the new VR scene with:\n\u2022  Simple level design starting with interior design floor plan instead of game level design to capture the spatial experience most users are used to (Instead of surreal gaming vibes).\n\u2022  Utilising assets built previously. Production is mostly just the placement of the objects with special focus on achieving the artistic direction.\n\u2022  All items designed with interaction (sitting, mirror, pool table) built in, plus simple activities leveraging VRChat's physic engine (tennis, volleyball).",
-          "ResultTitle": "Alignment with the client. Successfully materialised the essence of a VR use case",
-          "ResultContent": "\u2022  A mock up VR experience that successfully communicated the proposed VR value in just 1.5 weeks. \n\u2022  Received positive feedback from senior stakeholders and clients.\n\u2022  VR space is used for client's future employee onboarding project. \n\nOur goal for design is to have the users to define the space with careful articulation of the object's affordance. ",
-          "ParagraphContentList": [
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.3.1.png",
-              "ContentText": "Scenery shot of the interior of the VR scene",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/1.3.2.png",
-              "ContentText": "Top view of the VR scene",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            }
-          ]
+          "ContentText": "Immersive experiences requires a combination of digital and spatial features and requires a different approach for designers when comparing to digital cases we are used to nowadays",
+          "Layout": "statement"
         }
       ]
     },
@@ -384,404 +136,161 @@
       "TeamComposition": "1 experience designer, \n1 business analyst, \n4 Engineers(FE,BE)",
       "ProjectDuration": "4 months",
       "ProjectLocation": "London, Paris",
-      "SummaryContentList": [
+      "ChallengeSummary": "The project was the first ever sold metaverse project for the firm.\n\nWith our strategic input, our client made significant progress on building their own metaverse strategy.\nWe've had two major pivot during the period of my staffing.\nThe first phase was to explore the VR use case for the family and business setting. The second phase was to explore the feasibility of building VR based virtual community within our client's core social group (Employees and family).The third use case builds on top of the second phase result. We validated the use case to extend the virtual community concept with a VR onboarding experience for new joiners of our client's community. The project extended from originally a 7 weeks project to a project lasting more than an year. It is still an on going project as of now (OCT 2023.)",
+      "ParagraphContentList": [
         {
           "TitleText": "Solving a complex B2B problem",
           "SubtitleText": "",
           "ImageLocation": "",
           "ContentText": "Our client's operation requires a lot of manual tasks. Without validation, the manual tasks are causing a large margin of error damaging their reputation with increases the cost to their operation",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
-          "TitleText": "Facilitating brain-storming workshops to problem-solve collectively ",
+          "TitleText": "Facilitating brain-storming workshops to problem-solve collectively",
           "SubtitleText": "8 work session with clients, 3 major collaborative workshop to problem solve",
           "ImageLocation": "images/2.1.png",
-          "ContentText": "The client's operation was extremely complex. It was agreed that the quickest way to build our hypothesis is by collaborating with our clients. We had 3 major problem solving sessions and 8 work sessions to further iron out the details. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": true,
-            "Page": 2,
-            "Project": 1,
-            "Challenge": 0
-          }
+          "ContentText": "The client's operation was extremely complex. It was agreed that the quickest way to build our hypothesis is by collaborating with our clients. We had 3 major problem solving sessions and 8 work sessions to further iron out the details.",
+          "Layout": "column"
         },
         {
           "TitleText": "Fostering the agile development set up",
           "SubtitleText": "",
           "ImageLocation": "",
-          "ContentText": "Due to the staffing constrains, we have no product managers familiar with the agile process on the case. Designers on this case were the expert closest to the agile framework. I was tasked to build the agile development framework for my workstream. ",
-          "Layout": "onlyText",
-          "Link": {
-            "LinkActive": true,
-            "Page": 2,
-            "Project": 1,
-            "Challenge": 1
-          }
+          "ContentText": "Due to the staffing constrains, we have no product managers familiar with the agile process on the case. Designers on this case were the expert closest to the agile framework. I was tasked to build the agile development framework for my workstream.",
+          "Layout": "onlyText"
         },
         {
           "TitleText": "Design to minimise human error",
           "SubtitleText": "",
           "ImageLocation": "",
           "ContentText": "Upon learning about the client's operation. We identified that the key issue was the amount of mental calculation involved in the operation causing all of the issues mentioned above. Our hypothesis is that a well built interface for users to interact with data would be the solution.",
-          "Layout": "onlyText",
-          "Link": {
-            "LinkActive": true,
-            "Page": 2,
-            "Project": 1,
-            "Challenge": 2
-          }
+          "Layout": "onlyText"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/2.2.png",
           "ContentText": "Task overview to see the remaining tasks",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/2.3.png",
           "ContentText": "Inviting clients to contribute to the wireframing effort. Non-designers could also have fun!",
-          "Layout": "right",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/2.4.png",
           "ContentText": "Help centre to provide contextual assistance",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/2.5.png",
           "ContentText": "Navigation rework to reflect the user sessions feedback",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/2.6.png",
-          "ContentText": "Carefully crafted panel to include all information in one screen without jumping back and forth. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "Carefully crafted panel to include all information in one screen without jumping back and forth.",
+          "Layout": "column"
         },
         {
           "TitleText": "User research sessions to validate our deliverables",
           "SubtitleText": "4 user research sessions with over 20 participants ",
-          "ImageLocation": "empty",
+          "ImageLocation": "",
           "ContentText": "The result from the user research sessions was resoundingly positive. the users were affirmative that the product we built will solve the issues they are facing. The sessions was documented and sent to the client for future upskilling programme.",
-          "Layout": "onlyText",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        }
-      ],
-      "ImpactContentList": [
-        {
-          "TitleText": "",
-          "SubtitleText": "",
-          "ImageLocation": "",
-          "ContentText": "Our client is a major international non-profit organisation aiming to further digitise their operation for scale. We need to build a digital journey from the ground up. Demolishing undesirable process and create the new link in their operation. ",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        },
-        {
-          "TitleText": "Solving a complex B2B problem",
-          "SubtitleText": "",
-          "ImageLocation": "",
-          "ContentText": "nThis is a behemoth piece of work, we separate the work into many different streams. I work closely with the client team manager, the BCG engineering team, and a BCG business analyst for this work stream. I am responsible for the workstream's design operation.",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
-        }
-      ],
-      "ChallengeContent": [
-        {
-          "STARTitle": "Problem solving an outdated digital operation that is prone to human error",
-          "ChallengeSummary": "Documenting the problem solving skills in a modern agile development environment plus showcasing the UX design progress powered by collaborative sessions",
-          "SituationTitle": "Unscalable process prone to human error that costs our client dearly.",
-          "SituationContent": "\u2022  The client's operation is prone to human errors due to the lacking of proper data validation.\n\u2022  Manual process makes the operation hard to scale. This is problematic in the face of rising demand to their service.",
-          "TaskTitle": "Build the digital product with scalability in mind",
-          "TaskContent": "\u2022  Investigate the reason why the as-is journey is prone to error. \n\u2022  Fixing the operation that is mostly Excel-based with a digital product that has data validation at every step. \n\u2022  Ensure that the product future proof and is easy to scale.",
-          "ActionTitle": "Investigating the journey, connecting the dots, then figure out what we can automate. With a strict lean MVP mindset",
-          "ActionContent": "\u2022  Hosting collaborative design session to extract insights from the clients and users and turn their ideas into design to speed up our process tremendously.\n\u2022  Creating collaborative design platform to collate the design insight across the client team. First draft of the design journey were done in just three days.\n\u2022  Investigate the blockers to the scalability. Create and iterate the product strategy for the problem solving",
-          "ResultTitle": "Connected team align on the focus of the development after the first sprint cycle",
-          "ResultContent": "\u2022  Successfully identified the core feature with the utmost priority to build in sprint one with no prior research. \n\u2022  Setting up abd maintained the platform for continuous collaboration on multiple boards ",
-          "ParagraphContentList": [
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.1.1.png",
-              "ContentText": "Co- working session and the effort to document the team's output",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.1.2.png",
-              "ContentText": "Initial site map for alignment. Phased out after roadmap on Azure was more tangible to assess the build effort",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.1.3.png",
-              "ContentText": "Product blueprint, marking the main five building blocks for prioritisation",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            }
-          ]
-        },
-        {
-          "STARTitle": "Working with a team with zero experience in agile environment",
-          "ChallengeSummary": "Making most of the situation with the staffing constrains. Taking the team unto the journey of agile product development",
-          "SituationTitle": "Conflicting interests in product development roles while setting up agile development environment",
-          "SituationContent": "\u2022  Working with an organisation new to the product development environment. \n\u2022  Working with product manager with no prior experience in digital development. Upskilling is part of the internal brief. It was not a usual product development set up and can cause conflicting interest. \n\u2022  As senior design project leaders realise that we need to push for better understanding of agile development in the team, they proposed an one off agile workshop and expect the rest of the team to take the helm to guide the agile process. ",
-          "TaskTitle": "Taking the team onto the journey of agile ways of working ",
-          "TaskContent": "\u2022  The senior project leader expect the designers, who are the most likely personal on the project with the best knowledge to agile development, to help the team understand agile development and its value. \n\u2022  Working with the understaffed situation. Be extra lean with the development progress. ",
-          "ActionTitle": "Ownership of the agile rituals from day one. Acting as scram master until the client is comfortable to assume the role",
-          "ActionContent": "1. Building the agile development\n\u2022  Taking ownership of the design rituals on day one. \n\u2022  Assume the role of scram master, setting up the system of documenting development effort. \n2. Inviting the client to assume the product owner's role with baby steps\n\u2022  Commit to give them full visibility on the teams' capacity from the start to let the client manager understand the process. \n\u2022  Communicating the risk of unrealistic product development goals when there needs to be deprioritised.\n\u2022  Make an example by executing the agile rituals, then invite the client to assume the roles afterward. \n\u2022  Sidestepping the agile lead role, then have the client assume the responsibility as we give our continuous support on communicating with investors and senior executive members of the organisation. \n3. Explaining how and why we do product iterations. Bringing the zero to one MVP building experience to the project.\n4. Actively involve in product planning to set up the scope of the development and validate workplan to make sure we have a realistic timeline to deliver the product",
-          "ResultTitle": "Good teaming performance from a quantifiable source",
-          "ResultContent": "\u2022  The workstream is deemed as the most efficient team across the entire project base on the internal firm teaming survey. \n\u2022  The team members are happy with the level of exposure to the agile ways of working and would love to take on ownership on agile rituals voluntarily.\n\u2022  The client team's project manager was able to handle the operation of the team at the later half of the project. \n\u2022  With my active participation in product planning. The team cut the time need to build the product from four product iteration(32 weeks, 16 sprints) in to just three product iterations (24 weeks, 12 sprints). ",
-          "ParagraphContentList": [
-          ]
-        },
-        {
-          "STARTitle": "Building and shipping the web app with suboptimal design system and lack of resources",
-          "ChallengeSummary": "Executing product building tasks with agile and UCD methodologies. Saving time and achieving the development goal with precision",
-          "SituationTitle": "Designing with a almost non-existent digital branding guideline with tight deadlines",
-          "SituationContent": "\u2022  The client's design system is a web page based colour palette. With no functional semantic colours guidelines\n\u2022  All digital related progress is not being defined. \n\u2022  The design system is a duplicated MUI library without a digital specific branding.",
-          "TaskTitle": "Deliver a fully working product for the project duration",
-          "TaskContent": "\u2022  Build the product with the suboptimal design system\n\u2022  Test the product to validate our work in terms of usability. \n\u2022  Reach the KPIs of the workstream for the product we build. ",
-          "ActionTitle": "Setting up routines to iterate the digital branding",
-          "ActionContent": "\u2022  Small incremental changes to the design system while we design the product allowing us to churn out screens for testing as we improves the design system\n\u2022  As design stream lead, take ownership of the research session and synthesise the result for Case team share back. \n\u2022  Active QA session between the development team to ensure the quality of the end product and implement change if needed. ",
-          "ResultTitle": "A functional product built in just 3 months with necessary validations",
-          "ResultContent": "\u2022  Successfully cutting down 40% of time needed to complete the client's operation cycle which meets the strategic KPI set at the start of the project(Data from final user testing). \n\u2022  Extremely positive rating on all user sessions (In total 6 was held). The product has good usability and testing participants (future end users) are happy with the features and are affirmative that this is going to improve their operation. \n\u2022  Robust data validation at every single stage of the operation. ",
-          "ParagraphContentList": [
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.3.1.png",
-              "ContentText": "Lading page for the product with all score overview",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.3.2.png",
-              "ContentText": "Overview of the statistic of a specific account",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.3.3.png",
-              "ContentText": "Task overview",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.3.4.png",
-              "ContentText": "Overview of an account and for the highlight of the remaining action",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            },
-            {
-              "TitleText": "",
-              "SubtitleText": "",
-              "ImageLocation": "images/2.3.5.png",
-              "ContentText": "Action panel",
-              "Layout": "column",
-              "Link": {
-                "LinkActive": false,
-                "Page": 0,
-                "Project": 0,
-                "Challenge": 0
-              }
-            }
-          ]
+          "Layout": "onlyText"
         }
       ]
-    }
-  ],
-  "SmallProjects": [
+    },
     {
       "ProjectTitle": "Financial Advice platform",
       "ProjectTopic": "UX, wireframe, Wealth Management",
       "ProjectClient": "A FTSE 100 Wealth Management Firm",
       "ProjectThumbnail": "images/S1.cover.png",
-      "ProjectVideoPreview": "videos/S1.preview.mp4",
+      "ProjectVideoPreview":"videos/S1.preview.mp4",
       "ProjectMyRole": "Capturing the key elements from product requirements and turn them into wireframes. Creating user flows to help users document their financial behaviour.",
+      "TeamComposition": "2 Experience Designers, Team of FE/BE Engineers, 2 Venture Architects,  ",
       "ProjectDuration": "2 months",
-      "ChallengeSummary": "The delivery of financial advise needs to adhere to certain FCA regulations. On one hand we have identified that the financial advice is a highly desirable product for the average UK population. The other hand the FCA regulation has made it difficult for the financial advisor to deliver financial advice. Our goal is to create a service that connects the financial advisors and the average consumers while eliminating the barriers",
+      "ProjectLocation": "London",
+      "ChallengeSummary":"This is an incubation project in which the BCG team is tasked to build a stadalone app for Hargreaves Lansdown offering financial health check, financial advice, and financial support for UK wide customers.",
       "ParagraphContentList": [
         {
-          "TitleText": "",
+          "TitleText": "Objective: ",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Build the best-in-class product to democratize financial advice for a broader UK audience.",
+          "Layout":"statement"
+        },
+        {
+          "TitleText": "Strong user need, but no digital product available. ",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Initial research suggests that financial advice is highly sought after among HL users but is perceived as an inaccessible, premium offering. The practice of offering financial advice is also heavily regulated, making it difficult for financial advisors to scale. Recognising the situation, the team identified an opportunity to develop a digital service that allows users to self-assess their financial situation and connect with financial advice experts. The product incorporates automation elements into the KYC (Know Your Customer) process to address the scaling issue for financial advisors.",
+          "Layout":"column"
+        },
+        {
+          "TitleText": "Proposed journey",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "Enabling users to better understand their financial status helps them identify suitable financial products and achieve their life goals. We have simplified the journey, taking into account the varying stages of financial well-being individuals find themselves in.",
+          "Layout":"column"
+        },
+        {
+          "TitleText": "Problem Statement: ",
+          "SubtitleText": "",
+          "ImageLocation": "",
+          "ContentText": "How might we empower individuals to assess their financial health and guide them towards appropriate financial products and assistance?",
+          "Layout":"statement"
+        },
+        {
+          "TitleText": "Shipping the product: An app with glance view of your financial wellbeing",
           "SubtitleText": "",
           "ImageLocation": "images/S1.1.png",
-          "ContentText": "Using Gen AI to generate scenarios that effectively makes the future projection more relatable and tangible.",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The team aims to quickly bring the idea to market. Our market-ready MVP (Minimum Viable Product) build is not integrated with the HL app and focuses on financial advice and key financial well-being status.",
+          "Layout":"column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S1.2.png",
-          "ContentText": "Gen AI creating relevant prompts as potential financial actions for the users to decided the best course of actions towards their goals",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The financial score is calculated based on user input regarding their current assets.",
+          "Layout":"column"
         },
         {
-          "TitleText": "",
+          "TitleText": "Testing material: Leveraging design systems to make testing material from wireframes",
           "SubtitleText": "",
           "ImageLocation": "images/S1.3.png",
-          "ContentText": "Super charge the financial advisor's ability to better document their customers with Gen AI assisted in their KYC process",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "Quick mock-ups were built for testing sessions. The design system was utilised to give wireframes semantic colours, enabling designers to test the user experience flow with participants before finalising the user interface.",
+          "Layout":"column"
         },
         {
-          "TitleText": "",
+          "TitleText": "A/B testing",
           "SubtitleText": "",
           "ImageLocation": "images/S1.4.png",
-          "ContentText": "Turning the data collected into instant annuity options without delay. As the users go through the KYC process",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The team completed A/B testing at an incredible pace, facilitated by strong communication and an agile-lean approach.",
+          "Layout":"column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S1.5.png",
-          "ContentText": "Conceptualising the reverse auction market for annuity and how Gen AI powered product can make the process seamless and effortless",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "The team underwent a robust UX research process before finalising the wireframes for the UI (User Interface) fine finish. On average, the flows underwent three iterations with input from user testing before being sent to UI designers for the final touches.",
+          "Layout":"column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S1.6.png",
-          "ContentText": "IM dashboard tracking numerous sentiments allowing the managerial users to understand the general trend of their product and potential area for improvement",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "ContentText": "After rounds of testing, complicated flows were simplified. The team replicated the effort and built wireframes in tight sprints",
+          "Layout":"column"
         }
       ]
     },
@@ -792,7 +301,9 @@
       "ProjectThumbnail": "images/S2.cover.png",
       "ProjectVideoPreview": "videos/S2.preview.mp4",
       "ProjectMyRole": "Leading the ideation of the GenAI product to prospective clients. Designing concept prototypes for story telling sessions.",
+      "TeamComposition": "Please Fill",
       "ProjectDuration": "2 weeks",
+      "ProjectLocation": "Please Fill",
       "ChallengeSummary": "Capturing the essence of the Gen AI impact towards the wealth management industry. Speculating the potential application of the GenAI technology and contribute as the digital expert on the team and provide tech analytics towards potential implementation.",
       "ParagraphContentList": [
         {
@@ -800,78 +311,42 @@
           "SubtitleText": "",
           "ImageLocation": "images/S2.1.png",
           "ContentText": "Using Gen AI to generate scenarios that effectively makes the future projection more relatable and tangible.",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S2.2.png",
           "ContentText": "Gen AI creating relevant prompts as potential financial actions for the users to decided the best course of actions towards their goals",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S2.3.png",
           "ContentText": "Super charge the financial advisor's ability to better document their customers with Gen AI assisted in their KYC process",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S2.4.png",
           "ContentText": "Turning the data collected into instant annuity options without delay. As the users go through the KYC process",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S2.5.png",
           "ContentText": "Conceptualising the reverse auction market for annuity and how Gen AI powered product can make the process seamless and effortless",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S2.6.png",
           "ContentText": "IM dashboard tracking numerous sentiments allowing the managerial users to understand the general trend of their product and potential area for improvement",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         }
       ]
     },
@@ -882,47 +357,31 @@
       "ProjectThumbnail": "images/S3.cover.png",
       "ProjectVideoPreview": "videos/S3.preview.mp4",
       "ProjectMyRole": "Leading the workstream design process. Collaborating on product planning.",
+      "TeamComposition": "Please Fill",
       "ProjectDuration": "3 weeks",
-      "ChallengeSummary": "Ideating the concept of a genAI powered platform to document BOM (Documented Bills of Material) for a better experience ",
+      "ProjectLocation": "Please Fill",
+      "ChallengeSummary": "Ideating the concept of a genAI powered platform to document BOM (Documented Bills of Material) for a better experience.",
       "ParagraphContentList": [
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S3.1.png",
           "ContentText": "BOM comparison for executives to assess differences in BOM",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S3.2.png",
           "ContentText": "Actions when comparing BOM",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         },
         {
           "TitleText": "",
           "SubtitleText": "",
           "ImageLocation": "images/S3.3.png",
           "ContentText": "Chronological tracking of a specific part thanks to other Gen AI features",
-          "Layout": "column",
-          "Link": {
-            "LinkActive": false,
-            "Page": 0,
-            "Project": 0,
-            "Challenge": 0
-          }
+          "Layout": "column"
         }
       ]
     }

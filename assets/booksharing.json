@@ -1,0 +1,28 @@
+{
+  "BooksRecommended": [
+    "bookID"
+    :
+    "RecommendedBy"
+    :
+    "Reason"
+    :
+  ],
+  "BooksIRead": [
+    [
+      "bookID"
+      :
+      "BookComment"
+      :
+      "finishedDate"
+      :
+    ]
+  ],
+  "BooksInProgress": [
+    [
+      "bookID"
+      :
+      "BookComment"
+      :
+    ]
+  ]
+}
