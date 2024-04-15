@@ -4,8 +4,23 @@ import 'package:howard_chen_portfolio/main.dart';
 import 'package:howard_chen_portfolio/widgets/password_protection.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../style/app_theme.dart';
-import '../functions/json_parse.dart';
 import '../functions/network.dart';
+
+TextSpan ConvertCSS(String content) {
+  List<TextSpan> contentList = [];
+  String cleanContent = content
+      .replaceAll("<b>", "")
+      .replaceAll("</b>", "")
+      .replaceAll("<br>", "")
+      .replaceAll("</p>", "")
+      .replaceAll("<i>", "")
+      .replaceAll("</i>", "");
+  for (int i = 0; i < cleanContent.split("<p>").length; i++) {
+    contentList.add(TextSpan(text: cleanContent.split("<p>")[i]));
+  }
+
+  return TextSpan(children: contentList, style: Apptheme.bodyMedium);
+}
 
 class HoverEffect extends StatefulWidget {
   const HoverEffect({
@@ -143,8 +158,8 @@ class ParagraphLayout {
               : const SizedBox(),
           titleText != ""
               ? const SizedBox(
-            height: 12,
-          )
+                  height: 12,
+                )
               : const SizedBox(),
         ],
       );
@@ -158,13 +173,13 @@ class ParagraphLayout {
       children: <Widget>[
         subtitleText != ""
             ? Text(subtitleText,
-            style: Apptheme.labelLarge.copyWith(
-                color: Apptheme.blue, fontWeight: FontWeight.w700))
+                style: Apptheme.labelLarge.copyWith(
+                    color: Apptheme.blue, fontWeight: FontWeight.w700))
             : const SizedBox(),
         subtitleText != ""
             ? const SizedBox(
-          height: 12,
-        )
+                height: 12,
+              )
             : const SizedBox(),
       ],
     );
@@ -173,12 +188,12 @@ class ParagraphLayout {
   Widget contentTextComponent() {
     return RichText(
         text: TextSpan(children: [
-          const WidgetSpan(
-              child: SizedBox(
-                width: 30,
-              )),
-          TextSpan(text: contentText, style: Apptheme.bodyLarge)
-        ]));
+      const WidgetSpan(
+          child: SizedBox(
+        width: 30,
+      )),
+      TextSpan(text: contentText, style: Apptheme.bodyLarge)
+    ]));
   }
 
   Widget textOnly() {

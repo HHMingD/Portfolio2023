@@ -158,13 +158,14 @@ class DisplayBook extends StatelessWidget {
   final Book bookClass;
   final VoidCallback secondayAction;
 
-  Widget _titleRow() => Text(bookClass.info.title,maxLines: 1, style: Apptheme.titleSmall);
+  Widget _titleRow() =>
+      Text(bookClass.info.title, maxLines: 1, style: Apptheme.titleSmall);
 
   Widget _secondaryAction() => hasSecondaryAction
       ? Align(
           alignment: Alignment.centerRight,
           child: HoverEffect(
-            backGroundColor: Theme.of(universalContext).hoverColor,
+              backGroundColor: Theme.of(universalContext).hoverColor,
               onTap: () {
                 secondayAction();
               },
@@ -176,7 +177,7 @@ class DisplayBook extends StatelessWidget {
               onTap: () {
                 launchUrlFuture("${bookClass.info.previewLink}");
               },
-              child: const Text('See more >>', style: Apptheme.labelMedium)),
+              child: const Text('View the book on Google Books>>', style: Apptheme.labelMedium)),
         );
 
   Widget _image() => bookClass.info.imageLinks['thumbnail'] != null
@@ -188,22 +189,21 @@ class DisplayBook extends StatelessWidget {
           decoration: const BoxDecoration(color: Apptheme.prime100),
           child: const Center(child: Text('No book cover available')));
 
-  Widget _authorDescription() => Column(
+  Widget _authorDescription(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           bookClass.info.authors.isNotEmpty
               ? Text(bookClass.info.authors.first, style: Apptheme.bodyMedium)
               : const Text("Author name unavailable",
                   style: Apptheme.bodyMedium),
-          Text(
-            bookClass.info.description,
-            style: Apptheme.bodyMedium,
+          RichText(
+            text: ConvertCSS(bookClass.info.description),
             maxLines: 5,
           )
         ],
       );
 
-  Widget _desktop() => Container(
+  Widget _desktop(BuildContext context) => Container(
         padding: EdgeInsets.symmetric(vertical: verticalPadding ? 12 : 0),
         height: 240,
         child: Row(
@@ -217,7 +217,7 @@ class DisplayBook extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _titleRow(),
-                  _authorDescription(),
+                  _authorDescription(context),
                   _secondaryAction(),
                 ],
               ),
@@ -226,7 +226,7 @@ class DisplayBook extends StatelessWidget {
         ),
       );
 
-  Widget _mobile() => Container(
+  Widget _mobile(BuildContext context) => Container(
         padding: EdgeInsets.symmetric(vertical: verticalPadding ? 12 : 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,7 +239,7 @@ class DisplayBook extends StatelessWidget {
               child: _image(),
             ),
             Styling.contentSmallSpacing,
-            _authorDescription(),
+            _authorDescription(context),
             _secondaryAction(),
           ],
         ),
@@ -248,9 +248,9 @@ class DisplayBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (deviceIsDesktop) {
-      return _desktop();
+      return _desktop(context);
     } else {
-      return _mobile();
+      return _mobile(context);
     }
   }
 }

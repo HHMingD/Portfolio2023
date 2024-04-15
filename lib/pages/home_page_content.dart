@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                   child: RichText(
                       text: TextSpan(children: <TextSpan>[
                     TextSpan(
-                        text: "Hi! I am Howard, \n",
+                        text: "Hi! This is Howard, \n",
                         style: Apptheme.headlineLarge.copyWith(
                             color: Theme.of(context).primaryColorLight)),
                     TextSpan(
