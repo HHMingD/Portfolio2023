@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:howard_chen_portfolio/widgets/password_protection.dart';
@@ -73,10 +74,10 @@ class HomePage extends StatelessWidget {
                           layoutType: "column",
                           titleTextDisplay: true,
                           titleText:
-                          'This is a self-made website powered by flutter and firebase',
+                              'This is a self-made website powered by flutter and firebase',
                           subtitleText: "",
                           contentText:
-                          'The portfolio itself is also a demonstration of my approach to product builds. The ability to carried out coding projects like this greatly helped my design delivery capability and communication with engineers. \n\nIf you are a design student looking for free portfolio solutions, or are just simply interesting in the tech set up please do reach out.',
+                              'The portfolio itself is also a demonstration of my approach to product builds. The ability to carried out coding projects like this greatly helped my design delivery capability and communication with engineers. \n\nIf you are a design student looking for free portfolio solutions, or are just simply interesting in the tech set up please do reach out.',
                           imageLink: 'images/Coding.png',
                         ).layoutSelector(),
                         Styling.dividerLargeSpacing,
@@ -191,6 +192,9 @@ class _CarouselState extends State<Carousel> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        Container(
+          decoration: BoxDecoration(color: Color(0xDD000000)),
+        ),
         PageView.builder(
             controller: _pageController,
             physics: const NeverScrollableScrollPhysics(),
@@ -263,60 +267,73 @@ class PreviewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
+      margin: Styling.smallPadding,
       child: Stack(
         children: <Widget>[
           VideoPlayerScreen(projectVideoPreview),
           Align(
             alignment: Alignment.center,
-            child: HoverEffect(
-              onTap: () {
-                if (unlocked == true) {
-                  navigateBetweenProjects(context, projectIndex);
-                } else {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const AlertDialog(
-                          title:
-                              Text('Enter Password to View Protected Content'),
-                          content: UnlockButton(isDialog: true),
-                        );
-                      });
-                }
-              },
-              transparentBackground: false,
-              child: Container(
-                decoration: Styling.defaultState,
-                constraints: const BoxConstraints(maxWidth: 320),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FirebaseFutureImageBuilder(projectThumbnail),
-                    Styling.contentSmallSpacing,
-                    Text(style: Apptheme.titleMedium, projectTitle),
-                    Styling.contentSmallSpacing,
-                    Text(style: Apptheme.labelMedium, 'Topics: $projectTopic'),
-                    Styling.contentSmallSpacing,
-                    unlocked
-                        ? const SizedBox()
-                        : Row(
-                            children: [
-                              const Icon(FontAwesomeIcons.lock),
-                              Styling.contentMediumSpacing,
-                              const Expanded(
-                                  child: Text(
-                                      style: Apptheme.labelSmall,
-                                      'Enter password to view content')),
-                            ],
-                          ),
-                    Styling.contentSmallSpacing,
-                  ],
-                ),
-              ),
-            ),
+            child: Padding(
+                padding: Styling.smallPadding,
+                child: HoverEffect(
+                  transparentBackground: true,
+                  onTap: () {
+                    if (unlocked == true) {
+                      FirebaseAnalytics.instance.logEvent(
+                        name: "project_viewed",
+                        parameters: {"project_viewed": projectIndex,},);
+                      navigateBetweenProjects(context, projectIndex);
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const AlertDialog(
+                              title: Text(
+                                  'Enter Password to View Protected Content'),
+                              content: UnlockButton(isDialog: true),
+                            );
+                          });
+                    }
+                  },
+                  child: Container(
+                    constraints: const BoxConstraints(maxWidth: 320),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FirebaseFutureImageBuilder(projectThumbnail),
+                        Styling.contentSmallSpacing,
+                        Text(
+                            style: Apptheme.textThemeDark.titleMedium
+                                ?.copyWith(backgroundColor: Color(0x55000000)),
+                            projectTitle),
+                        Styling.contentSmallSpacing,
+                        Text(
+                            style: Apptheme.textThemeDark.labelMedium
+                                ?.copyWith(backgroundColor: Color(0x55000000)),
+                            projectTopic),
+                        Styling.contentMediumSpacing,
+                        unlocked
+                            ? const SizedBox()
+                            : Row(
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.lock,
+                                    color: Apptheme.white,
+                                  ),
+                                  Styling.contentMediumSpacing,
+                                  Expanded(
+                                      child: Text(
+                                          style:
+                                              Apptheme.textThemeDark.labelSmall,
+                                          'Enter password to view content')),
+                                ],
+                              ),
+                      ],
+                    ),
+                  ),
+                )),
           ),
         ],
       ),

@@ -202,7 +202,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           return controllerIsInitialised
               ? Container(
-                  color: Apptheme.black, child: VideoPlayer(_controller!))
+              child: VideoPlayer(_controller!))
               : const Center(
                   child: CircularProgressIndicator(
                     color: Apptheme.white,

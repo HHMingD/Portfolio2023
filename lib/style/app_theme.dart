@@ -126,6 +126,9 @@ class Apptheme {
     titleLarge: titleLarge.copyWith(color: Apptheme.white),
     titleMedium: titleMedium.copyWith(color: Apptheme.white),
     titleSmall: titleSmall.copyWith(color: Apptheme.white),
+    labelLarge: labelLarge.copyWith(color: Apptheme.white),
+    labelMedium: labelMedium.copyWith(color: Apptheme.white),
+    labelSmall: labelSmall.copyWith(color: Apptheme.white),
     bodyLarge: bodyLarge.copyWith(color: Apptheme.white),
     bodyMedium: bodyMedium.copyWith(color: Apptheme.white),
   );

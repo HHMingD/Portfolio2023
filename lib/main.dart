@@ -12,7 +12,6 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -65,12 +64,14 @@ class _FetchDataState extends State<FetchData> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAnalytics.instance.logEvent(
+      name: "version_log_in",
+      parameters: {"version_log_in": "1.0",},);
     universalContext = context;
     return FutureBuilder(
         future: myFuture,
         builder: (BuildContext context, AsyncSnapshot<JsonStructure> snapshot) {
           if (snapshot.hasData) {
-
             jsonContent = snapshot.data!;
             return ResponsiveBuilder(
               navigationShell: widget.navigationShell,
@@ -81,7 +82,10 @@ class _FetchDataState extends State<FetchData> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                    style: Theme.of(universalContext).textTheme.labelLarge,
+                    style: Theme
+                        .of(universalContext)
+                        .textTheme
+                        .labelLarge,
                     'Website is initiating...'),
                 Styling.contentMediumSpacing,
                 Styling.centerCircularProgressIndicator,
