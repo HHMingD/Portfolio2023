@@ -38,7 +38,7 @@ void navigateToBookExchange(BuildContext context) {
 }
 
 void navigateToBookList(BuildContext context, String bookList, int pageCount) {
-  context.go(
+  context.push(
     '/About/BookExchange/c=$bookList/Page$pageCount',
   );
 }
@@ -125,7 +125,7 @@ final GoRouter customRouter = GoRouter(
                                 return NoTransitionPage(
                                     child: ShowAllBooks(
                                       referenceCollection: reference,
-                                      pageNumbers: pageNumbers,
+                                      pageNumbers: int.parse(pageNumbers),
                                     ));
                               },
                             ),

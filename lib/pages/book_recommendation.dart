@@ -15,127 +15,142 @@ class BookExchangePageFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Styling.pageFrame(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 1400),
-        child: Column(
-          children: [
-            Styling.contentLargeSpacing,
-            HoverEffect(
-              onTap: () {
-                navigateToLockedHome(context);
-              },
-              transparentBackground: true,
-              child: const Row(
-                children: [
-                  Icon(Icons.arrow_back),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "Back to home",
-                    style: Apptheme.titleSmall,
-                  ),
-                ],
-              ),
-            ),
-            Styling.contentSmallSpacing,
-            RichText(
-                text: TextSpan(children: <TextSpan>[
-              TextSpan(
-                  text: "I wish to read the best book there ever is.\n",
-                  style: Apptheme.headlineLarge
-                      .copyWith(color: Theme.of(context).primaryColorLight)),
-              TextSpan(
-                  text: "So why not connect over books? ",
-                  style: Apptheme.headlineLarge.copyWith(
-                      fontWeight: FontWeight.w900,
-                      color: Theme.of(context).primaryColor)),
-              TextSpan(
-                  text: "Share a book with me and I will share you mine!",
-                  style: Apptheme.headlineLarge
-                      .copyWith(color: Theme.of(context).primaryColorLight)),
-            ])),
-            Styling.contentLargeSpacing,
-            Styling.defaultPaper(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        children: [
+          Styling.contentLargeSpacing,
+          HoverEffect(
+            onTap: () {
+              navigateToLockedHome(context);
+            },
+            transparentBackground: true,
+            child: const Row(
               children: [
-                const Text('Book exchange programme',
-                    style: Apptheme.headlineSmall),
-                Styling.contentSmallSpacing,
-                const Text(
-                    'Here, You can find the books I am currently reading, the books I have finished with my thoughts on them, and the books that has been recommended to me.',
-                    style: Apptheme.bodyLarge),
-                Styling.dividerLargeSpacing,
-                const Text('Books Currently Reading:',
-                    style: Apptheme.titleMedium),
-                Styling.contentSmallSpacing,
-                FetchBookCollection(
-                    key: GlobalKey(), bookCollections: booksInProgress),
-                Styling.contentMediumSpacing,
-                const Text('Books Recently Finished',
-                    style: Apptheme.titleMedium),
-                Styling.contentSmallSpacing,
-                FetchBookCollection(
-                    key: GlobalKey(), bookCollections: booksIRead),
-                Styling.contentMediumSpacing,
-                const Text('Books Recommended to me ',
-                    style: Apptheme.titleMedium),
-                Styling.contentSmallSpacing,
-                FetchBookCollection(
-                    key: GlobalKey(), bookCollections: booksRecommended),
-                Styling.contentMediumSpacing,
-                const Text('Recommend me some book? ',
-                    style: Apptheme.titleMedium),
-                Styling.contentSmallSpacing,
-                const RecommendBook(),
+                Icon(Icons.arrow_back),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Back to home",
+                  style: Apptheme.titleSmall,
+                ),
               ],
-            )),
-          ],
-        ),
+            ),
+          ),
+          RichText(
+              text: TextSpan(children: <TextSpan>[
+            TextSpan(
+                text: "Why not connect over books? ",
+                style: Apptheme.headlineLarge.copyWith(
+                    fontWeight: FontWeight.w900,
+                    color: Theme.of(context).primaryColor)),
+            TextSpan(
+                text: "Share a book with me and I will share you mine!",
+                style: Apptheme.headlineLarge
+                    .copyWith(color: Theme.of(context).primaryColorLight)),
+          ])),
+          Styling.contentLargeSpacing,
+          const BookCollectionTabs(),
+          Styling.contentLargeSpacing,
+          Styling.defaultPaper(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Recommend me some book? ',
+                  style: Apptheme.titleMedium),
+              Styling.contentSmallSpacing,
+              const RecommendBook(),
+            ],
+          )),
+        ],
       ),
     );
   }
 }
 
-class BookExchangeIntroduction extends StatelessWidget {
-  const BookExchangeIntroduction({super.key});
+class BookCollectionTabs extends StatefulWidget {
+  const BookCollectionTabs({super.key});
+
+  @override
+  State<BookCollectionTabs> createState() => _BookCollectionTabsState();
+}
+
+class _BookCollectionTabsState extends State<BookCollectionTabs> {
+  late int selectionIndex;
+  late CollectionReference bookCollections;
+
+  @override
+  void initState() {
+    selectionIndex = 0;
+    bookCollections = booksIRead;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Book Exchange:',
-          style: Apptheme.titleMedium,
-        ),
-        Styling.contentSmallSpacing,
-        const Text(
-            'Interested in Sharing some book recommendations? Head to the Book exchange page for more',
-            style: Apptheme.bodyLarge),
-        Styling.contentSmallSpacing,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Styling.defaultPaper(
+        child: Column(
           children: [
-            FutureBuilder(
-                future:
-                    booksInProgress.orderBy('addedBy', descending: true).get(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasData && snapshot.data?.docs != []) {
-                    return QuickBookPreview(
-                        id: snapshot.data!.docs[0]['bookID']);
-                  } else {
-                    return const Text(
-                        'Out of book to read! Recommended me some nice ones?',
-                        style: Apptheme.labelMedium);
-                  }
-                })
+            SizedBox(
+              width: double.infinity,
+              height: 80,
+              child: ListView(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Column(
+                    children: [
+                      ToggleButton(
+                          buttonTitle: "Read",
+                          buttonDescription: "Books I finished",
+                          isActive: true,
+                          isSelected: selectionIndex == 0,
+                          onToggle: () {
+                            setState(() {
+                              selectionIndex = 0;
+                              bookCollections = booksIRead;
+                            });
+                          }),
+                    ],
+                  ),
+                  Styling.contentLargeSpacing,
+                  Column(
+                    children: [
+                      ToggleButton(
+                          buttonTitle: "Reading",
+                          buttonDescription: "Books I am reading",
+                          isActive: true,
+                          isSelected: selectionIndex == 1,
+                          onToggle: () {
+                            setState(() {
+                              selectionIndex = 1;
+                              bookCollections = booksInProgress;
+                            });
+                          }),
+                    ],
+                  ),
+                  Styling.contentLargeSpacing,
+                  Column(
+                    children: [
+                      ToggleButton(
+                          buttonTitle: "Recommmended",
+                          buttonDescription: "Books Recommended to Me",
+                          isActive: true,
+                          isSelected: selectionIndex == 2,
+                          onToggle: () {
+                            setState(() {
+                              selectionIndex = 2;
+                              bookCollections = booksRecommended;
+                            });
+                          }),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            FetchBookCollection(
+                key: GlobalKey(), bookCollections: bookCollections),
           ],
-        ),
-      ],
-    );
+        ));
   }
 }
 
@@ -153,6 +168,8 @@ class _FetchBookCollectionState extends State<FetchBookCollection> {
     return reference.orderBy('addedBy', descending: true).get();
   }
 
+  List<Widget> books = [];
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -160,7 +177,7 @@ class _FetchBookCollectionState extends State<FetchBookCollection> {
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data!.size != 0) {
-              List<Widget> books = [];
+              books = [];
               for (int i = 0; i < snapshot.data!.docs.length && i < 3; i++) {
                 books.add(bookandComment(snapshot.data!.docs[i]));
               }
@@ -191,7 +208,9 @@ class _FetchBookCollectionState extends State<FetchBookCollection> {
               );
             }
           } else {
-            return Container();
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+            );
           }
         });
   }
@@ -209,8 +228,6 @@ class _RecommendBookState extends State<RecommendBook> {
   bool validate = false;
   bool bookSearched = false;
   bool bookAdded = false;
-
-  List<Book> bookSearchResults = [];
   List<BookCandidates> bookSearchWidgets = [];
   final myController = TextEditingController();
   late String searchTerms;
@@ -230,7 +247,7 @@ class _RecommendBookState extends State<RecommendBook> {
           searchTerms = 'No books found, try something different?';
         }
       });
-      bookSearchWidgets  = [];
+      bookSearchWidgets = [];
       for (int i = 0; i < value.length; i++) {
         bookSearchWidgets.add(BookCandidates(
           key: GlobalKey(),
@@ -283,22 +300,24 @@ class _RecommendBookState extends State<RecommendBook> {
         ),
         Styling.contentSmallSpacing,
         bookSearched
-            ? Column(
-                children: [
-                  Styling.contentSmallSpacing,
-                  Text(
-                    searchTerms,
-                    style: Apptheme.labelMedium,
-                  ),
-                  Styling.contentSmallSpacing,
-                ],
+            ? Text(
+                searchTerms,
+                style: Apptheme.labelMedium,
               )
             : const SizedBox(),
+        Styling.contentSmallSpacing,
         bookSearched
             ? Column(
                 children: bookSearchWidgets,
               )
-            : const SizedBox(),
+            : SizedBox(
+                height: 400,
+                child: Center(
+                    child: Text(
+                        style: Apptheme.labelSmall
+                            .copyWith(color: Apptheme.prime200),
+                        'Start the search above')),
+              ),
       ],
     );
   }
@@ -320,6 +339,34 @@ class _BookCandidatesState extends State<BookCandidates> {
   bool bookSelected = false;
   bool bookAdded = false;
   bool messageIsPrivate = false;
+  late FocusNode focusToCandidate;
+
+  @override
+  void initState() {
+    focusToCandidate = FocusNode();
+    focusToCandidate.addListener(() {
+      if (focusToCandidate.hasFocus) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Scrollable.ensureVisible(
+            focusToCandidate.context!,
+            duration: const Duration(milliseconds: 250),
+            alignment:
+                0.5, // Adjust alignment for better control of the item's final position
+          );
+        });
+      }
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    focusToCandidate.dispose();
+    reasonController.dispose();
+    nameController.dispose();
+    addressController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -333,113 +380,113 @@ class _BookCandidatesState extends State<BookCandidates> {
             verticalPadding: true,
             hasSecondaryAction: true,
             secondayAction: () {
+              print(widget.bookClass.id);
               setState(() {
                 bookSelected = true;
               });
+              focusToCandidate.requestFocus();
             },
           ),
           Styling.contentSmallSpacing,
-          bookSelected
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Styling.dividerSmallSpacing,
-                    messageIsPrivate
-                        ? const Text(
-                            'Why do you think this book is worth reading? (Optional) (Private)',
-                            style: Apptheme.labelMedium,
+          Focus(
+            focusNode: focusToCandidate,
+            child: bookSelected
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Your Name (Optional)',
+                        style: Apptheme.labelMedium,
+                      ),
+                      Styling.contentSmallSpacing,
+                      TextField(
+                        controller: nameController,
+                        decoration: Styling.defaultInputDecoration(
+                            'Enter Name', 'Error!', false),
+                      ),
+                      Styling.contentMediumSpacing,
+                      const Text(
+                        'Email address for future contact? (optional) (Private)',
+                        style: Apptheme.labelMedium,
+                      ),
+                      const Text(
+                        '(So that I can contact you! The information will not be made   public.)',
+                        style: Apptheme.bodyMedium,
+                      ),
+                      Styling.contentSmallSpacing,
+                      TextField(
+                        controller: addressController,
+                        decoration: Styling.defaultInputDecoration(
+                            'Enter Email Address', 'Error!', false),
+                      ),
+                      Styling.contentMediumSpacing,
+                      messageIsPrivate
+                          ? const Text(
+                              'Why do you think this book is worth reading? (Optional) (Private)',
+                              style: Apptheme.labelMedium,
+                            )
+                          : const Text(
+                              'Why do you think this book is worth reading? (Optional)',
+                              style: Apptheme.labelMedium,
+                            ),
+                      Styling.contentSmallSpacing,
+                      TextField(
+                        controller: reasonController,
+                        decoration: Styling.defaultInputDecoration(
+                            'Share your thoughts...', 'Error!', false),
+                      ),
+                      Styling.contentSmallSpacing,
+                      Row(
+                        children: [
+                          Checkbox(
+                              value: messageIsPrivate,
+                              onChanged: (private) {
+                                setState(() {
+                                  messageIsPrivate = private!;
+                                });
+                              }),
+                          Styling.contentSmallSpacing,
+                          const Expanded(
+                            child: Text(
+                                'Want to keep the name and the message a secret?'),
                           )
-                        : const Text(
-                            'Why do you think this book is worth reading? (Optional)',
-                            style: Apptheme.labelMedium,
-                          ),
-                    Styling.contentSmallSpacing,
-                    TextField(
-                      controller: reasonController,
-                      decoration: Styling.defaultInputDecoration(
-                          'Share your thoughts...', 'Error!', false),
-                    ),
-                    Styling.contentSmallSpacing,
-                    messageIsPrivate
-                        ? const Text(
-                            'Your Name (Optional) (Private)',
-                            style: Apptheme.labelMedium,
-                          )
-                        : const Text(
-                            'Your Name (Optional)',
-                            style: Apptheme.labelMedium,
-                          ),
-                    Styling.contentSmallSpacing,
-                    TextField(
-                      controller: nameController,
-                      decoration: Styling.defaultInputDecoration(
-                          'Enter Name', 'Error!', false),
-                    ),
-                    Styling.contentSmallSpacing,
-                    Row(
-                      children: [
-                        Checkbox(
-                            value: messageIsPrivate,
-                            onChanged: (private) {
-                              setState(() {
-                                messageIsPrivate = private!;
-                              });
-                            }),
-                        Styling.contentSmallSpacing,
-                        const Text(
-                            'Want to keep the name and the message a secret?')
-                      ],
-                    ),
-                    Styling.contentSmallSpacing,
-                    const Text(
-                      'Email address for future contact? (optional) (Private)',
-                      style: Apptheme.labelMedium,
-                    ),
-                    const Text(
-                      '(Contact details will be not be shared publicly and will be removed after an year.)',
-                      style: Apptheme.bodyMedium,
-                    ),
-                    Styling.contentSmallSpacing,
-                    TextField(
-                      controller: addressController,
-                      decoration: Styling.defaultInputDecoration(
-                          'Enter Email Address', 'Error!', false),
-                    ),
-                    Styling.contentMediumSpacing,
-                    HoverEffect(
-                        highContrast: true,
-                        onTap: () {
-                          FirebaseFirestore.instance
-                              .collection('Books_Recommended')
-                              .doc(widget.bookClass.info.title)
-                              .set({
-                            "bookName": widget.bookClass.info.title,
-                            "bookID": widget.bookClass.id,
-                            "reason": reasonController.text,
-                            "reasonIsASecret": messageIsPrivate,
-                            "isRecommended": true,
-                            "recommendedBy": nameController.text,
-                            "contact": addressController.text,
-                            "addedBy":
-                                "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().second}${DateTime.now().minute}",
-                          });
-                          setState(() {
-                            bookAdded = true;
-                            bookSelected = false;
-                          });
-                        },
-                        child: Text(
-                          'Add the book to the recommendation List',
-                          style: Apptheme.labelMedium
-                              .copyWith(color: Theme.of(context).hoverColor),
-                        )),
-                    Styling.contentMediumSpacing,
-                  ],
-                )
-              : const SizedBox(),
+                        ],
+                      ),
+                      Styling.contentMediumSpacing,
+                      HoverEffect(
+                          highContrast: true,
+                          onTap: () {
+                            FirebaseFirestore.instance
+                                .collection('Books_Recommended')
+                                .doc(widget.bookClass.info.title)
+                                .set({
+                              "bookName": widget.bookClass.info.title,
+                              "bookID": widget.bookClass.id,
+                              "reason": reasonController.text,
+                              "reasonIsASecret": messageIsPrivate,
+                              "isRecommended": true,
+                              "recommendedBy": nameController.text,
+                              "contact": addressController.text,
+                              "addedBy":
+                                  "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().second}${DateTime.now().minute}",
+                            });
+                            setState(() {
+                              bookAdded = true;
+                              bookSelected = false;
+                            });
+                          },
+                          child: Text(
+                            'Add the book to the recommendation List',
+                            style: Apptheme.labelMedium
+                                .copyWith(color: Theme.of(context).hoverColor),
+                          )),
+                    ],
+                  )
+                : const SizedBox(),
+          ),
         ],
       ),
-      secondChild: Container(
+      secondChild: SizedBox(
         height: deviceIsDesktop ? 400 : 300,
         width: double.infinity,
         child: Column(
@@ -475,90 +522,108 @@ class ShowAllBooks extends StatelessWidget {
   });
 
   final String referenceCollection;
-  final String pageNumbers;
+  final int pageNumbers;
+
+  Widget _Pagination(BuildContext context, int totalCount) {
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        RowBuilder(
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: HoverEffect(
+                    highContrast: index + 1 == pageNumbers,
+                    onTap: () {
+                      navigateToBookList(
+                          context, referenceCollection, index + 1);
+                    },
+                    child: Text("${index + 1}",
+                        style: index + 1 == pageNumbers
+                            ? Apptheme.labelSmall
+                                .copyWith(color: Apptheme.white)
+                            : Apptheme.labelSmall)),
+              );
+            },
+            itemCount: (totalCount / 10).ceil()),
+        Visibility(
+          visible: totalCount > pageNumbers * 10,
+          child: HoverEffect(
+              onTap: () {
+                navigateToBookList(
+                    context, referenceCollection, pageNumbers + 1);
+              },
+              child: const Text("Next Page", style: Apptheme.labelSmall)),
+        ),
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Styling.horizontalPadding,
-              Expanded(
-                  child: Column(
-                children: [
-                  Styling.contentLargeSpacing,
-                  Container(
-                    constraints: const BoxConstraints(maxWidth: 700),
-                    child: Styling.defaultPaper(
-                      child: FutureBuilder(
-                          future: FirebaseFirestore.instance
-                              .collection(referenceCollection)
-                              .orderBy('addedBy', descending: true)
-                              .get(),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (snapshot.hasData) {
-                              return Column(
-                                children: [
-                                  HoverEffect(
-                                    onTap: () {
-                                      navigateToBookExchange(context);
-                                    },
-                                    child: const Row(
-                                      children: [
-                                        Icon(Icons.arrow_back),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          "Back to Book exchange",
-                                          style: Apptheme.titleSmall,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Styling.contentMediumSpacing,
-                                  Text(
-                                    referenceCollection.replaceAll(
-                                        RegExp('_'), ' '),
-                                    style: Apptheme.headlineSmall,
-                                  ),
-                                  Styling.contentMediumSpacing,
-                                  ColumnBuilder(
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return bookandComment(snapshot.data!.docs[
-                                          index +
-                                              10 *
-                                                  (int.parse(pageNumbers) -
-                                                      1)]);
-                                    },
-                                    itemCount: snapshot.data!.docs.length < 10
-                                        ? snapshot.data!.docs.length
-                                        : 10,
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return const Column(
-                                children: [Text('name')],
-                              );
-                            }
-                          }),
-                    ),
-                  )
-                ],
-              )),
-              Styling.horizontalPadding,
-            ],
-          ),
-          Styling.contentLargeSpacing,
-          const Footer(),
-        ],
-      ),
-    );
+    return Styling.pageFrame(
+        child: Column(
+      children: [
+        Styling.contentLargeSpacing,
+        Styling.defaultPaper(
+          child: FutureBuilder(
+              future: FirebaseFirestore.instance
+                  .collection(referenceCollection)
+                  .orderBy('addedBy', descending: true)
+                  .get(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasData) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      HoverEffect(
+                        onTap: () {
+                          navigateToBookExchange(context);
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(Icons.arrow_back),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              "Back to Book exchange",
+                              style: Apptheme.titleSmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Styling.contentMediumSpacing,
+                      Text(
+                        referenceCollection.replaceAll(RegExp('_'), ' '),
+                        style: Apptheme.headlineSmall,
+                      ),
+                      Styling.contentMediumSpacing,
+                      ColumnBuilder(
+                        itemBuilder: (BuildContext context, int index) {
+                          return bookandComment(snapshot
+                              .data!.docs[index + 10 * (pageNumbers - 1)]);
+                        },
+                        itemCount: snapshot.data!.docs.length < pageNumbers
+                            ? snapshot.data!.docs.length
+                            : snapshot.data!.docs.length -
+                                ((pageNumbers - 1) * 10),
+                      ),
+                      Styling.contentMediumSpacing,
+                      _Pagination(context, snapshot.data!.docs.length),
+                    ],
+                  );
+                } else {
+                  return const Column(
+                    children: [Text('name')],
+                  );
+                }
+              }),
+        ),
+      ],
+    ));
   }
 }
 
@@ -567,25 +632,21 @@ Widget bookandComment(dynamic data) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Styling.contentSmallSpacing,
-      FetchBook(id: data['bookID'], verticalPadding: false),
+      FetchBook(
+          id: data['bookID'],
+          verticalPadding: false,
+          hasSecondaryAction: false),
       data['isRecommended']
           ? Column(
               children: [
                 Styling.contentMediumSpacing,
-                data['reasonIsASecret']
-                    ? const SizedBox()
-                    : const Text(
-                        'Recommended by',
-                        style: Apptheme.labelSmall,
-                      ),
-                Styling.contentSmallSpacing,
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
                       color: Apptheme.prime100,
                       borderRadius: BorderRadius.circular(10)),
                   padding: Styling.smallPadding,
-                  child: data['reasonIsASecret']
+                  child: data['reasonIsASecret'] || data['recommendedBy'] == ""
                       ? const Text(
                           'This person decided to keep the message secret',
                           style: Apptheme.labelMedium,

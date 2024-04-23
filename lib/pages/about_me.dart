@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:books_finder/books_finder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -211,11 +212,13 @@ class AboutMe extends StatelessWidget {
             ),
             Styling.contentMediumSpacing,
             FutureBuilder(
-                future: booksInProgress.orderBy('addedBy', descending: true).get(),
-                builder:
-                    (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                future:
+                    booksInProgress.orderBy('addedBy', descending: true).get(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasData && snapshot.data?.docs != []) {
-                    return QuickBookPreview(id: snapshot.data!.docs[0]['bookID']);
+                    return QuickBookPreview(
+                        id: snapshot.data!.docs[0]['bookID']);
                   } else {
                     return const Text(
                         'Out of book to read! Recommended me some nice ones?',
@@ -422,7 +425,7 @@ class AboutMe extends StatelessWidget {
           Styling.contentLargeSpacing,
         ],
       ),
-      secondChild: Wrap(
+      secondaryChild: Wrap(
         alignment: WrapAlignment.center,
         runSpacing: Styling.defaultSpacing,
         spacing: Styling.defaultSpacing,
@@ -453,20 +456,23 @@ class _SecretPageState extends State<SecretPage> {
               child: HoverEffect(
                   onTap: () {
                     for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                      FirebaseFirestore.instance
-                          .collection('Books_I_Read')
-                          .doc(snapshot.data!.docs[i]['bookName'])
-                          .set({
-                        "bookName": snapshot.data!.docs[i]['bookName'],
-                        "bookID": snapshot.data!.docs[i]['bookID'],
-                        "reason": "",
-                        "reasonIsASecret": false,
-                        "isRecommended": false,
-                        "recommendedBy": "",
-                        "contact": "",
-                        "addedBy":
-                            "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().second}${DateTime.now().minute}",
-                      });
+                      getSpecificBook(snapshot.data!.docs[i]['bookID'])
+                          .then((value) {
+                            FirebaseFirestore.instance
+                            .collection('Books_I_Read')
+                            .doc(value.info.title)
+                            .set({
+                              "bookName": value.info.title,
+                              "bookID": snapshot.data!.docs[i]['bookID'],
+                              "reason": "",
+                              "reasonIsASecret": false,
+                              "isRecommended": false,
+                              "recommendedBy": "",
+                              "contact": "",
+                              "addedBy":
+                              "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${DateTime.now().second}${DateTime.now().minute}",
+                            });
+                          });
                     }
                   },
                   child: Text('Update book list')));

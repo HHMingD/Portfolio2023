@@ -77,19 +77,23 @@ class _FetchDataState extends State<FetchData> {
               navigationShell: widget.navigationShell,
             );
           } else {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                    style: Theme
-                        .of(universalContext)
-                        .textTheme
-                        .labelLarge,
-                    'Website is initiating...'),
-                Styling.contentMediumSpacing,
-                Styling.centerCircularProgressIndicator,
-              ],
+            return Container(
+              decoration:const BoxDecoration(color: Apptheme.white),
+              padding: Styling.mediumPadding,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                      style: Theme
+                          .of(universalContext)
+                          .textTheme
+                          .labelLarge,
+                      'Website is initiating...'),
+                  Styling.contentMediumSpacing,
+                  Styling.centerCircularProgressIndicator,
+                ],
+              ),
             );
           }
         });

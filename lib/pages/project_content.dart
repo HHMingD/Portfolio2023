@@ -19,7 +19,7 @@ class ProjectContentPage extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Styling.horizontalPadding,
+            Styling.horizontalGridSpacing,
             deviceIsDesktop
                 ? Expanded(
                     flex: 2,
@@ -248,7 +248,7 @@ class ProjectContentPage extends StatelessWidget {
                       ],
                     ))
                 : const SizedBox(),
-            Styling.horizontalPadding,
+            Styling.horizontalGridSpacing,
           ],
         ),
       ),

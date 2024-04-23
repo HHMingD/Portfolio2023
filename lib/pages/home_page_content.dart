@@ -8,6 +8,7 @@ import 'package:howard_chen_portfolio/widgets/utility_widgets.dart';
 import '../style/app_theme.dart';
 import '../main.dart';
 import '../functions/network.dart';
+import '../widgets/book_utilities.dart';
 import '../widgets/navigation.dart';
 import 'book_recommendation.dart';
 
@@ -25,7 +26,7 @@ class HomePage extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Styling.horizontalPadding,
+                Styling.horizontalGridSpacing,
                 Expanded(
                   child: RichText(
                       text: TextSpan(children: <TextSpan>[
@@ -45,13 +46,15 @@ class HomePage extends StatelessWidget {
                             color: Theme.of(context).primaryColorLight)),
                   ])),
                 ),
-                deviceIsDesktop ? Styling.horizontalPadding : const SizedBox(),
+                deviceIsDesktop
+                    ? Styling.horizontalGridSpacing
+                    : const SizedBox(),
                 Container(
                     constraints: const BoxConstraints(maxWidth: 360),
                     child: deviceIsDesktop
                         ? const QuickLinks()
                         : const SizedBox()),
-                Styling.horizontalPadding,
+                Styling.horizontalGridSpacing,
               ],
             ),
           ),
@@ -65,12 +68,12 @@ class HomePage extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 700),
             child: Row(
               children: [
-                Styling.horizontalPadding,
+                Styling.horizontalGridSpacing,
                 Expanded(
-                  child: Styling.largePaper(
-                    child: Column(
-                      children: [
-                        const ParagraphLayout(
+                  child: Column(
+                    children: [
+                      Styling.defaultPaper(
+                        child: const ParagraphLayout(
                           layoutType: "column",
                           titleTextDisplay: true,
                           titleText:
@@ -80,13 +83,14 @@ class HomePage extends StatelessWidget {
                               'The portfolio itself is also a demonstration of my approach to product builds. The ability to carried out coding projects like this greatly helped my design delivery capability and communication with engineers. \n\nIf you are a design student looking for free portfolio solutions, or are just simply interesting in the tech set up please do reach out.',
                           imageLink: 'images/Coding.png',
                         ).layoutSelector(),
-                        Styling.dividerLargeSpacing,
-                        const BookExchangeIntroduction(),
-                      ],
-                    ),
+                      ),
+                      Styling.contentLargeSpacing,
+                      Styling.defaultPaper(
+                          child: const BookExchangeIntroduction()),
+                    ],
                   ),
                 ),
-                Styling.horizontalPadding,
+                Styling.horizontalGridSpacing,
               ],
             ),
           ),
@@ -193,25 +197,28 @@ class _CarouselState extends State<Carousel> {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(color: Color(0xDD000000)),
+          decoration: const BoxDecoration(color: Color(0xDD000000)),
         ),
-        PageView.builder(
-            controller: _pageController,
-            physics: const NeverScrollableScrollPhysics(),
-            allowImplicitScrolling: true,
-            itemBuilder: (BuildContext context, int projectIndex) {
-              return PreviewItem(
-                projectThumbnail: jsonContent
-                    .smallProjectList[projectIndex % 5].projectThumbnail,
-                projectVideoPreview: jsonContent
-                    .smallProjectList[projectIndex % 5].projectVideoPreview,
-                projectTitle:
-                    jsonContent.smallProjectList[projectIndex % 5].projectTitle,
-                projectTopic:
-                    jsonContent.smallProjectList[projectIndex % 5].projectTopic,
-                projectIndex: projectIndex % 5,
-              );
-            }),
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: PageView.builder(
+              controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              allowImplicitScrolling: true,
+              itemBuilder: (BuildContext context, int projectIndex) {
+                return PreviewItem(
+                  projectThumbnail: jsonContent
+                      .smallProjectList[projectIndex % 5].projectThumbnail,
+                  projectVideoPreview: jsonContent
+                      .smallProjectList[projectIndex % 5].projectVideoPreview,
+                  projectTitle: jsonContent
+                      .smallProjectList[projectIndex % 5].projectTitle,
+                  projectTopic: jsonContent
+                      .smallProjectList[projectIndex % 5].projectTopic,
+                  projectIndex: projectIndex % 5,
+                );
+              }),
+        ),
         Align(
           alignment: Alignment.centerLeft,
           child: HoverEffect(
@@ -281,7 +288,10 @@ class PreviewItem extends StatelessWidget {
                     if (unlocked == true) {
                       FirebaseAnalytics.instance.logEvent(
                         name: "project_viewed",
-                        parameters: {"project_viewed": projectIndex,},);
+                        parameters: {
+                          "project_viewed": projectIndex,
+                        },
+                      );
                       navigateBetweenProjects(context, projectIndex);
                     } else {
                       showDialog(

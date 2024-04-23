@@ -5,8 +5,7 @@ import '../functions/network.dart';
 import '../main.dart';
 
 class Apptheme {
-  static light() =>
-      ThemeData(
+  static light() => ThemeData(
         useMaterial3: true,
         primaryColor: Apptheme.black,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white)
@@ -44,11 +43,10 @@ class Apptheme {
           iconColor: Apptheme.black,
         ),
         progressIndicatorTheme:
-        const ProgressIndicatorThemeData(color: Apptheme.black),
+            const ProgressIndicatorThemeData(color: Apptheme.black),
       );
 
-  static dark() =>
-      ThemeData(
+  static dark() => ThemeData(
         useMaterial3: true,
         primaryColor: Apptheme.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black)
@@ -86,7 +84,7 @@ class Apptheme {
           iconColor: Apptheme.white,
         ),
         progressIndicatorTheme:
-        const ProgressIndicatorThemeData(color: Apptheme.white),
+            const ProgressIndicatorThemeData(color: Apptheme.white),
       );
 
   static const String fontName = 'Montserrat';
@@ -215,26 +213,23 @@ class Styling {
 
   static Widget topBottomSpacing = SizedBox(
     height: deviceIsDesktop
-        ? MediaQuery
-        .of(universalContext)
-        .size
-        .height * 0.40
+        ? MediaQuery.of(universalContext).size.height * 0.40
         : 48,
   );
 
   static Widget contentLargeSpacing = SizedBox(
-    width: deviceIsDesktop ? 32 : 16,
-    height: deviceIsDesktop ? 48 : 24,
+    width: deviceIsDesktop ? 24 : 16,
+    height: deviceIsDesktop ? 32 : 24,
   );
 
   static Widget contentMediumSpacing = SizedBox(
-    width: deviceIsDesktop ? 16 : 8,
-    height: deviceIsDesktop ? 24 : 12,
+    width: deviceIsDesktop ? 12 : 12,
+    height: deviceIsDesktop ? 16 : 12,
   );
 
   static Widget contentSmallSpacing = SizedBox(
-    width: deviceIsDesktop ? 8 : 4,
-    height: deviceIsDesktop ? 16 : 8,
+    width: deviceIsDesktop ? 8 : 8,
+    height: deviceIsDesktop ? 12 : 8,
   );
 
   static Widget gridSpacing = SizedBox(
@@ -243,7 +238,7 @@ class Styling {
   );
   static double defaultSpacing = deviceIsDesktop ? 32.0 : 16.0;
 
-  static Widget horizontalPadding = SizedBox(
+  static Widget horizontalGridSpacing = SizedBox(
     width: deviceIsDesktop ? 32 : 16,
   );
 
@@ -254,9 +249,7 @@ class Styling {
       ),
       Divider(
         height: 1,
-        color: Theme
-            .of(universalContext)
-            .primaryColor,
+        color: Theme.of(universalContext).primaryColor,
       ),
       const SizedBox(
         height: 15,
@@ -271,9 +264,7 @@ class Styling {
       ),
       Divider(
         height: 1,
-        color: Theme
-            .of(universalContext)
-            .primaryColor,
+        color: Theme.of(universalContext).primaryColor,
       ),
       const SizedBox(
         height: 23,
@@ -288,9 +279,7 @@ class Styling {
       ),
       Divider(
         height: 1,
-        color: Theme
-            .of(universalContext)
-            .scaffoldBackgroundColor,
+        color: Theme.of(universalContext).scaffoldBackgroundColor,
       ),
       const SizedBox(
         height: 15,
@@ -305,9 +294,7 @@ class Styling {
       ),
       Divider(
         height: 1,
-        color: Theme
-            .of(universalContext)
-            .scaffoldBackgroundColor,
+        color: Theme.of(universalContext).scaffoldBackgroundColor,
       ),
       const SizedBox(
         height: 23,
@@ -315,86 +302,92 @@ class Styling {
     ],
   );
 
-  static EdgeInsetsGeometry smallPadding =
-  EdgeInsets.all(deviceIsDesktop ? 16 : 8);
+  static EdgeInsetsGeometry smallPadding = EdgeInsets.symmetric(
+      horizontal: deviceIsDesktop ? 12 : 8, vertical: deviceIsDesktop ? 8 : 4);
 
   static EdgeInsetsGeometry mediumPadding =
-  EdgeInsets.all(deviceIsDesktop ? 24 : 16);
+      EdgeInsets.all(deviceIsDesktop ? 24 : 16);
 
   static EdgeInsetsGeometry largePadding =
-  EdgeInsets.all(deviceIsDesktop ? 24 : 16);
+      EdgeInsets.all(deviceIsDesktop ? 32 : 24);
+
+  static BoxDecoration focusTabState = const BoxDecoration(
+      border: Border(bottom: BorderSide(width: 4, color: Apptheme.prime500)));
+
+  static BoxDecoration defaultTabState = const BoxDecoration(
+      border: Border(bottom: BorderSide(width: 2, color: Apptheme.prime100)));
+
+  static BoxDecoration hoveredTabState = const BoxDecoration(
+      border: Border(bottom: BorderSide(width: 2, color: Apptheme.prime300)));
 
   static BoxDecoration hoveredState = BoxDecoration(
-      color: Theme
-          .of(universalContext)
-          .scaffoldBackgroundColor,
-      border: Border.all(width: 1, color: Apptheme
-          .light()
-          .primaryColor));
+      color: Theme.of(universalContext).scaffoldBackgroundColor,
+      borderRadius: BorderRadius.circular(10),
+      border: Border.all(width: 1, color: Apptheme.light().primaryColor));
 
-  static BoxDecoration focusedState =
-  BoxDecoration(color: Theme
-      .of(universalContext)
-      .primaryColor);
+  static BoxDecoration focusState = BoxDecoration(
+      color: Theme.of(universalContext).primaryColor,
+      borderRadius: BorderRadius.circular(10));
 
   static BoxDecoration defaultState = BoxDecoration(
-      color: Theme
-          .of(universalContext)
-          .scaffoldBackgroundColor,
+      color: Theme.of(universalContext).scaffoldBackgroundColor,
+      borderRadius: BorderRadius.circular(10));
+
+  static BoxDecoration disabledState = BoxDecoration(
+      color: Theme.of(universalContext).primaryColorLight,
       borderRadius: BorderRadius.circular(10));
 
   static BoxDecoration elevatedState = BoxDecoration(
-      color: Theme
-          .of(universalContext)
-          .scaffoldBackgroundColor,
+      color: Theme.of(universalContext).scaffoldBackgroundColor,
       borderRadius: BorderRadius.circular(10),
       border: Border.all(width: 1));
 
   static BoxDecoration defaultHighContrastState = BoxDecoration(
-      color: Theme
-          .of(universalContext)
-          .primaryColorDark,
+      color: Theme.of(universalContext).primaryColorDark,
       borderRadius: BorderRadius.circular(10));
 
-  static InputDecoration defaultInputDecoration(String hintText,
-      String errorText, bool dataIncorrect,
+  static InputDecoration defaultInputDecoration(
+      String hintText, String errorText, bool dataIncorrect,
       {bool highContrast = false}) {
     return InputDecoration(
-        contentPadding: EdgeInsets.only(
-            left: deviceIsDesktop ? 16:8,
-            right:deviceIsDesktop ? 16:8,
-            top:deviceIsDesktop ? 20:12,
-            bottom:deviceIsDesktop ? 19:11,
-        ),
-        isDense: true,
-        border: OutlineInputBorder(
-        borderSide: BorderSide(
-        color: highContrast
-        ? Theme.of(universalContext)
-        .scaffoldBackgroundColor: Theme.of(universalContext).primaryColor,
-    width: 1.0)),
-    focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide(
-    color: highContrast
-    ? Theme.of(universalContext).scaffoldBackgroundColor
-        : Theme.of(universalContext).primaryColor,
-    width: 2.0)),
-    enabledBorder: OutlineInputBorder(
-    borderSide: BorderSide(
-    color: highContrast
-    ? Theme.of(universalContext).scaffoldBackgroundColor
-        : Theme.of(universalContext).primaryColor,
-    width: 1.0)),
-    hintText: hintText,
-    hintStyle: Apptheme.labelMedium
-        .copyWith(color: Theme.of(universalContext).primaryColorLight),
-    errorText: dataIncorrect ? errorText : null,
+      contentPadding: EdgeInsets.only(
+        left: deviceIsDesktop ? 16 : 8,
+        right: deviceIsDesktop ? 16 : 8,
+        top: deviceIsDesktop ? 20 : 12,
+        bottom: deviceIsDesktop ? 19 : 11,
+      ),
+      isDense: true,
+      border: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: highContrast
+                  ? Theme.of(universalContext).scaffoldBackgroundColor
+                  : Theme.of(universalContext).primaryColor,
+              width: 1.0)),
+      focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: highContrast
+                  ? Theme.of(universalContext).scaffoldBackgroundColor
+                  : Theme.of(universalContext).primaryColor,
+              width: 2.0)),
+      enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+              color: highContrast
+                  ? Theme.of(universalContext).scaffoldBackgroundColor
+                  : Theme.of(universalContext).primaryColor,
+              width: 1.0)),
+      hintText: hintText,
+      hintStyle: Apptheme.labelMedium
+          .copyWith(color: Theme.of(universalContext).primaryColorLight),
+      errorText: dataIncorrect ? errorText : null,
     );
   }
 
-  static Widget pageFrame({Widget child = const SizedBox(height: 16),
-    Widget secondChild = const SizedBox(height: 16),
-    Widget bannerChild = const SizedBox()}) {
+  static Widget pageFrame(
+      {Widget child = const SizedBox(height: 16),
+      Widget leftChild = const SizedBox(height: 16),
+      Widget rightChild = const SizedBox(height: 16),
+      Widget secondaryChild = const SizedBox(height: 16),
+      Widget bannerChild = const SizedBox()}) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -403,34 +396,37 @@ class Styling {
             constraints: const BoxConstraints(maxWidth: 1400),
             child: Row(
               children: [
-                Styling.horizontalPadding,
+                Styling.horizontalGridSpacing,
                 Expanded(child: bannerChild),
-                Styling.horizontalPadding,
+                Styling.horizontalGridSpacing,
               ],
             ),
           ),
           Styling.contentSmallSpacing,
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Styling.horizontalPadding,
+              Styling.horizontalGridSpacing,
               deviceIsDesktop
-                  ? const Expanded(flex: 2, child: SizedBox())
+                  ? Expanded(flex: 1, child: leftChild)
                   : const SizedBox(),
               deviceIsDesktop ? Styling.gridSpacing : const SizedBox(),
-              Expanded(flex: 5, child: child),
+              Container(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: child),
               deviceIsDesktop ? Styling.gridSpacing : const SizedBox(),
               deviceIsDesktop
-                  ? const Expanded(flex: 2, child: SizedBox())
+                  ? Expanded(flex: 1, child: rightChild)
                   : const SizedBox(),
-              Styling.horizontalPadding,
+              Styling.horizontalGridSpacing,
             ],
           ),
           Styling.contentSmallSpacing,
           Row(
             children: [
-              Styling.horizontalPadding,
-              Expanded(child: secondChild),
-              Styling.horizontalPadding,
+              Styling.horizontalGridSpacing,
+              Expanded(child: secondaryChild),
+              Styling.horizontalGridSpacing,
             ],
           ),
           Styling.contentLargeSpacing,

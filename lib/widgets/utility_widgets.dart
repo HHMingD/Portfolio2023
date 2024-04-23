@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:howard_chen_portfolio/main.dart';
@@ -6,20 +7,139 @@ import 'package:url_launcher/url_launcher.dart';
 import '../style/app_theme.dart';
 import '../functions/network.dart';
 
-TextSpan ConvertCSS(String content) {
+List<TextSpan> AddLink(List<TextSpan> content, String link) {
+  content.add(TextSpan(
+      text: "... Read More on Google Books",
+      recognizer: TapGestureRecognizer()
+        ..onTap = () {
+          launchUrlFuture(link);
+        }));
+  return content;
+}
+
+TextSpan SplitCSSParagraphs(String content) {
   List<TextSpan> contentList = [];
-  String cleanContent = content
-      .replaceAll("<b>", "")
-      .replaceAll("</b>", "")
-      .replaceAll("<br>", "")
-      .replaceAll("</p>", "")
-      .replaceAll("<i>", "")
-      .replaceAll("</i>", "");
-  for (int i = 0; i < cleanContent.split("<p>").length; i++) {
-    contentList.add(TextSpan(text: cleanContent.split("<p>")[i]));
+  RegExp pattern = RegExp(r'<p>|<br>');
+
+  String cleanContent =
+      content.replaceAll("</p>", "\n").replaceAll("<br><br>", "<br>").replaceAll("<br>", "<br>\n");
+
+  for (int i = 0; i < cleanContent.split(pattern).length; i++) {
+    contentList
+        .add(ImplementCSS(TextSpan(text: cleanContent.split(pattern)[i])));
   }
 
-  return TextSpan(children: contentList, style: Apptheme.bodyMedium);
+  return TextSpan(
+      children: contentList,
+      style: Apptheme.bodyMedium.copyWith(fontWeight: FontWeight.w300));
+}
+
+TextSpan ImplementCSS(TextSpan content) {
+  String? text = content.text;
+  TextStyle? textStyle = Apptheme.bodyMedium;
+  if (text!.contains("<b>")) {
+    text = text.replaceAll("<b>", "");
+    textStyle = textStyle.copyWith(fontWeight: FontWeight.bold);
+  }
+  if (text!.contains("</b>")) {
+    text = text.replaceAll("</b>", "");
+  }
+  if (content.text!.contains("<i>")) {
+    text = text.replaceAll("<i>", "").replaceAll("</i>", "");
+  }
+  return TextSpan(text: text, style: textStyle);
+}
+
+class ToggleButton extends StatefulWidget {
+  const ToggleButton({
+    super.key,
+    required this.buttonTitle,
+    required this.buttonDescription,
+    required this.onToggle,
+    this.isActive = false,
+    this.isSelected = false,
+  });
+
+  final String buttonTitle;
+  final String buttonDescription;
+  final Function()? onToggle;
+  final bool isActive;
+  final bool isSelected;
+
+  @override
+  State<ToggleButton> createState() => _ToggleButtonState();
+}
+
+class _ToggleButtonState extends State<ToggleButton> {
+  late bool isHover = false;
+  late bool _isSelected;
+  late BoxDecoration decoration;
+  late TextStyle textStyle;
+
+  @override
+  void initState() {
+    decoration = Styling.defaultTabState;
+    _isSelected = widget.isSelected;
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(ToggleButton oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.isSelected != oldWidget.isSelected) {
+      setState(() {
+        decoration = Styling.defaultTabState;
+        _isSelected = widget.isSelected;
+      });
+    }
+  }
+
+  void _incrementEnter(PointerEvent details) {
+    setState(() {
+      isHover = true;
+      decoration = Styling.hoveredTabState;
+    });
+  }
+
+  void _incrementExit(PointerEvent details) {
+    setState(() {
+      isHover = false;
+      if (widget.isSelected == true) {
+        decoration = Styling.focusTabState;
+      } else {
+        decoration = Styling.defaultTabState;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: _incrementEnter,
+      onExit: _incrementExit,
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onToggle,
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 4),
+          decoration: _isSelected ? Styling.focusTabState : decoration,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                widget.buttonTitle,
+                style: Apptheme.titleLarge.copyWith(color: Apptheme.prime700),
+              ),
+              Text(
+                widget.buttonDescription,
+                style: Apptheme.bodyMedium,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class HoverEffect extends StatefulWidget {
@@ -512,39 +632,52 @@ class Footer extends StatelessWidget {
       width: double.infinity,
       decoration:
           BoxDecoration(color: Theme.of(universalContext).primaryColorDark),
-      child: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 1400),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Styling.contentLargeSpacing,
-              Text(
-                'Due to NDA constrains some of the images may not be available. Please feel free to reach out if you are interested in learning more about my work.',
-                style: Apptheme.bodyMedium.copyWith(
-                    color: Theme.of(universalContext).scaffoldBackgroundColor),
-              ),
-              Styling.contentMediumSpacing,
-              Text(
-                'This websire contains sensitive information. Please do not replicate and redistribute the content',
-                style: Apptheme.bodyMedium.copyWith(
-                    color: Theme.of(universalContext).scaffoldBackgroundColor),
-              ),
-              Styling.contentMediumSpacing,
-              Text(
-                'For any inquiry please reach hobing.tan@gmail.com',
-                style: Apptheme.bodyMedium.copyWith(
-                    color: Theme.of(universalContext).scaffoldBackgroundColor),
-              ),
-              Styling.contentMediumSpacing,
-              const QuickLinks(
-                hasPadding: false,
-                highContrast: true,
-              ),
-              Styling.contentLargeSpacing,
-            ],
+      child: Column(
+        children: [
+          Container(
+            constraints: BoxConstraints(maxWidth: 1400),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Styling.contentLargeSpacing,
+                      Text(
+                        'Due to NDA constrains some of the images may not be available. Please feel free to reach out if you are interested in learning more about my work.',
+                        style: Apptheme.bodyMedium.copyWith(
+                            color: Theme.of(universalContext)
+                                .scaffoldBackgroundColor),
+                      ),
+                      Styling.contentMediumSpacing,
+                      Text(
+                        'This websire contains sensitive information. Please do not replicate and redistribute the content',
+                        style: Apptheme.bodyMedium.copyWith(
+                            color: Theme.of(universalContext)
+                                .scaffoldBackgroundColor),
+                      ),
+                      Styling.contentMediumSpacing,
+                      Text(
+                        'For any inquiry please reach hobing.tan@gmail.com',
+                        style: Apptheme.bodyMedium.copyWith(
+                            color: Theme.of(universalContext)
+                                .scaffoldBackgroundColor),
+                      ),
+                    ],
+                  ),
+                ),
+                Styling.contentMediumSpacing,
+                const Expanded(
+                  child: QuickLinks(
+                    hasPadding: false,
+                    highContrast: true,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
+          Styling.contentLargeSpacing,
+        ],
       ),
     );
   }
